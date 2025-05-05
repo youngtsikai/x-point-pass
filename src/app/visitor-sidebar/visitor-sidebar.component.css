@@ -1,0 +1,34 @@
+.visits-drop,
+.flags-drop,
+.alerts-drop,
+.activities-drop {
+  position: relative;
+  margin: 26px auto;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.visits-drop button,
+.flags-drop button,
+.alerts-drop button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: inherit;
+  text-align: left;
+  background-color: transparent;
+}
+
+.visits-drop button:hover,
+.flags-drop button:hover,
+.alerts-drop button:hover {
+  background-color: var(--background-color);
+  color: #333333;
+  border-radius: 10px;
+}

@@ -1,0 +1,30 @@
+<header>
+  <div logo>
+    <img src="logo-xpoint-pass.png" alt="logo" class="logo-img" />
+  </div>
+
+  <nav>
+    <ul>
+      <li>
+        <a routerLink="/staff-dashboard"><i class="fas fa-home"></i></a>
+      </li>
+      <li>
+        <a class="info-icon"><i class="fa-solid fa-circle-info"></i></a>
+      </li>
+    </ul>
+    <div class="user-menu">
+      <button (click)="toggleUserMenu()">
+        <i class="fa-solid fa-user"></i>
+      </button>
+      <div class="dropdown" [ngClass]="{ show: isUserMenuOpen }">
+        <a routerLink="/profile"
+          ><i class="fa-solid fa-user-gear"></i> Profile</a
+        >
+        <a routerLink="/staff-dashboard"
+          ><i class="fa-solid fa-list-alt"></i> Activity</a
+        >
+        <a (click)="signOut()"><i class="fa fa-sign-out"></i> Sign-Out</a>
+      </div>
+    </div>
+  </nav>
+</header>

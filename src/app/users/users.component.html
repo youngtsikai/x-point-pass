@@ -1,0 +1,166 @@
+<app-admin-header></app-admin-header>
+<div class="page-container">
+  <app-admin-sidebar></app-admin-sidebar>
+  <div class="dash-main-container">
+    <h1 class="inheaderh1">Users</h1>
+    <p class="inheaderp">View all and manage different types of users</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Phone Number</th>
+          <th>Password</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users$ | async">
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>{{ user.phoneNumber }}</td>
+          <td>
+            <span *ngIf="user.accountCreated">********</span>
+            <input
+              *ngIf="!user.accountCreated"
+              type="password"
+              value="********"
+              disabled
+            />
+          </td>
+          <td
+            style="
+              gap: 13px;
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+            "
+          >
+            <button
+              *ngIf="user?.id"
+              (click)="editUser(user)"
+              style="background-color: var(--accent-color)"
+            >
+              <i class="fa-solid fa-pencil"></i>
+            </button>
+            <button
+              *ngIf="user?.id"
+              (click)="deleteUser(user.id)"
+              style="background-color: var(--error-color)"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+            <button *ngIf="!user?.id" disabled>Edit</button>
+            <button *ngIf="!user?.id" disabled>Delete</button>
+            <button *ngIf="user?.id" (click)="downloadUserQRCode(user)">
+              <i class="fa-solid fa-download" style="margin-right: 5px"></i>
+              <i class="fa-solid fa-qrcode"></i>
+            </button>
+            <button *ngIf="user?.id" (click)="printUserQRCode(user)">
+              <i class="fa-solid fa-print" style="margin-right: 5px"></i>
+              <i class="fa-solid fa-qrcode"></i>
+            </button>
+            <button *ngIf="!user?.id" disabled>Download QR</button>
+            <button *ngIf="!user?.id" disabled>Print QR</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" placeholder="Name" [(ngModel)]="newUser.name" />
+          </td>
+          <td>
+            <input
+              type="email"
+              placeholder="Email"
+              [(ngModel)]="newUser.email"
+            />
+          </td>
+          <td>
+            <input type="text" placeholder="Role" [(ngModel)]="newUser.role" />
+          </td>
+          <td>
+            <input
+              type="text"
+              placeholder="Phone Number"
+              [(ngModel)]="newUser.phoneNumber"
+            />
+          </td>
+          <td>
+            <input
+              type="password"
+              placeholder="Password"
+              [(ngModel)]="newUser.password"
+            />
+          </td>
+          <td>
+            <button
+              (click)="createUser()"
+              [disabled]="newUser.accountCreated"
+              style="background-color: var(--success-color); width: 100%"
+            >
+              Create Account
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  table {
+    margin: 13px auto;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  thead {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  th {
+    padding: 5px;
+    box-sizing: border-box;
+  }
+
+  tbody {
+    background-color: #ffffff;
+    border: 1px solid var(--primary-color);
+    padding: 5px;
+    box-sizing: border-box;
+  }
+
+  td {
+    font-size: 15px;
+    border: 1px solid var(--primary-color);
+    padding: 2px;
+    box-sizing: border-box;
+  }
+
+  td input {
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    height: 100%;
+    margin: 0%;
+  }
+
+  td button {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 2px;
+  }
+</style>

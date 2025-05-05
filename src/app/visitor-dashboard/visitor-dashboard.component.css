@@ -1,0 +1,134 @@
+.buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  gap: 10px;
+  margin: 0px auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.status-flags,
+.status-alerts,
+.status-visits,
+.status-disack {
+  flex-grow: 1;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 20px;
+  color: #ffffff;
+}
+
+.status-visits {
+  background-color: var(--success-color);
+}
+
+.status-disack {
+  background-color: var(--error-color);
+}
+
+.status-flags {
+  background-color: var(--warning-color);
+}
+
+.status-alerts {
+  background-color: var(--primary-color);
+}
+
+.quick-actions,
+.rec-act-ale {
+  flex-grow: 1;
+  border-radius: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  max-width: 50%;
+  justify-content: space-between;
+  background-color: #ffffff;
+  max-height: 362px;
+  height: 362px;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 26px;
+  padding: 10px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  border: none;
+}
+
+button {
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 16px;
+  width: 126px;
+  flex-grow: 1;
+  display: flex;
+  border-radius: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.visits,
+.flag,
+.flag-review,
+.profile,
+.alerts,
+.pre-registration {
+  border-radius: 20px;
+  flex-grow: 1;
+  display: flex;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+}
+
+.quick-actions {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.rec-act-ale {
+  background-color: #ffffff;
+}
+
+.check-in-dist {
+  background-color: var(--accent-color);
+  color: #ffffff;
+}
+
+.buttons :hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+@media (max-width: 720px) {
+  .buttons button {
+    height: 52px;
+  }
+
+  .buttons {
+    margin: 10px auto;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .rec-act-ale,
+  .quick-actions {
+    width: 100% !important;
+    max-width: 100%;
+    display: flex;
+    height: fit-content;
+    max-height: 385px;
+  }
+}

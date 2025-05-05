@@ -1,0 +1,68 @@
+<div class="sidebar">
+  <nav>
+    <ul>
+      <li>
+        <a routerLink="/security-dashboard"
+          ><i
+            class="fa-solid fa-gauge-high"
+            style="margin-right: 26px; font-size: 21.5px"
+          ></i>
+          Dashboard</a
+        >
+      </li>
+    </ul>
+    <div class="checkedin-drop">
+      <button (click)="toggleCheckedin()">
+        <i
+          class="fa-solid fa-users"
+          style="margin-right: 26px; font-size: 21.5px"
+        ></i>
+        Checked-In <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="dropdown" [ngClass]="{ show: isCheckedinOpen }">
+        <a href="#"><i class="fa-solid fa-id-card-clip"></i> Staff</a>
+        <a href="#"><i class="fa-solid fa-id-badge"></i> Visitors</a>
+      </div>
+    </div>
+    <div class="flags-drop">
+      <button (click)="toggleflags()">
+        <i
+          class="fa-solid fa-flag"
+          style="margin-right: 26px; font-size: 21.5px"
+        ></i>
+        Flags <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="dropdown" [ngClass]="{ show: isFlagsOpen }">
+        <a href="#"><i class="fa-solid fa-flag"></i> Raise Flag</a>
+        <a href="#"><i class="fa-solid fa-flag-checkered"></i> Raised Flags</a>
+      </div>
+    </div>
+    <div class="alerts-drop">
+      <button (click)="toggleAlerts()">
+        <i
+          class="fa-solid fa-bell"
+          style="margin-right: 26px; font-size: 21.5px"
+        ></i>
+        Alerts <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="dropdown" [ngClass]="{ show: isAlertsOpen }">
+        <a routerLink="#"><i class="fa-solid fa-paper-plane"></i> Send Alert</a>
+        <a routerLink="/staff-view-alerts"
+          ><i class="fa-solid fa-eye"></i> View Alerts</a
+        >
+      </div>
+    </div>
+    <ul>
+      <li>
+        <a routerLink="/staff-dashboard" class="info-icon"
+          ><i
+            class="fa-solid fa-circle-info"
+            style="margin-right: 26px; font-size: 21.5px"
+          ></i>
+          Emergency <br />
+          Information
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

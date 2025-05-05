@@ -1,0 +1,327 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
+
+:root {
+  --primary-color: #1a5276;
+  --secondary-color: #e8f0fe;
+  --background-color: #e8f0fe;
+  --accent-color: #00ced1;
+  --success-color: #28b463;
+  --warning-color: #f39c12;
+  --error-color: #c62828;
+}
+
+body,
+html {
+  margin: 0%;
+  padding: 0%;
+  color: #333333;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  background-color: var(--background-color);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+header {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.headerh1 {
+  font-size: 2em;
+  margin-top: 52px;
+  margin-bottom: 0%;
+}
+
+.headerp {
+  font-size: 16px;
+  margin: 0%;
+}
+
+.inheaderh1 {
+  font-size: 2em;
+  margin-top: 13px;
+  margin-bottom: 0%;
+}
+
+.inheaderp {
+  font-size: 16px;
+  margin-bottom: 0%;
+  margin-top: 0%;
+}
+
+.page-container {
+  display: flex;
+  width: 100%;
+}
+
+.mini-header {
+  border-radius: 20px;
+  flex-direction: row;
+  display: flex;
+  padding: 5px;
+  box-sizing: border-box;
+  text-align: right;
+  width: 16%;
+  justify-content: center;
+  align-items: center;
+  margin-left: 83%;
+  margin-bottom: 0px;
+}
+
+.status {
+  display: flex;
+  flex-direction: row;
+  border-radius: 20px;
+  gap: 13px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.dash-main-container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: row;
+  gap: 26px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.sidebar {
+  width: 72px;
+  height: calc(100vh - 62px);
+  border-right: 2px solid var(--primary-color);
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 26px;
+  padding: 10px;
+  box-sizing: border-box;
+  color: #ffffff;
+  overflow-x: hidden;
+  transition: width 0.3s ease-in-out;
+  position: sticky;
+}
+
+.sidebar:hover {
+  width: 260px;
+}
+
+.sidebar nav {
+  margin: 20px auto;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 30px auto;
+}
+
+.sidebar nav ul li a {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: inherit;
+  white-space: nowrap;
+  font-size: 16px;
+}
+
+.sidebar nav ul li a:hover {
+  background-color: var(--background-color);
+  color: #333333;
+  border-radius: 10px;
+}
+
+.sidebar .dropdown {
+  top: 100%;
+  left: 0;
+  background-color: var(--accent-color);
+  min-width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  display: none;
+  cursor: pointer;
+  margin: 10px auto;
+  border-radius: 5px;
+}
+
+.sidebar .dropdown.show {
+  display: block;
+}
+
+.sidebar .dropdown a {
+  color: #ffffff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.sidebar .dropdown a:hover {
+  background-color: #008080;
+  color: #ffffff;
+}
+
+/* Style for the down arrow icon */
+.fa-chevron-down {
+  margin-left: auto;
+}
+
+header {
+  width: 100%;
+  padding: 10px;
+  top: 0;
+  position: sticky;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .logo-img {
+  height: 36px;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+header nav li {
+  margin-right: 5px;
+}
+
+header nav li a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  text-align: center;
+  padding: 5px 6px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+header nav li a:hover {
+  background-color: #008080;
+}
+
+.info-icon i {
+  color: #f39c12;
+  animation: flash 1s infinite alternate;
+}
+
+header .user-menu {
+  position: relative;
+  margin-left: 10px;
+}
+
+header .dropdown {
+  position: absolute;
+  background-color: var(--accent-color);
+  min-width: 126px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  display: none;
+  cursor: pointer;
+  right: 0;
+  top: 100%;
+  margin: 10px auto;
+  border-radius: 5px;
+}
+
+header .dropdown.show {
+  display: block;
+}
+
+header .dropdown a {
+  color: #ffffff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 80%;
+  border-radius: 5px;
+}
+
+header .dropdown a:hover {
+  background-color: #008080;
+  color: #ffffff;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+header button {
+  background-color: #1a5276;
+  color: #ffffff;
+  padding: 5px;
+  border: none;
+  border-radius: 25%;
+  font-size: 20px;
+}
+
+header button:hover {
+  background-color: #008080;
+}
+
+@media (max-width: 720px) {
+  .status,
+  .bottom {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .mini-header {
+    margin: 10px auto;
+    display: flex;
+    flex-direction: row;
+    width: 63%;
+    border-bottom: #333333 2px solid;
+    border-bottom-left-radius: 0%;
+    border-bottom-right-radius: 0%;
+    margin-bottom: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .inheaderp {
+    margin-bottom: 13px;
+  }
+
+  .inheaderh1 {
+    margin-top: 45px;
+  }
+}

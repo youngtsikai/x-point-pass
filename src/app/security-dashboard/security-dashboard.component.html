@@ -1,0 +1,208 @@
+<app-security-header></app-security-header>
+<div class="page-container">
+  <app-security-sidebar></app-security-sidebar>
+  <div class="dash-main-container">
+    <div class="status">
+      <div class="status-new-flags">
+        <h3>New Raised Flags</h3>
+        <h2>0</h2>
+      </div>
+      <div class="status-new-alerts">
+        <h3>New Alerts</h3>
+        <h2>0</h2>
+      </div>
+      <div class="status-visitors-in">
+        <h3>Visitors Checked In</h3>
+        <h2>0</h2>
+      </div>
+      <div class="status-staff-in">
+        <h3>Staff Checked In</h3>
+        <h2>0</h2>
+      </div>
+      <div class="status-head-count">
+        <h3>Total Head Count</h3>
+        <h2>0</h2>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="quick-actions">
+        <h4 style="margin-bottom: 0%">
+          <i class="fa-solid fa-bolt"></i> Quick Actions
+        </h4>
+        <div class="buttons">
+          <button routerLink="/staff-checkin">
+            <h2><i class="fa-solid fa-id-card-clip"></i></h2>
+            <h4>Staff <br />Check-In</h4></button
+          ><button>
+            <h2>
+              <i class="fa-solid fa-image-portrait"></i>
+            </h2>
+            <h4>Visitor <br />Check-In</h4></button
+          ><button>
+            <h2><i class="fa fa-sign-out"></i></h2>
+            <h4>Check <br />Out</h4></button
+          ><button>
+            <h2><i class="fa fa-paper-plane"></i></h2>
+            <h4>Send <br />Alert</h4></button
+          ><button>
+            <h2><i class="fa fa-envelope"></i></h2>
+            <h4>Unread <br />Alerts</h4></button
+          ><button>
+            <h2><i class="fa fa-flag-checkered"></i></h2>
+            <h4>New <br />Flags</h4></button
+          ><button style="background-color: darkred; color: #ffffff">
+            <h2><i class="fa fa-clock"></i></h2>
+            <h4>Expired <br />Check-Ins</h4></button
+          ><button style="background-color: darkorange; color: #ffffff">
+            <h2><i class="fa fa-hourglass"></i></h2>
+            <h4>Extended <br />Check-Ins</h4>
+          </button>
+        </div>
+      </div>
+      <div class="rec-act-ale">
+        <h4 style="margin-bottom: 0%">
+          <i class="fa-solid fa-list-alt"></i> Recent Activities and Alerts
+        </h4>
+      </div>
+    </div>
+    <div class="trend-alerts">
+      <div style="text-align: center">
+        <h4>Check-ins Today</h4>
+        <div style="font-size: 1.5em; font-weight: bold">152</div>
+        <div style="color: green">
+          <i class="fas fa-arrow-up"></i> (+12% vs. Yesterday)
+        </div>
+      </div>
+
+      <div style="text-align: center">
+        <h4>New Flags Today</h4>
+        <div style="font-size: 1.5em; font-weight: bold">3</div>
+        <div style="color: red">
+          <i class="fas fa-arrow-down"></i> (-5% vs. Avg.)
+        </div>
+      </div>
+
+      <div style="text-align: center">
+        <h4>New Alerts Today</h4>
+        <div style="font-size: 1.5em; font-weight: bold">5</div>
+        <div style="color: green">
+          <i class="fas fa-arrow-up"></i> (+8% vs. Avg.)
+        </div>
+      </div>
+
+      <div style="text-align: center">
+        <h4>Check-outs Today</h4>
+        <div style="font-size: 1.5em; font-weight: bold">110</div>
+        <div style="color: red">
+          <i class="fas fa-arrow-down"></i> (-3% vs. Yesterday)
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .status-new-flags,
+  .status-new-alerts,
+  .status-visitors-in,
+  .status-staff-in,
+  .status-head-count {
+    flex-grow: 1;
+    font-size: 0.8em;
+    text-align: center;
+    border-radius: 20px;
+    color: #ffffff;
+  }
+
+  .status-head-count {
+    background-color: var(--primary-color);
+  }
+
+  .status-visitors-in {
+    background-color: var(--success-color);
+  }
+  .status-staff-in {
+    background-color: var(--accent-color);
+  }
+  .status-new-flags {
+    background-color: var(--error-color);
+  }
+  .status-new-alerts {
+    background-color: var(--warning-color);
+  }
+
+  .quick-actions {
+    display: flex;
+    flex-direction: column;
+    max-width: 46.5%;
+    background-color: #333333;
+    padding: 10px;
+    box-sizing: border-box;
+    color: #ffffff;
+    border-radius: 10px;
+  }
+
+  .rec-act-ale {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--accent-color);
+    padding: 10px;
+    box-sizing: border-box;
+    flex-grow: 1;
+    color: #ffffff;
+    border-radius: 10px;
+  }
+
+  .buttons {
+    flex-direction: row;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 5px;
+    margin: 8px auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .buttons button {
+    width: 126px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 2px 2px;
+    border: none;
+    font-size: 15px;
+    flex-grow: 1;
+  }
+
+  .buttons button:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+  }
+
+  .buttons button h2 {
+    margin-bottom: 0%;
+  }
+
+  .buttons button h4 {
+    margin-top: 0%;
+  }
+
+  .trend-alerts {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    flex-direction: row;
+    background-color: #ffffff;
+  }
+
+  .trend-alerts div {
+    flex-grow: 1;
+  }
+
+  .trend-alerts h4 {
+    margin-top: 0%;
+  }
+</style>

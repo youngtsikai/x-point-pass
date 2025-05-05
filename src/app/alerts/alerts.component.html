@@ -1,0 +1,38 @@
+<h1 class="inheaderh1">Alerts</h1>
+<p class="inheaderp">View all and manage different types of alerts</p>
+<div class="buttons">
+  <div class="emergency-butt">
+    <button
+      (click)="toggleEmergency()"
+      [class.active]="activeButton === 'emergency'"
+    >
+      <i class="fa-solid fa-exclamation-triangle"></i>
+      Emergency
+    </button>
+  </div>
+  <div class="general-butt">
+    <button
+      (click)="toggleGeneral()"
+      [class.active]="activeButton === 'general'"
+    >
+      <i class="fa-solid fa-bell"></i>
+      General
+    </button>
+  </div>
+  <div class="targeted-butt">
+    <button
+      (click)="toggleTargeted()"
+      [class.active]="activeButton === 'targeted'"
+    >
+      <i class="fa-solid fa-bullseye"></i>
+      Targeted
+    </button>
+  </div>
+</div>
+<div class="alerts-containers">
+  <div class="emergency-alerts" *ngIf="isVisibleEmergency">
+    No Emergency Alerts
+  </div>
+  <div class="general-alerts" *ngIf="isVisibleGeneral"></div>
+  <div class="targeted-alerts" *ngIf="isVisibleTargeted"></div>
+</div>

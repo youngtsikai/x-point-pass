@@ -1,0 +1,76 @@
+<app-visitor-header></app-visitor-header>
+<div class="page-container">
+  <app-visitor-sidebar></app-visitor-sidebar>
+  <div class="dash-main-container">
+    <div class="mini-header">
+      <h3><i class="fa-solid fa-user"></i> Keith Tsikai</h3>
+    </div>
+    <div class="status">
+      <div class="status-flags">
+        <h3><i class="fa-solid fa-flag"></i> Pending Flags</h3>
+        <h2>0</h2>
+      </div>
+      <div class="status-visits">
+        <h3>
+          <i class="fa-solid fa-user-plus"></i> Active Pre-registered visits
+        </h3>
+        <h2>0</h2>
+      </div>
+      <div class="status-disack">
+        <h3><i class="fa-solid fa-user-slash"></i> Disacknowledged visits</h3>
+        <h2>0</h2>
+      </div>
+      <div class="status-alerts">
+        <h3><i class="fa-solid fa-bell"></i> Unread Alerts</h3>
+        <h2>0</h2>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="quick-actions">
+        <h4><i class="fa-solid fa-bolt"></i> Quick Actions</h4>
+        <div class="buttons">
+          <div class="pre-registration">
+            <button routerLink="/pre-registration">
+              <h4>
+                <i class="fa-solid fa-calendar-plus"></i><br />
+                Pre-Register
+              </h4>
+            </button>
+          </div>
+          <div class="visits">
+            <button routerLink="/visits">
+              <h4><i class="fa-solid fa-list-ul"></i><br />Visits</h4>
+            </button>
+          </div>
+          <div class="flag">
+            <button routerLink="/flag-activity">
+              <h4><i class="fa-solid fa-flag"></i><br />Raise Flag</h4>
+            </button>
+          </div>
+          <div class="flag-review">
+            <button routerLink="/flag-review">
+              <h4>
+                <i class="fa-solid fa-flag-checkered"></i><br />View Flags
+              </h4>
+            </button>
+          </div>
+          <div class="profile">
+            <button routerLink="/profile">
+              <h4><i class="fa-solid fa-user"></i><br />Profile</h4>
+            </button>
+          </div>
+          <div class="alerts">
+            <button routerLink="/visitor-view-alerts">
+              <h4><i class="fa-solid fa-bell"></i><br />Alerts</h4>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="rec-act-ale">
+        <h4>
+          <i class="fa-solid fa-list-alt"></i> Recent Activities and Alerts
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>

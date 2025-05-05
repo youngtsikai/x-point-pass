@@ -1,0 +1,158 @@
+<div class="main-container">
+  <h2>Facial Recognition</h2>
+  <div class="container">
+    <div class="camera-container">
+      <div class="camera">
+        <video #webcamVideo autoplay playsinline></video>
+        <canvas #canvas style="display: none"></canvas>
+        <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+      </div>
+      <div class="instructions">
+        <h4>
+          Make sure your face is visible in the face before capturing frame
+        </h4>
+        <button (click)="cancelRecognition()">Cancel</button>
+        <button
+          (click)="startWebcam()"
+          *ngIf="!isCameraActive && !errorMessage"
+        >
+          Start Camera
+        </button>
+        <button (click)="stopWebcam()" *ngIf="isCameraActive">
+          Stop Camera
+        </button>
+        <button (click)="captureFrame()" *ngIf="isCameraActive">
+          Capture Frame
+        </button>
+        <button (click)="scanFace()" *ngIf="capturedFrame">Scan Face</button>
+      </div>
+    </div>
+    <div class="result">
+      <div *ngIf="capturedFrame">
+        <h3>Captured Frame:</h3>
+        <img
+          [src]="capturedFrame"
+          alt="Captured Face"
+          style="max-width: 100%"
+        />
+      </div>
+      <div *ngIf="scanResults">
+        <h3>Scan Results:</h3>
+        <pre>{{ scanResults | json }}</pre>
+      </div>
+      <div *ngIf="!capturedFrame && !scanResults && isCameraActive">
+        <p>Capture a frame to scan.</p>
+      </div>
+      <div *ngIf="!isCameraActive && !errorMessage">
+        <p>Click 'Start Camera' to begin.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Your existing styles remain the same */
+  .main-container {
+    border: 2px solid green;
+    min-height: 100vh; /* Use min-height to allow content to grow */
+    padding: 20px; /* Increased padding for better spacing */
+    box-sizing: border-box;
+    display: flex; /* Enable flexbox for centering */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    flex-direction: column; /* Stack items vertically */
+    text-align: center; /* Center text within the container */
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    width: 90%; /* Adjust width as needed */
+    max-width: 960px; /* Limit maximum width */
+    border: 2px solid purple;
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: flex-start; /* Align items to the start of the cross-axis */
+    gap: 20px; /* Add gap between camera and result */
+  }
+
+  .camera-container {
+    border: 2px solid black;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+  }
+
+  .camera {
+    width: 256px; /* Match video width */
+    height: 256px; /* Match video height */
+    border: 2px solid white;
+    margin-bottom: 15px; /* Add margin below the camera/video */
+    position: relative; /* For positioning waiting/error messages */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .waiting-message,
+  .error-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .instructions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .instructions h4 {
+    margin-bottom: 0;
+  }
+
+  .instructions button {
+    padding: 8px 15px;
+    cursor: pointer;
+  }
+
+  .result {
+    border: 2px solid orange;
+    padding: 15px;
+    box-sizing: border-box;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .result img {
+    max-width: 100%; /* Ensure image doesn't overflow */
+    height: auto;
+    border: 1px solid #ccc;
+  }
+
+  .result pre {
+    white-space: pre-wrap; /* Allow text to wrap */
+    word-break: break-word; /* Break long words */
+    text-align: left;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: auto; /* Add scrollbar if content is too long */
+    max-height: 300px; /* Limit max height */
+  }
+</style>

@@ -1,0 +1,91 @@
+<app-security-header></app-security-header>
+<div class="dash-main-container">
+  <h1 class="headerh1">Staff Check-In</h1>
+  <p class="headerp">Please Select Check-In Method Below</p>
+  <div class="container">
+    <div class="facial-scanning">
+      <div class="instructions">
+        <ul>
+          <li>Stand in front of the camera.</li>
+          <li>Look directly at the screen.</li>
+          <li>Ensure face is clearly visible.</li>
+          <li>Wait for green confirmation.</li>
+        </ul>
+      </div>
+      <i class="fa-solid fa-user"></i>
+      <button routerLink="/facial-scan">Facial Recognition</button>
+    </div>
+    <div class="qr-scanning">
+      <div class="instructions">
+        <ul>
+          <li>Have your QR code ready..</li>
+          <li>Position the QR code in front of the scanner.</li>
+          <li>Hold the code steady until it is recognized.</li>
+          <li>Wait for the green confirmation</li>
+        </ul>
+      </div>
+      <i class="fa-solid fa-qrcode"></i>
+      <button routerLink="/qr-code-scan">QR Code Scanning</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .container {
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+    gap: 13px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .qr-scanning,
+  .facial-scanning {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 2px solid var(--primary-color);
+    background-color: #ffffff;
+    margin: 10px auto;
+  }
+
+  .container i {
+    font-size: 178px;
+    border: 2px solid #ffffff;
+    padding: 10px;
+    margin: 10px auto;
+    box-sizing: border-box;
+    color: var(--primary-color);
+  }
+
+  button {
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 232px;
+    margin: 5px auto;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    border: none;
+    color: #ffffff;
+  }
+
+  button:hover {
+    background-color: var(--accent-color);
+    color: #ffffff;
+  }
+
+  .instructions {
+    text-align: left;
+    font-size: 15px;
+  }
+
+  .instructions ul li {
+    list-style: decimal;
+  }
+</style>
