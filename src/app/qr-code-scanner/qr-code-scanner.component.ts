@@ -43,19 +43,19 @@ export class QrCodeScannerComponent implements OnInit, OnDestroy {
   scannedResult: { [key: string]: string } | null = null;
   errorMessage: string | null = null;
   isScanning = false;
-  isVerifying = false; // New property
-  private scanIntervalSubscription: Subscription | undefined; // For the scanning interval
-  private qrApiUrl = 'http://localhost:5000/scan_qr'; // QR reading endpoint (still used)
+  isVerifying = false;
+  private scanIntervalSubscription: Subscription | undefined;
+  private qrApiUrl = 'http://localhost:5000/scan_qr';
   private stream: MediaStream | null = null;
   private stopScanningSubject = new Subject<void>();
-  public hasScannedSuccessfully = false; // Changed to public
+  public hasScannedSuccessfully = false;
   private metadataLoaded = false;
   processingCheckin = false;
   checkinSuccessful = false;
   checkinMessage: string = '';
   private firestore: Firestore = inject(Firestore);
-  private scanTimeout: any; // To hold the timeout for max scan duration
-  backendDecodeError: string | null = null; // To store backend decode errors
+  private scanTimeout: any;
+  backendDecodeError: string | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -71,7 +71,7 @@ export class QrCodeScannerComponent implements OnInit, OnDestroy {
     this.processingCheckin = false;
     this.checkinSuccessful = false;
     this.checkinMessage = '';
-    this.backendDecodeError = null; // Reset backend decode error
+    this.backendDecodeError = null;
 
     try {
       this.stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -82,7 +82,6 @@ export class QrCodeScannerComponent implements OnInit, OnDestroy {
           this.metadataLoaded = true;
           this.videoElement.nativeElement.play();
 
-          // Start scanning after a small delay to allow camera to initialize
           timer(500)
             .pipe(takeUntil(this.stopScanningSubject))
             .subscribe(() => {
@@ -100,13 +99,13 @@ export class QrCodeScannerComponent implements OnInit, OnDestroy {
                     ) {
                       this.isScanning = false;
                       this.stopCamera();
-                      clearTimeout(this.scanTimeout); // Clear the "no QR code found" timeout
+                      clearTimeout(this.scanTimeout);
                       console.log('Raw QR Code Data:', response.data);
                       const parsedData = this.parseQrData(response.data);
                       console.log('Parsed QR Code Data:', parsedData);
-                      this.scannedResult = parsedData; // Show whatever data we got
-                      this.hasScannedSuccessfully = true; // Indicate a successful scan
-                      this.isVerifying = true; // Start verification
+                      this.scannedResult = parsedData;
+                      this.hasScannedSuccessfully = true;
+                      this.isVerifying = true;
                       await this.verifyAndCheckinStaff(parsedData);
                       this.stopScanningSubject.next();
                     } else if (response?.status === 'error') {
@@ -114,7 +113,7 @@ export class QrCodeScannerComponent implements OnInit, OnDestroy {
                         'Backend reported QR decode error:',
                         response.message
                       );
-                      // We will only show this error if the 10-second timeout completes without a success
+
                       this.backendDecodeError = 'Failed to decode QR code.';
                     }
                   },
@@ -148,7 +147,6 @@ export class QrCodeScannerComponent implements OnInit, OnDestroy {
                   },
                 });
 
-              // Set a timeout to stop scanning after 10 seconds if no success
               this.scanTimeout = setTimeout(() => {
                 if (this.isScanning && !this.hasScannedSuccessfully) {
                   this.stopScanningSubject.next();
@@ -211,7 +209,7 @@ export class QrCodeScannerComponent implements OnInit, OnDestroy {
       if (parts.length === 2) {
         const key = parts[0].trim();
         const value = parts[1].trim();
-        result[key.toUpperCase()] = value; // Store keys in uppercase
+        result[key.toUpperCase()] = value;
       }
     }
     return result;
@@ -254,7 +252,7 @@ export class QrCodeScannerComponent implements OnInit, OnDestroy {
       this.errorMessage = `Firestore error: ${error.message}`;
     } finally {
       this.processingCheckin = false;
-      this.isVerifying = false; // Stop verifying
+      this.isVerifying = false;
     }
   }
 

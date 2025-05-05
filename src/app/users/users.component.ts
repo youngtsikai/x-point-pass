@@ -11,7 +11,7 @@ import {
 import { Observable } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http'; // Import HttpClient
+import { HttpClient } from '@angular/common/http';
 
 import { CommonModule } from '@angular/common';
 import { AdminHeaderComponent } from '../admin-header/admin-header.component';
@@ -67,9 +67,7 @@ export class UsersComponent implements OnInit {
     }) as Observable<User[]>;
   }
 
-  ngOnInit(): void {
-    // Data is fetched via the observable
-  }
+  ngOnInit(): void {}
 
   async createUser() {
     if (
@@ -116,7 +114,6 @@ export class UsersComponent implements OnInit {
             accountCreated: false,
           };
 
-          // Re-initialize the users$ Observable
           this.users$ = collectionData(usersCollection, {
             idField: 'id',
           }) as Observable<User[]>;
@@ -142,20 +139,18 @@ export class UsersComponent implements OnInit {
 
     this.http
       .post<{ image: string }>(backendUrl, {
-        uid: user.id, // Use the user's ID from Firestore
+        uid: user.id,
         name: user.name,
         role: user.role,
-        phone: user.phoneNumber, // Ensure the backend expects 'phone'
+        phone: user.phoneNumber,
       })
       .subscribe({
         next: (response) => {
           this.qrCodeImage = 'data:image/png;base64,' + response.image;
           console.log('QR Code received:', this.qrCodeImage);
-          // The QR code image is now stored in this.qrCodeImage and will be displayed in the template
         },
         error: (error) => {
           console.error('Error generating QR code from backend:', error);
-          // Handle the error
         },
       });
   }
@@ -176,10 +171,10 @@ export class UsersComponent implements OnInit {
           const base64Image = 'data:image/png;base64,' + response.image;
           const link = document.createElement('a');
           link.href = base64Image;
-          link.download = `user_${user.name.replace(/\s+/g, '_')}_qrcode.png`; // Create a filename
+          link.download = `user_${user.name.replace(/\s+/g, '_')}_qrcode.png`;
           document.body.appendChild(link);
           link.click();
-          document.body.removeChild(link); // Clean up the temporary link
+          document.body.removeChild(link);
           console.log('QR Code download initiated');
         },
         error: (error) => {
@@ -256,6 +251,5 @@ export class UsersComponent implements OnInit {
 
   editUser(user: User): void {
     console.log('Edit user clicked for:', user);
-    // Implement your edit logic here
   }
 }
