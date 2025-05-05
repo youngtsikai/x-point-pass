@@ -209,7 +209,7 @@ export class QrCodeScannerComponent implements OnInit, OnDestroy {
       if (parts.length === 2) {
         const key = parts[0].trim();
         const value = parts[1].trim();
-        result[key.toUpperCase()] = value;
+        result[key.toUpperCase()] = value; // Store keys in uppercase
       }
     }
     return result;
@@ -252,7 +252,7 @@ export class QrCodeScannerComponent implements OnInit, OnDestroy {
       this.errorMessage = `Firestore error: ${error.message}`;
     } finally {
       this.processingCheckin = false;
-      this.isVerifying = false;
+      this.isVerifying = false; // Stop verifying
     }
   }
 
@@ -263,6 +263,7 @@ export class QrCodeScannerComponent implements OnInit, OnDestroy {
         name: staffData['NAME'],
         role: staffData['ROLE'],
         checkin_time: new Date(),
+        checkin_status: true,
       });
       this.checkinSuccessful = true;
       this.checkinMessage = 'Check-in successful!';
