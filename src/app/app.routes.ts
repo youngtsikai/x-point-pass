@@ -24,6 +24,7 @@ import { QrCodeScannerComponent } from './qr-code-scanner/qr-code-scanner.compon
 import { UsersComponent } from './users/users.component';
 import { CheckinLogsComponent } from './checkin-logs/checkin-logs.component';
 import { VisitorPreregistratonComponent } from './visitor-preregistraton/visitor-preregistraton.component';
+import { VisitsComponent } from './visits/visits.component';
 
 export const routes: Routes = [
   { path: '', component: MainHomeComponent },
@@ -53,5 +54,9 @@ export const routes: Routes = [
   {
     path: 'visitor-preregistration',
     component: VisitorPreregistratonComponent,
+  },
+  {
+    path: 'visits',
+    component: VisitsComponent,
   },
 ];

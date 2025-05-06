@@ -3,49 +3,59 @@
 <p class="headerp">Sign up and be one of us</p>
 <div class="main-container">
   <form (ngSubmit)="onSubmit()" ngForm>
-    <label for="name" >
+    <label for="name">
       <input
         type="text"
         id="name"
-        [(ngModel)] ="userData.username"
+        [(ngModel)]="userData.username"
         placeholder="Name"
         name="name"
         required
       />
       <span>Full Name</span>
     </label>
-    <label for="email" >
+    <label for="email">
       <input
         type="email"
         id="email"
-        [(ngModel)] ="userData.email"
+        [(ngModel)]="userData.email"
         placeholder="Email"
         name="email"
         required
       />
       <span>Email Address</span>
     </label>
-    <label for="password" >
+    <label for="password">
       <input
         type="password"
         id="password"
-        [(ngModel)] ="userData.password"
+        [(ngModel)]="userData.password"
         placeholder="Password"
         name="password"
         required
       />
       <span>Password</span>
     </label>
-    <label for="confirmPassword" >
+    <label for="confirmPassword">
       <input
         type="password"
         id="confirmPassword"
-        [(ngModel)] ="userData.confirmpassword"
+        [(ngModel)]="userData.confirmpassword"
         placeholder="Confirm Password"
         name="confirmPassword"
         required
       />
       <span>Confirm Password</span>
+    </label>
+    <label for="phoneNumber">
+      <input
+        type="tel"
+        id="phoneNumber"
+        [(ngModel)]="userData.phoneNumber"
+        placeholder="Phone Number"
+        name="phoneNumber"
+      />
+      <span>Phone Number</span>
     </label>
     <button type="submit">Sign-Up</button>
   </form>

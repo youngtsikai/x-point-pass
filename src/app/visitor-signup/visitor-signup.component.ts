@@ -22,11 +22,12 @@ export class VisitorSignupComponent {
     password: '',
     confirmpassword: '',
     role: 'visitor',
+    phoneNumber: '',
   };
 
   onSubmit(): void {
     if (this.userData.password !== this.userData.confirmpassword) {
-      alert('Passwords do not match!');
+      alert('Error: Passwords do not match!');
       return;
     }
 
@@ -35,14 +36,16 @@ export class VisitorSignupComponent {
         this.userData.email,
         this.userData.username,
         this.userData.password,
-        this.userData.role
+        this.userData.role,
+        this.userData.phoneNumber
       )
       .then(() => {
+        alert('Success: Your account has been created!');
         this.router.navigateByUrl('/visitor-dashboard');
       })
       .catch((error: any) => {
         console.error('Sign-up failed:', error);
-        let errorMessage = 'Sign-up Failed. Please try again.';
+        let errorMessage = 'Error: Sign-up Failed. Please try again.';
         if (error?.message) {
           errorMessage = error.message;
         }

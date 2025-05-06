@@ -20,8 +20,12 @@
         Visits <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="dropdown" [ngClass]="{ show: isVisitsOpen }">
-        <a href="#"><i class="fa-solid fa-check-double"></i> Preregistration</a>
-        <a href="#"><i class="fa-solid fa-users"></i> Planned Visits</a>
+        <a routerLink="/visitor-preregistration"
+          ><i class="fa-solid fa-check-double"></i> Preregistration</a
+        >
+        <a routerLink="/visits"
+          ><i class="fa-solid fa-users"></i> Planned Visits</a
+        >
       </div>
     </div>
     <div class="flags-drop">
