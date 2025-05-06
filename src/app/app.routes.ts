@@ -23,6 +23,7 @@ import { FacialRecognitionComponent } from './facial-recognition/facial-recognit
 import { QrCodeScannerComponent } from './qr-code-scanner/qr-code-scanner.component';
 import { UsersComponent } from './users/users.component';
 import { CheckinLogsComponent } from './checkin-logs/checkin-logs.component';
+import { VisitorPreregistratonComponent } from './visitor-preregistraton/visitor-preregistraton.component';
 
 export const routes: Routes = [
   { path: '', component: MainHomeComponent },
@@ -49,4 +50,8 @@ export const routes: Routes = [
   { path: 'visitor-dashboard', component: VisitorDashboardComponent },
   { path: 'alerts', component: AlertsComponent },
   { path: 'checkin-logs', component: CheckinLogsComponent },
+  {
+    path: 'visitor-preregistration',
+    component: VisitorPreregistratonComponent,
+  },
 ];
