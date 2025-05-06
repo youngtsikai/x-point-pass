@@ -34,11 +34,10 @@
 .rec-act-ale {
   border-radius: 20px;
   padding: 10px;
-  max-height: 326px;
+  max-height: 420px;
   box-sizing: border-box;
   display: flex;
   max-width: 50%;
-  height: 326px;
   flex-direction: column;
   flex-grow: 1;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -49,33 +48,6 @@
 .quick-actions {
   background-color: #333333;
   color: #ffffff;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: row;
-  gap: 13px;
-  padding: 5px;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  border: none;
-  margin: 0px auto;
-  font-size: 16px;
-}
-
-.buttons button {
-  padding: 0px;
-  box-sizing: border-box;
-  font-size: 16px;
-  width: 152px;
-  flex-grow: 1;
-  display: flex;
-  border-radius: 20px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  background-color: #ffffff;
 }
 
 @media (max-width: 720px) {

@@ -54,31 +54,6 @@
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.buttons {
-  display: flex;
-  flex-direction: row;
-  gap: 26px;
-  padding: 10px;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  border: none;
-}
-
-button {
-  padding: 10px;
-  box-sizing: border-box;
-  font-size: 16px;
-  width: 126px;
-  flex-grow: 1;
-  display: flex;
-  border-radius: 20px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  background-color: #ffffff;
-}
-
 .visits,
 .flag,
 .flag-review,

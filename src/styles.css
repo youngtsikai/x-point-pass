@@ -70,10 +70,45 @@ header {
   margin-left: 83%;
   max-width: 32%;
   margin-bottom: 0px;
+  border: 2px solid #1a5276;
 }
 
 .mini-header h4 {
   margin: 0;
+}
+
+.buttons {
+  flex-direction: row;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 5px;
+  margin: 8px auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.buttons button {
+  width: 126px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 2px 2px;
+  border: none;
+  font-size: 15px;
+  flex-grow: 1;
+}
+
+.buttons button:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.buttons button h2 {
+  margin-bottom: 0%;
+}
+
+.buttons button h4 {
+  margin-top: 0%;
 }
 
 .status {
@@ -315,6 +350,7 @@ header button:hover {
     border-bottom-right-radius: 0%;
     margin-bottom: 10px;
     padding: 5px;
+    border: 2px solid #1a5276;
     box-sizing: border-box;
   }
 
