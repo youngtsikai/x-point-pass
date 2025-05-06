@@ -1,0 +1,131 @@
+<app-visitor-header>
+  <div class="page-container">
+    <app-visitor-sidebar></app-visitor-sidebar>
+    <div class="dash-main-container">
+      <h1>Visitor Pre-Registration Form</h1>
+      <p>Please fill out the form below to pre-register your visit.</p>
+      <form id="visitorForm" (ngSubmit)="onSubmit()">
+        <div class="group">
+          <label for="name">
+            <input
+              type="text"
+              id="name"
+              [(ngModel)]="formData.name"
+              name="name"
+              placeholder="Name"
+              required
+              readonly
+            />
+            <span>Full Name</span>
+          </label>
+          <label for="phone">
+            <input
+              type="text"
+              id="phone"
+              [(ngModel)]="formData.phone"
+              name="phone"
+              placeholder="Phone Number"
+              required
+            />
+            <span>Phone Number</span>
+          </label>
+          <label for="host">
+            <input
+              type="text"
+              id="host"
+              [(ngModel)]="formData.host"
+              name="host"
+              placeholder="Host's Name"
+              required
+            />
+            <span
+              >Host's Name
+              <b style="font-size: 0.8em; font-weight: lighter"
+                >(Who are you Visiting)</b
+              ></span
+            >
+          </label>
+        </div>
+        <div class="group">
+          <label for="idnum">
+            <input
+              type="text"
+              id="idnum"
+              [(ngModel)]="formData.idnum"
+              name="idnum"
+              placeholder="National ID Number"
+              required
+            />
+            <span>National ID Number</span>
+          </label>
+
+          <label for="licenseplate">
+            <input
+              type="text"
+              id="licenseplate"
+              name="licenseplate"
+              [(ngModel)]="formData.licenseplate"
+              placeholder="License Plate"
+              required
+            />
+            <span>License Plate</span>
+          </label>
+        </div>
+
+        <div class="group">
+          <select
+            id="purpose"
+            [(ngModel)]="formData.purpose"
+            name="purpose"
+            required
+          >
+            <option value="">Select Purpose of Visit</option>
+            <option value="Business">Business</option>
+            <option value="Meeting">Meeting</option>
+            <option value="Delivery">Delivery</option>
+            <option value="Other">Other</option>
+          </select>
+          <select
+            id="estimatedHours"
+            [(ngModel)]="formData.estimatedHours"
+            name="estimatedHours"
+            required
+          >
+            <option value="">Estimated Visit Time</option>
+            <option value="1-2">1-2 Hours</option>
+            <option value="2-3">2-3 Hours</option>
+            <option value="3-4">3-4 Hours</option>
+            <option value="4+">4+ Hours</option>
+            <option value="unsure">Unsure</option>
+          </select>
+        </div>
+
+        <div class="group">
+          <label for="visitDate">
+            <input
+              type="date"
+              id="visitDate"
+              [(ngModel)]="formData.visitDate"
+              name="visitDate"
+              required
+            />
+            <span>Visit Date</span>
+          </label>
+
+          <label for="visitTime">
+            <input
+              type="time"
+              id="visitTime"
+              [(ngModel)]="formData.visitTime"
+              name="visitTime"
+              required
+            />
+            <span>Visit Time</span>
+          </label>
+        </div>
+
+        <button type="submit">Register Visit</button>
+      </form>
+    </div>
+  </div></app-visitor-header
+>

@@ -21,7 +21,7 @@ export class VisitorSignupComponent {
     email: '',
     password: '',
     confirmpassword: '',
-    role: 'visitor', // Set the default role here
+    role: 'visitor',
   };
 
   onSubmit(): void {
@@ -35,13 +35,12 @@ export class VisitorSignupComponent {
         this.userData.email,
         this.userData.username,
         this.userData.password,
-        this.userData.role // Pass the default role
+        this.userData.role
       )
       .then(() => {
         this.router.navigateByUrl('/visitor-dashboard');
       })
       .catch((error: any) => {
-        // Explicitly type 'error' as 'any'
         console.error('Sign-up failed:', error);
         let errorMessage = 'Sign-up Failed. Please try again.';
         if (error?.message) {
