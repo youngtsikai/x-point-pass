@@ -1,0 +1,126 @@
+.medium,
+.high,
+.low {
+  width: 90%;
+  border: #222 2px solid;
+  margin: 1% auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.high {
+  background-color: rgba(255, 0, 0, 0.2);
+  border: 2px solid #c62828;
+}
+
+.medium {
+  background-color: rgba(255, 193, 7, 0.2);
+  border: 2px solid #f39c12;
+}
+
+.low {
+  background-color: rgba(76, 175, 80, 0.2);
+  border: 2px solid #286463;
+}
+
+.buttons {
+  margin: auto auto;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  box-sizing: border-box;
+  gap: 10px;
+}
+
+.high-threats,
+.low-threats,
+.medium-threats {
+  color: #ffffff;
+  border: none;
+  border-top-right-radius: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 13%;
+  font-size: 16px;
+}
+
+.high-threats:hover,
+.low-threats:hover,
+.medium-threats:hover {
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  text-decoration: underline;
+}
+
+.high-threats {
+  background-color: #c62828;
+}
+
+.medium-threats {
+  background-color: #f39c12;
+}
+
+.low-threats {
+  background-color: #286463;
+}
+
+.accordion {
+  margin: 5px auto;
+  width: 96%;
+}
+
+.accordion li {
+  list-style: none;
+  width: 100%;
+  margin: 10px auto;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 0.5px dotted #c62828;
+  box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15),
+    -6px -6px 10px -1px rgba(225, 225, 225, 0.7);
+}
+
+.accordion li label {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+label::before {
+  content: "+";
+  margin-right: 10px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: var(--background-color);
+}
+
+@media (max-width: 600px) {
+  .main-container {
+    width: 95%;
+    margin: 0 auto;
+  }
+}

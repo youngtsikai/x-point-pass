@@ -1,0 +1,75 @@
+<h1 class="headerh1">Flag Reviews</h1>
+<p class="headerp">Check the status of your flags or review them</p>
+<div class="buttons">
+  <button class="high-threats" (click)="toggleHigh()">High</button
+  ><button class="medium-threats" (click)="toggleMedium()">Medium</button
+  ><button class="low-threats" (click)="toggleLow()">Low</button>
+</div>
+
+<div class="high" *ngIf="isVisibleHigh">
+  <table *ngIf="highThreatFlags.length > 0">
+    <thead>
+      <tr>
+        <th>Badge Colour</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Additional Information</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let flag of highThreatFlags">
+        <td>{{ flag.badgecolour }}</td>
+        <td>{{ flag.description }}</td>
+        <td>{{ flag.location }}</td>
+        <td>{{ flag.additional }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="highThreatFlags.length === 0">No High Level Threat Flags Found</p>
+</div>
+
+<div class="medium" *ngIf="isVisibleMedium">
+  <table *ngIf="mediumThreatFlags.length > 0">
+    <thead>
+      <tr>
+        <th>Badge Colour</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Additional Information</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let flag of mediumThreatFlags">
+        <td>{{ flag.badgecolour }}</td>
+        <td>{{ flag.description }}</td>
+        <td>{{ flag.location }}</td>
+        <td>{{ flag.additional }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="mediumThreatFlags.length === 0">
+    No Medium Level Threat Flags Found
+  </p>
+</div>
+
+<div class="low" *ngIf="isVisibleLow">
+  <table *ngIf="lowThreatFlags.length > 0">
+    <thead>
+      <tr>
+        <th>Badge Colour</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Additional Information</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let flag of lowThreatFlags">
+        <td>{{ flag.badgecolour }}</td>
+        <td>{{ flag.description }}</td>
+        <td>{{ flag.location }}</td>
+        <td>{{ flag.additional }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="lowThreatFlags.length === 0">No Low Level Threat Flags Found</p>
+</div>

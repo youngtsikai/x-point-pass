@@ -25,6 +25,8 @@ import { UsersComponent } from './users/users.component';
 import { CheckinLogsComponent } from './checkin-logs/checkin-logs.component';
 import { VisitorPreregistratonComponent } from './visitor-preregistraton/visitor-preregistraton.component';
 import { VisitsComponent } from './visits/visits.component';
+import { FlagComponent } from './flag/flag.component';
+import { FlagReviewComponent } from './flag-review/flag-review.component';
 
 export const routes: Routes = [
   { path: '', component: MainHomeComponent },
@@ -58,5 +60,13 @@ export const routes: Routes = [
   {
     path: 'visits',
     component: VisitsComponent,
+  },
+  {
+    path: 'flag',
+    component: FlagComponent,
+  },
+  {
+    path: 'flag-review',
+    component: FlagReviewComponent,
   },
 ];
