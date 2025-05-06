@@ -68,7 +68,9 @@
     <div class="trend-alerts">
       <div style="text-align: center">
         <h4>Check-ins Today</h4>
-        <div style="font-size: 1.5em; font-weight: bold">152</div>
+        <div style="font-size: 1.5em; font-weight: bold">
+          {{ checkInsTodayCount }}
+        </div>
         <div style="color: green">
           <i class="fas fa-arrow-up"></i> (+12% vs. Yesterday)
         </div>
@@ -92,7 +94,9 @@
 
       <div style="text-align: center">
         <h4>Check-outs Today</h4>
-        <div style="font-size: 1.5em; font-weight: bold">110</div>
+        <div style="font-size: 1.5em; font-weight: bold">
+          {{ checkOutsTodayCount }}
+        </div>
         <div style="color: red">
           <i class="fas fa-arrow-down"></i> (-3% vs. Yesterday)
         </div>
