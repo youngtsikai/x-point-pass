@@ -36,6 +36,7 @@ import { VisitorFlagsComponent } from './visitor-flags/visitor-flags.component';
 import { StaffFlagsComponent } from './staff-flags/staff-flags.component';
 import { ProfileComponent } from './profile/profile.component';
 import { VisitorProfileComponent } from './visitor-profile/visitor-profile.component';
+import { StaffProfileComponent } from './staff-profile/staff-profile.component';
 
 export const routes: Routes = [
   { path: '', component: MainHomeComponent },
@@ -112,5 +113,9 @@ export const routes: Routes = [
   {
     path: 'visitor-profile',
     component: VisitorProfileComponent,
+  },
+  {
+    path: 'staff-profile',
+    component: StaffProfileComponent,
   },
 ];
