@@ -63,12 +63,11 @@ header {
   display: flex;
   padding: 10px;
   box-sizing: border-box;
-  text-align: right;
   width: 16%;
   justify-content: center;
   align-items: center;
   margin-left: 83%;
-  max-width: 32%;
+  max-width: 46%;
   margin-bottom: 0px;
   border: 2px solid #1a5276;
 }

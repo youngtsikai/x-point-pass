@@ -3,7 +3,9 @@
   <app-visitor-sidebar></app-visitor-sidebar>
   <div class="dash-main-container">
     <div class="mini-header">
-      <h4><i class="fa-solid fa-user"></i> Keith Tsikai</h4>
+      <h4>
+        <i class="fa-solid fa-user"></i> {{ userName ? userName : "User" }}
+      </h4>
     </div>
     <div class="status">
       <div class="status-flags">
@@ -30,7 +32,7 @@
         <h4><i class="fa-solid fa-bolt"></i> Quick Actions</h4>
         <div class="buttons">
           <div class="pre-registration">
-            <button routerLink="/visitor-pre-registration">
+            <button routerLink="/visitor-preregistration">
               <h2><i class="fa-solid fa-calendar-plus"></i></h2>
               <h4>Pre-Register</h4>
             </button>
@@ -48,7 +50,7 @@
             </button>
           </div>
           <div class="flag-review">
-            <button routerLink="/flag-review">
+            <button routerLink="/visitor-flags">
               <h2>
                 <i class="fa-solid fa-flag-checkered"></i>
               </h2>

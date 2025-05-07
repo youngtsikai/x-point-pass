@@ -30,6 +30,10 @@ import { FlagReviewComponent } from './flag-review/flag-review.component';
 import { StaffFlagComponent } from './staff-flag/staff-flag.component';
 import { VisitorFlagComponent } from './visitor-flag/visitor-flag.component';
 import { AdminFlagComponent } from './admin-flag/admin-flag.component';
+import { SecurityFlagsComponent } from './security-flags/security-flags.component';
+import { AdminFlagsComponent } from './admin-flags/admin-flags.component';
+import { VisitorFlagsComponent } from './visitor-flags/visitor-flags.component';
+import { StaffFlagsComponent } from './staff-flags/staff-flags.component';
 
 export const routes: Routes = [
   { path: '', component: MainHomeComponent },
@@ -47,7 +51,6 @@ export const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'staff-view-alerts', component: StaffViewAlertsComponent },
   { path: 'visitor-view-alerts', component: VisitorViewAlertsComponent },
-  { path: 'view-flags', component: FlagViewsComponent },
   { path: 'staffheader', component: StaffHeaderComponent },
   { path: 'staff-dashboard', component: StaffDashboardComponent },
   { path: 'users', component: UsersComponent },
@@ -83,5 +86,21 @@ export const routes: Routes = [
   {
     path: 'admin-flag',
     component: AdminFlagComponent,
+  },
+  {
+    path: 'staff-flags',
+    component: StaffFlagsComponent,
+  },
+  {
+    path: 'visitor-flags',
+    component: VisitorFlagsComponent,
+  },
+  {
+    path: 'admin-flags',
+    component: AdminFlagsComponent,
+  },
+  {
+    path: 'security-flags',
+    component: SecurityFlagsComponent,
   },
 ];

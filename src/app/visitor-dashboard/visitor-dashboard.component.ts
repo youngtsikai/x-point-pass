@@ -8,6 +8,8 @@ import {
   query,
   where,
   getDocs,
+  doc,
+  getDoc,
 } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 
@@ -35,9 +37,11 @@ export class VisitorDashboardComponent implements OnInit {
   activeVisitCount: number = 0;
   db: Firestore = inject(Firestore);
   auth: Auth = inject(Auth);
+  userName: string | null = null;
 
   ngOnInit(): void {
     this.loadActiveVisitCount();
+    this.loadUserName();
   }
 
   async loadActiveVisitCount(): Promise<void> {
@@ -57,6 +61,28 @@ export class VisitorDashboardComponent implements OnInit {
       }
     } else {
       this.activeVisitCount = 0;
+    }
+  }
+
+  async loadUserName(): Promise<void> {
+    const user = this.auth.currentUser;
+    if (user) {
+      const userDocRef = doc(this.db, 'users', user.uid); // Assuming your user data is stored in a 'users' collection
+      try {
+        const userDocSnapshot = await getDoc(userDocRef);
+        if (userDocSnapshot.exists()) {
+          const userData = userDocSnapshot.data();
+          this.userName = userData['displayName'] || userData['name'] || null; // Adjust 'displayName' or 'name' to match your field
+        } else {
+          console.log('No user data found');
+          this.userName = null;
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        this.userName = null;
+      }
+    } else {
+      this.userName = null;
     }
   }
 }
