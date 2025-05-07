@@ -121,6 +121,14 @@ textarea:not(:placeholder-shown) {
   border-color: #1a5276;
 }
 
+.group {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 13px;
+  margin-bottom: 13px;
+}
+
 @media (max-width: 768px) {
   .group {
     flex-direction: column;

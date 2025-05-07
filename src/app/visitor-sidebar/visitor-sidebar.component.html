@@ -37,7 +37,9 @@
         Flags <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="dropdown" [ngClass]="{ show: isFlagsOpen }">
-        <a href="#"><i class="fa-solid fa-flag"></i> Raise Flag</a>
+        <a routerLink="/visitor-flag"
+          ><i class="fa-solid fa-flag"></i> Raise Flag</a
+        >
         <a routerLink="/view-flags"
           ><i class="fa-solid fa-flag-checkered"></i> Raised Flags</a
         >

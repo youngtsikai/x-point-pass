@@ -27,6 +27,9 @@ import { VisitorPreregistratonComponent } from './visitor-preregistraton/visitor
 import { VisitsComponent } from './visits/visits.component';
 import { FlagComponent } from './flag/flag.component';
 import { FlagReviewComponent } from './flag-review/flag-review.component';
+import { StaffFlagComponent } from './staff-flag/staff-flag.component';
+import { VisitorFlagComponent } from './visitor-flag/visitor-flag.component';
+import { AdminFlagComponent } from './admin-flag/admin-flag.component';
 
 export const routes: Routes = [
   { path: '', component: MainHomeComponent },
@@ -68,5 +71,17 @@ export const routes: Routes = [
   {
     path: 'flag-review',
     component: FlagReviewComponent,
+  },
+  {
+    path: 'staff-flag',
+    component: StaffFlagComponent,
+  },
+  {
+    path: 'visitor-flag',
+    component: VisitorFlagComponent,
+  },
+  {
+    path: 'admin-flag',
+    component: AdminFlagComponent,
   },
 ];
