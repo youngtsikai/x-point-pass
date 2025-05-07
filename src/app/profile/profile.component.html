@@ -1,0 +1,198 @@
+<div class="buttons">
+  <div class="contact-btn">
+    <button
+      (click)="toggleContact()"
+      [class.active]="activeButton === 'contact'"
+    >
+      <i class="fa-solid fa-phone" style="color: var(--primary-color)"></i>
+      Contact Information
+    </button>
+  </div>
+  <div class="medical-btn">
+    <button
+      (click)="toggleMedical()"
+      [class.active]="activeButton === 'medical'"
+    >
+      <i
+        class="fa-solid fa-heart-pulse"
+        style="color: var(--success-color)"
+      ></i>
+      Medical Information
+    </button>
+  </div>
+</div>
+<div class="secondary-container">
+  <form class="contact" *ngIf="isVisibleContact">
+    <div *ngIf="!isProfileComplete">
+      <p style="color: red">Please complete your profile.</p>
+    </div>
+    <div class="group">
+      <label for="name">
+        <input
+          type="text"
+          [(ngModel)]="contactData.name"
+          name="name"
+          id="name"
+          placeholder="Name"
+          [readonly]="!isEditMode"
+        />
+        <span>Name</span>
+      </label>
+      <label for="email">
+        <input
+          type="email"
+          [(ngModel)]="contactData.email"
+          name="email"
+          id="email"
+          placeholder="Email"
+          [readonly]="!isEditMode"
+        />
+        <span>Email Address</span>
+      </label>
+    </div>
+    <div class="group">
+      <label for="phoneNumber">
+        <input
+          type="tel"
+          [(ngModel)]="contactData.phoneNumber"
+          name="phoneNumber"
+          id="phoneNumber"
+          placeholder="Phone Number"
+          [readonly]="!isEditMode"
+        />
+        <span>Phone Number</span>
+      </label>
+      <label for="address">
+        <input
+          type="text"
+          [(ngModel)]="contactData.address"
+          name="address"
+          id="address"
+          placeholder="Address"
+          [readonly]="!isEditMode"
+        />
+        <span>Address</span>
+      </label>
+    </div>
+    <div class="group">
+      <label for="city">
+        <input
+          type="text"
+          [(ngModel)]="contactData.city"
+          name="city"
+          id="city"
+          placeholder="City"
+          [readonly]="!isEditMode"
+        />
+        <span>City</span>
+      </label>
+      <label for="country">
+        <input
+          type="text"
+          [(ngModel)]="contactData.country"
+          name="country"
+          id="country"
+          placeholder="Country"
+          [readonly]="!isEditMode"
+        />
+        <span>Country</span>
+      </label>
+    </div>
+    <div class="btns">
+      <button
+        *ngIf="!isEditMode"
+        (click)="toggleEdit()"
+        style="
+          background-color: #1a5267;
+          border: none;
+          border-radius: 10px;
+          padding: 10px;
+          cursor: pointer;
+          color: #ffffff;
+          font-size: 20px;
+        "
+      >
+        <i class="fas fa-edit"></i>
+        Edit
+      </button>
+      <button
+        *ngIf="isEditMode"
+        (click)="saveContactData()"
+        style="
+          background-color: #1a5267;
+          border: none;
+          border-radius: 10px;
+          padding: 10px;
+          cursor: pointer;
+          color: #ffffff;
+          font-size: 20px;
+        "
+      >
+        <i class="fas fa-save" style="color: #ffffff"></i> Save
+      </button>
+    </div>
+  </form>
+
+  <form class="medical" *ngIf="isVisibleMedical">
+    <div class="group">
+      <label for="emergencyContactName">
+        <input
+          type="text"
+          [(ngModel)]="medicalData.emergencyContactName"
+          name="emergencyContactName"
+          id="emergencyContactName"
+          placeholder="Emergency Contact Name"
+        />
+        <span>Emergency Contact Name</span>
+      </label>
+      <label for="emergencyContactPhone">
+        <input
+          type="tel"
+          [(ngModel)]="medicalData.emergencyContactPhone"
+          name="emergencyContactPhone"
+          id="emergencyContactPhone"
+          placeholder="Emergency Contact Phone"
+        />
+        <span>Emergency Contact Phone</span>
+      </label>
+    </div>
+    <div class="group">
+      <label for="allergies">
+        <input
+          type="text"
+          [(ngModel)]="medicalData.allergies"
+          name="allergies"
+          id="allergies"
+          placeholder="Allergies (if any)"
+        />
+        <span>Allergies</span>
+      </label>
+      <label for="preExistingConditions">
+        <input
+          type="text"
+          [(ngModel)]="medicalData.preExistingConditions"
+          name="preExistingConditions"
+          id="preExistingConditions"
+          placeholder="Pre-existing Conditions (if any)"
+        />
+        <span>Pre-existing Conditions</span>
+      </label>
+    </div>
+    <button
+      (click)="saveMedicalData()"
+      style="
+        background-color: rgb(99, 87, 24);
+        border: none;
+        border-radius: 10px;
+        padding: 10px;
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 20px;
+        width: 26%;
+      "
+    >
+      <i class="fa-solid fa-heart-pulse"></i>
+      Save Medical Data
+    </button>
+  </form>
+</div>

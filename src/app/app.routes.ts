@@ -34,6 +34,8 @@ import { SecurityFlagsComponent } from './security-flags/security-flags.componen
 import { AdminFlagsComponent } from './admin-flags/admin-flags.component';
 import { VisitorFlagsComponent } from './visitor-flags/visitor-flags.component';
 import { StaffFlagsComponent } from './staff-flags/staff-flags.component';
+import { ProfileComponent } from './profile/profile.component';
+import { VisitorProfileComponent } from './visitor-profile/visitor-profile.component';
 
 export const routes: Routes = [
   { path: '', component: MainHomeComponent },
@@ -102,5 +104,13 @@ export const routes: Routes = [
   {
     path: 'security-flags',
     component: SecurityFlagsComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
+  },
+  {
+    path: 'visitor-profile',
+    component: VisitorProfileComponent,
   },
 ];

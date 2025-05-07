@@ -1,0 +1,133 @@
+.contact,
+.medical {
+  width: 100%;
+  border: #222 2px solid;
+  margin: 1% auto;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.secondary-container {
+  width: 98%;
+  display: flex;
+  margin: 0 auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+  max-height: fit-content;
+}
+
+label {
+  margin-bottom: 15px;
+  position: relative;
+  border-bottom: 1px solid #1a5276;
+  width: 100%;
+}
+input {
+  width: 100%;
+  padding: 10px 0px;
+  margin-top: 20px;
+  border: none;
+  outline: none;
+  background-color: var(--background-color);
+}
+input::placeholder {
+  opacity: 0;
+}
+span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(30px);
+  font-size: 0.825em;
+  transition-duration: 300ms;
+}
+
+label:focus-within > span,
+input:not(:placeholder-shown) + span {
+  color: #1a5276;
+  transform: translateY(0px);
+}
+
+.contact {
+  border: 2px solid var(--primary-color);
+}
+
+.medical {
+  border: 2px solid var(--primary-color);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  width: 98%;
+  margin: 13px auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+  gap: 26px;
+}
+
+.buttons button {
+  width: 50%;
+  font-size: 17px;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #333333;
+  font-weight: bold;
+  border: none;
+  border: var(--primary-color) 2px solid;
+}
+
+.buttons button:hover {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.buttons button.active {
+  background-color: #333333;
+  color: #ffffff;
+  font-weight: bold;
+  border: none;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+form {
+  width: 100%;
+  border: none;
+  padding: 3vw;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0px;
+}
+
+.contact-btn,
+.medical-btn {
+  display: flex;
+  border-radius: 10px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .main-container {
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  .medical-btn,
+  .contact-btn {
+    width: 32%;
+  }
+}

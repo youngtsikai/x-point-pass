@@ -27,6 +27,13 @@ interface Visit {
   visitorUid: string;
 }
 
+interface Flag {
+  id: string;
+  reportedByUid: string;
+  status: 'pending' | 'reviewed' | 'resolved'; // Adjust based on your actual status values
+  // Add other relevant flag properties
+}
+
 @Component({
   selector: 'app-visitor-dashboard',
   imports: [RouterModule, VisitorHeaderComponent, VisitorSidebarComponent],
@@ -35,6 +42,7 @@ interface Visit {
 })
 export class VisitorDashboardComponent implements OnInit {
   activeVisitCount: number = 0;
+  pendingFlagCount: number = 0; // New property for pending flag count
   db: Firestore = inject(Firestore);
   auth: Auth = inject(Auth);
   userName: string | null = null;
@@ -42,6 +50,7 @@ export class VisitorDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.loadActiveVisitCount();
     this.loadUserName();
+    this.loadPendingFlagCount(); // Load pending flag count on initialization
   }
 
   async loadActiveVisitCount(): Promise<void> {
@@ -83,6 +92,26 @@ export class VisitorDashboardComponent implements OnInit {
       }
     } else {
       this.userName = null;
+    }
+  }
+
+  async loadPendingFlagCount(): Promise<void> {
+    const user = this.auth.currentUser;
+    if (user) {
+      const flagsQuery = query(
+        collection(this.db, 'Flags'), // Make sure 'Flags' matches your collection name
+        where('reportedByUid', '==', user.uid),
+        where('status', '==', 'pending')
+      );
+      try {
+        const querySnapshot = await getDocs(flagsQuery);
+        this.pendingFlagCount = querySnapshot.size;
+      } catch (error) {
+        console.error('Error fetching pending flag count:', error);
+        this.pendingFlagCount = 0;
+      }
+    } else {
+      this.pendingFlagCount = 0;
     }
   }
 }
