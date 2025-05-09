@@ -42,7 +42,6 @@ export class AuthService {
     });
   }
 
-  // Existing signup function (for full signup)
   signup(
     email: string,
     username: string,

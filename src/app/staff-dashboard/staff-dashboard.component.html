@@ -2,27 +2,27 @@
 <div class="page-container">
   <app-staff-sidebar></app-staff-sidebar>
   <div class="dash-main-container">
-    <div class="mini-header">
-      <h4><i class="fa-solid fa-user"></i> Keith Tsikai</h4>
+    <div class="mini-header" *ngIf="authserv.user() as user">
+      <h4><i class="fa-solid fa-user"></i> {{ user.displayName }}</h4>
     </div>
     <div class="status">
       <div class="act-visits">
-        <h3><i class="fa-solid fa-walking"></i> <br />Active Visits</h3>
-        <h2>0</h2>
+        <h3><i class="fa-solid fa-walking"></i> <br />My<br />Active Visits</h3>
+        <h2>{{ ActiveVisitsCount }}</h2>
       </div>
       <div class="pen-visits">
         <h3>
           <i class="fa-regular fa-clock"></i> <br />Pending Visit
           <br />Acknowledgements
         </h3>
-        <h2>0</h2>
+        <h2>{{ PendingVACount }}</h2>
       </div>
       <div class="pen-flags">
-        <h3><i class="fa-solid fa-flag"></i> <br />Pending Flags</h3>
-        <h2>0</h2>
+        <h3><i class="fa-solid fa-flag"></i> <br />My<br />Pending Flags</h3>
+        <h2>{{ RaisedFlagsCount }}</h2>
       </div>
       <div class="unr-alerts">
-        <h3><i class="fa-solid fa-bell"></i> <br />Unread Alerts</h3>
+        <h3><i class="fa-solid fa-bell"></i> <br />My<br />Unread Alerts</h3>
         <h2>0</h2>
       </div>
     </div>

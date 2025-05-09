@@ -2,36 +2,34 @@
 <div class="page-container">
   <app-visitor-sidebar></app-visitor-sidebar>
   <div class="dash-main-container">
-    <div class="mini-header">
-      <h4>
-        <i class="fa-solid fa-user"></i> {{ userName ? userName : "User" }}
-      </h4>
+    <div class="mini-header" *ngIf="authserv.user() as user">
+      <h4><i class="fa-solid fa-user"></i> {{ user.displayName }}</h4>
     </div>
     <div class="status">
       <div class="status-flags">
         <h3>
-          <i class="fa-solid fa-flag"></i><br />
+          <i class="fa-solid fa-flag"></i><br />My<br />
           Pending Flags
         </h3>
-        <h2>{{ pendingFlagCount }}</h2>
+        <h2>{{ RaisedFlagsCount }}</h2>
       </div>
       <div class="status-visits">
         <h3>
           <i class="fa-solid fa-user-plus"></i><br />
-          Active <br />Pre-registered visits
+          My Active <br />Pre-registered visits
         </h3>
-        <h2>{{ activeVisitCount }}</h2>
+        <h2>{{ ActiveVisitsCount }}</h2>
       </div>
       <div class="status-disack">
         <h3>
-          <i class="fa-solid fa-user-slash"></i><br />
+          <i class="fa-solid fa-user-slash"></i> <br />My<br />
           Disacknowledged visits
         </h3>
-        <h2>0</h2>
+        <h2>{{ DisacknowledgedVACount }}</h2>
       </div>
       <div class="status-alerts">
         <h3>
-          <i class="fa-solid fa-bell"></i><br />
+          <i class="fa-solid fa-bell"></i><br />My<br />
           Unread Alerts
         </h3>
         <h2>0</h2>

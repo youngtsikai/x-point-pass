@@ -37,6 +37,7 @@ import { StaffFlagsComponent } from './staff-flags/staff-flags.component';
 import { ProfileComponent } from './profile/profile.component';
 import { VisitorProfileComponent } from './visitor-profile/visitor-profile.component';
 import { StaffProfileComponent } from './staff-profile/staff-profile.component';
+import { StaffSignInComponent } from './staff-sign-in/staff-sign-in.component';
 
 export const routes: Routes = [
   { path: '', component: MainHomeComponent },
@@ -117,5 +118,9 @@ export const routes: Routes = [
   {
     path: 'staff-profile',
     component: StaffProfileComponent,
+  },
+  {
+    path: 'staff-signin',
+    component: StaffSignInComponent,
   },
 ];

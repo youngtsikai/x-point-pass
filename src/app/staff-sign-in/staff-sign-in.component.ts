@@ -25,7 +25,7 @@ export class StaffSignInComponent {
       .signin(this.userData.email, this.userData.password)
       .subscribe({
         next: () => {
-          this.rout.navigateByUrl('/staff-dashboard');
+          const userId = this.rout.navigateByUrl('/staff-dashboard');
         },
         error: (error) => {
           console.error('Sign-in failed:', error);

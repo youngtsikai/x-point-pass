@@ -7,26 +7,33 @@
     </div>
     <div class="status">
       <div class="act-visits">
-        <h3><i class="fa-solid fa-walking"></i> Active Visits</h3>
-        <h2>0</h2>
+        <h3>
+          <i class="fa-solid fa-walking"></i> <br />All<br />Active Visits
+        </h3>
+        <h2>{{ ActiveVisitsCount }}</h2>
       </div>
       <div class="pen-visits">
         <h3>
-          <i class="fa-regular fa-clock"></i> Pending <br />Visit
+          <i class="fa-regular fa-clock"></i> <br />Pending Visit
           <br />Acknowledgements
         </h3>
         <h2>0</h2>
       </div>
       <div class="pen-flags">
-        <h3><i class="fa-solid fa-flag"></i> Raised Flags</h3>
-        <h2>0</h2>
+        <h3>
+          <i class="fa-solid fa-flag"></i> <br />Pending <br />Raised Flags
+        </h3>
+        <h2>{{ RaisedFlagsCount }}</h2>
       </div>
       <div class="check-staff">
-        <h3><i class="fa-solid fa-check-circle"></i> Checked-In <br />Staff</h3>
+        <h3>
+          <i class="fa-solid fa-check-circle"></i><br />
+          Checked-In <br />Staff
+        </h3>
         <h2>{{ staffCheckedInCount }}</h2>
       </div>
       <div class="unr-alerts">
-        <h3><i class="fa-solid fa-bell"></i> Unread Alerts</h3>
+        <h3><i class="fa-solid fa-bell"></i> <br />All <br />Unread Alerts</h3>
         <h2>0</h2>
       </div>
     </div>
@@ -46,7 +53,7 @@
             <h2><i class="fa-solid fa-paper-plane"></i><br /></h2>
             <h4>Send Alert</h4>
           </button>
-          <button>
+          <button routerLink="/admin-flag">
             <h2><i class="fa-solid fa-flag"></i><br /></h2>
             <h4>Raise Flag</h4>
           </button>

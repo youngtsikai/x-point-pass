@@ -25,7 +25,11 @@ export class VisitorSigninComponent {
     this.authservice
       .signin(this.userData.email, this.userData.password)
       .subscribe({
-        next: () => {
+        next: (userCredential) => {
+          const userId = userCredential?.user.uid;
+          const displayName = userCredential?.user.displayName;
+          console.log('User ID:', userId);
+          console.log('Display Name:', displayName);
           this.router.navigateByUrl('/visitor-dashboard');
         },
         error: (error) => {

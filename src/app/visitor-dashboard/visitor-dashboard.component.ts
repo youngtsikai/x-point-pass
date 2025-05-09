@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, effect } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { VisitorHeaderComponent } from '../visitor-header/visitor-header.component';
 import { VisitorSidebarComponent } from '../visitor-sidebar/visitor-sidebar.component';
@@ -11,107 +11,147 @@ import {
   doc,
   getDoc,
 } from '@angular/fire/firestore';
-import { Auth } from '@angular/fire/auth';
-
-interface Visit {
-  id: string;
-  name: string;
-  phone: string;
-  idnum: string;
-  licenseplate: string;
-  purpose: string;
-  host: string;
-  visitDate: string;
-  visitTime: string;
-  status: string;
-  visitorUid: string;
-}
-
-interface Flag {
-  id: string;
-  reportedByUid: string;
-  status: 'pending' | 'reviewed' | 'resolved'; // Adjust based on your actual status values
-  // Add other relevant flag properties
-}
+import { AuthService } from '../auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-visitor-dashboard',
-  imports: [RouterModule, VisitorHeaderComponent, VisitorSidebarComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    VisitorHeaderComponent,
+    VisitorSidebarComponent,
+  ],
   templateUrl: './visitor-dashboard.component.html',
   styleUrl: './visitor-dashboard.component.css',
 })
 export class VisitorDashboardComponent implements OnInit {
-  activeVisitCount: number = 0;
-  pendingFlagCount: number = 0; // New property for pending flag count
-  db: Firestore = inject(Firestore);
-  auth: Auth = inject(Auth);
-  userName: string | null = null;
+  authserv = inject(AuthService);
+  fire = inject(Firestore);
+  ActiveVisitsCount: number = 0;
+  DisacknowledgedVACount: number = 0;
+  RaisedFlagsCount: number = 0;
 
-  ngOnInit(): void {
-    this.loadActiveVisitCount();
-    this.loadUserName();
-    this.loadPendingFlagCount(); // Load pending flag count on initialization
-  }
+  private userDependentDataEffect = effect(() => {
+    console.log('User signal changed, triggering user-dependent fetches...');
+    const currentUser = this.authserv.user();
 
-  async loadActiveVisitCount(): Promise<void> {
-    const user = this.auth.currentUser;
-    if (user) {
-      const visitsQuery = query(
-        collection(this.db, 'visitor-preregistrations'),
-        where('visitorUid', '==', user.uid),
-        where('status', '==', 'active')
+    if (currentUser && currentUser.displayName) {
+      console.log(
+        'User is signed in with displayName, fetching user-dependent data.'
       );
-      try {
-        const querySnapshot = await getDocs(visitsQuery);
-        this.activeVisitCount = querySnapshot.size;
-      } catch (error) {
-        console.error('Error fetching active visits count:', error);
-        this.activeVisitCount = 0;
-      }
+      this.fetchActiveVisitsCount(currentUser.displayName);
+      this.fetchDisacknowledgedVisitsAck(currentUser.displayName);
+      this.fetchRaisedFlagsCount(currentUser.displayName);
     } else {
-      this.activeVisitCount = 0;
-    }
-  }
-
-  async loadUserName(): Promise<void> {
-    const user = this.auth.currentUser;
-    if (user) {
-      const userDocRef = doc(this.db, 'users', user.uid); // Assuming your user data is stored in a 'users' collection
-      try {
-        const userDocSnapshot = await getDoc(userDocRef);
-        if (userDocSnapshot.exists()) {
-          const userData = userDocSnapshot.data();
-          this.userName = userData['displayName'] || userData['name'] || null; // Adjust 'displayName' or 'name' to match your field
-        } else {
-          console.log('No user data found');
-          this.userName = null;
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-        this.userName = null;
-      }
-    } else {
-      this.userName = null;
-    }
-  }
-
-  async loadPendingFlagCount(): Promise<void> {
-    const user = this.auth.currentUser;
-    if (user) {
-      const flagsQuery = query(
-        collection(this.db, 'Flags'), // Make sure 'Flags' matches your collection name
-        where('reportedByUid', '==', user.uid),
-        where('status', '==', 'pending')
+      console.log(
+        'No signed-in user or displayName. Resetting user-dependent counts'
       );
-      try {
-        const querySnapshot = await getDocs(flagsQuery);
-        this.pendingFlagCount = querySnapshot.size;
-      } catch (error) {
-        console.error('Error fetching pending flag count:', error);
-        this.pendingFlagCount = 0;
-      }
-    } else {
-      this.pendingFlagCount = 0;
+      this.ActiveVisitsCount = 0;
+      this.DisacknowledgedVACount = 0;
+      this.RaisedFlagsCount = 0;
     }
+  });
+
+  constructor() {
+    console.log('StaffDashboardComponent initialized');
+    this.getCurrentUser();
+  }
+
+  ngOnInit() {
+    console.log('ngOnit called');
+  }
+
+  getCurrentUser() {
+    const currentUser = this.authserv.user();
+    if (currentUser) {
+      console.log('User UID:', currentUser.uid);
+      console.log('User Display Name:', currentUser.displayName);
+    } else {
+      console.log('No user is signed in!!!');
+    }
+  }
+
+  async fetchDisacknowledgedVisitsAck(hostDisplayName: string) {
+    console.log(
+      'fetchDisacknowledgedVisitsAck started for host:',
+      hostDisplayName
+    );
+    const visitsCollection = collection(this.fire, 'visitor-preregistrations');
+
+    const pva = query(
+      visitsCollection,
+      where('name', '==', hostDisplayName),
+      where('status', '==', 'disacknowledged')
+    );
+
+    try {
+      console.log('Executing query for Disacknowledged visits  count...');
+
+      const querySnapshot = await getDocs(pva);
+      this.DisacknowledgedVACount = querySnapshot.size;
+      console.log(
+        'Disacknowledged visits  count query successful. Count:',
+        this.DisacknowledgedVACount
+      );
+    } catch (error) {
+      console.error('Error fetching Disacknowledged visits  count:', error);
+      this.DisacknowledgedVACount = 0;
+      console.log('Disacknowledged visits  count set to 0 due to error');
+    }
+    console.log('fetchDisacknowledgedVisitAck finished');
+  }
+
+  async fetchRaisedFlagsCount(hostDisplayName: string) {
+    console.log('RaisedFlagsCount started for host:', hostDisplayName);
+    const flagsCollection = collection(this.fire, 'Flags');
+
+    const f = query(
+      flagsCollection,
+      where('status', '==', 'pending'),
+      where('reportedBy', '==', hostDisplayName)
+    );
+
+    try {
+      console.log('Executing Firestore query for pending raised flags...');
+      const querySnapshot = await getDocs(f);
+      this.RaisedFlagsCount = querySnapshot.size;
+      console.log(
+        'Pending raised flags query successful. Count:',
+        this.RaisedFlagsCount
+      );
+    } catch (error) {
+      console.error('Error fetching pending raised flags count:', error);
+      this.RaisedFlagsCount = 0;
+      console.log('Pending  raised flags count set to 0 due to error');
+    }
+    console.log('fetchRaisedFlagsCount finished');
+  }
+
+  async fetchActiveVisitsCount(hostDisplayName: string) {
+    console.log('fetchActiveVisitsCount started for host:', hostDisplayName);
+    const visitsCollection = collection(this.fire, 'visitor-preregistrations');
+
+    const v = query(
+      visitsCollection,
+      where('status', '==', 'active'),
+      where('name', '==', hostDisplayName)
+    );
+
+    try {
+      console.log('Executing query for Active visits count...');
+
+      const querySnapshot = await getDocs(v);
+      this.ActiveVisitsCount = querySnapshot.size;
+      console.log(
+        'Active visits count query successful. Count:',
+        this.ActiveVisitsCount
+      );
+    } catch (error) {
+      console.error('Error fetching active visits count:', error);
+      this.ActiveVisitsCount = 0;
+      console.log('Active visits count set to 0 due to error');
+    }
+    console.log('fetchActiveVisitsCount finished');
   }
 }

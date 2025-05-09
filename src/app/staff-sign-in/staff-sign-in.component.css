@@ -1,45 +1,22 @@
 .main-container {
   padding: 20px;
   box-sizing: border-box;
-  margin: 1% auto;
+  margin: 1.5% auto;
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 60%;
-  gap: 10px;
 }
 
 form {
-  width: 90%;
+  width: 100%;
   max-width: 768px;
   border: none;
-  padding: 10px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
   box-sizing: border-box;
-}
-
-.visitor {
-  border: 2px solid #1a5276;
-  text-align: center;
-  padding: 10px;
-  box-sizing: border-box;
-}
-
-.visitor h2 {
-  font-size: 213px;
-  margin: 0% auto;
-}
-
-.visitor h3 {
-  margin: 0% auto;
-}
-
-.visitor p {
-  font-size: 16px;
-  margin-top: 0%;
-  margin-bottom: 0%;
 }
 
 label {
