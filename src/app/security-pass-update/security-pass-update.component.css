@@ -1,0 +1,55 @@
+.checkbox-container label {
+  margin: 0px 0px;
+  display: inline-flex;
+  align-items: center;
+  font-weight: normal;
+  color: #333;
+  line-height: 1.2;
+  border: none;
+  padding: 0;
+  position: static;
+  background: transparent;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin: 0px;
+  width: fit-content;
+  align-self: flex-start;
+  font-size: 15px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin: 0% auto;
+  margin-right: 4px;
+  width: auto;
+  height: auto;
+}
+
+.dash-main-container {
+  width: 50%;
+  margin: 78px auto;
+}
+
+button {
+  width: fit-content;
+  padding: 10px;
+  box-sizing: border-box;
+  margin: 13px auto;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 16px;
+}
+
+@media (max-width: 762px) {
+  .dash-main-container {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 26px auto;
+  }
+}

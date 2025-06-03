@@ -3,44 +3,51 @@
   <app-staff-sidebar></app-staff-sidebar>
   <div class="dash-main-container">
     <div class="mini-header" *ngIf="authserv.user() as user">
-      <h4><i class="fa-solid fa-user"></i> {{ user.displayName }}</h4>
+      <h4>
+        <i class="fa-solid fa-user"></i>
+        {{ user.displayName }}
+        <ng-container *ngIf="getUserRole(user) as userRole">
+          ({{ userRole }})</ng-container
+        >
+      </h4>
     </div>
+
     <div class="status">
       <div class="act-visits">
-        <h3><i class="fa-solid fa-walking"></i> <br />My<br />Active Visits</h3>
-        <h2>{{ ActiveVisitsCount }}</h2>
+        <h3><i class="fa-solid fa-walking"></i> <br />Active Visits</h3>
+        <h2>{{ dashboardService.ActiveVisitsCount$ | async }}</h2>
       </div>
       <div class="pen-visits">
         <h3>
-          <i class="fa-regular fa-clock"></i> <br />Pending Visit
-          <br />Acknowledgements
+          <i class="fa-regular fa-clock"></i> <br />Pending Acknowledgements
         </h3>
-        <h2>{{ PendingVACount }}</h2>
+        <h2>{{ dashboardService.PendingVACount$ | async }}</h2>
       </div>
       <div class="pen-flags">
-        <h3><i class="fa-solid fa-flag"></i> <br />My<br />Pending Flags</h3>
-        <h2>{{ RaisedFlagsCount }}</h2>
+        <h3><i class="fa-solid fa-flag"></i> <br />Pending Flags</h3>
+        <h2>{{ dashboardService.MyPendingFlagsCount$ | async }}</h2>
       </div>
       <div class="unr-alerts">
-        <h3><i class="fa-solid fa-bell"></i> <br />My<br />Unread Alerts</h3>
-        <h2>0</h2>
+        <h3><i class="fa-solid fa-bell"></i> <br />Unread Alerts</h3>
+        <h2>{{ dashboardService.UnreadAlertsTodayCount$ | async }}</h2>
       </div>
     </div>
+
     <div class="bottom">
       <div class="quick-actions">
-        <h4 style="margin-bottom: 0%">
+        <h4 class="section-header">
           <i class="fa-solid fa-bolt"></i> Quick Actions
         </h4>
         <div class="buttons">
-          <button>
+          <button routerLink="/staff-visitors">
             <h2><i class="fa-solid fa-users"></i></h2>
             <h4>Guest <br />List</h4>
           </button>
-          <button>
+          <button routerLink="/staff-visits">
             <h2><i class="fa-solid fa-check-double"></i></h2>
             <h4>Acknowledge <br />Visits</h4>
           </button>
-          <button>
+          <button routerLink="/staff-send">
             <h2><i class="fa-solid fa-paper-plane"></i></h2>
             <h4>Send <br />Alert</h4>
           </button>
@@ -48,17 +55,174 @@
             <h2><i class="fa-solid fa-flag"></i></h2>
             <h4>Raise <br />Flag</h4>
           </button>
+          <button routerLink="/staff-flags">
+            <h2><i class="fa-solid fa-flag"></i></h2>
+            <h4>Raised <br />Flags</h4>
+          </button>
+          <button routerLink="/staff-view-alerts">
+            <h2><i class="fa-solid fa-bullhorn"></i></h2>
+            <h4>My Alerts</h4>
+          </button>
         </div>
       </div>
+
       <div class="check-in-dist">
-        <h4 style="margin-bottom: 0%">
-          <i class="fa-solid fa-chart-pie"></i> Check-In Distrubution
+        <h4 class="section-header">
+          <i class="fa-solid fa-chart-pie"></i> My Weekly Activity
         </h4>
+        <div
+          *ngIf="weeklyActivity.length === 0"
+          style="padding: 10px; text-align: center; color: #555"
+        >
+          No check-in/check-out activity found for this week.
+        </div>
+        <ul
+          *ngIf="weeklyActivity.length > 0"
+          style="list-style: none; padding: 0; margin: 0"
+        >
+          <li *ngFor="let activity of weeklyActivity" class="activity-log-item">
+            <strong>{{ activity.date }}:</strong> {{ activity.activity }}
+          </li>
+        </ul>
       </div>
+
       <div class="rec-act-ale">
-        <h4 style="margin-bottom: 0%">
+        <h4
+          style="
+            margin-bottom: 0%;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+          "
+        >
           <i class="fa-solid fa-list-alt"></i> Recent Activities and Alerts
         </h4>
+        <div
+          *ngIf="dashboardService.recentActivityAlerts$ | async as recentAlerts"
+        >
+          <div
+            *ngIf="recentAlerts.length === 0"
+            style="padding: 10px; text-align: center; color: #888"
+          >
+            No recent activity or alerts found today.
+          </div>
+          <ul
+            *ngIf="recentAlerts.length > 0"
+            style="list-style: none; padding: 0; margin: 0"
+          >
+            <li
+              *ngFor="let alert of recentAlerts"
+              class="recent-activity-item"
+              [class.activity-item]="
+                alert.type === 'checkin' || alert.type === 'checkout'
+              "
+              [class.sent-alert-item]="alert.type === 'sent-alert'"
+              [class.unread]="alert.read === false"
+              style="
+                padding: 8px 10px;
+                border: none;
+                display: flex;
+                font-size: 15px;
+                justify-content: space-between;
+                text-align: left;
+                background-color: #ffffff;
+                color: #333;
+                border-radius: 10px;
+                margin: 5px auto;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                align-items: center;
+              "
+            >
+              <div>
+                <ng-container
+                  *ngIf="alert.type === 'checkin' || alert.type === 'checkout'"
+                >
+                  <i class="fa-solid fa-clock" style="margin-right: 5px"></i>
+                  <strong *ngIf="alert.name">{{ alert.name }}</strong>
+                  <ng-container *ngIf="alert.role">
+                    ({{ alert.role }})</ng-container
+                  >
+                  <ng-container *ngIf="alert.type === 'checkin'">
+                    checked in at
+                  </ng-container>
+                  <ng-container *ngIf="alert.type === 'checkout'">
+                    checked out at
+                  </ng-container>
+                  <strong *ngIf="alert.time">{{ alert.time }}</strong>
+                </ng-container>
+
+                <ng-container *ngIf="alert.type === 'sent-alert'">
+                  <ng-container [ngSwitch]="alert.code">
+                    <i
+                      *ngSwitchCase="'medical'"
+                      class="fas fa-stethoscope"
+                      style="margin-right: 5px"
+                    ></i>
+                    <i
+                      *ngSwitchCase="'security'"
+                      class="fas fa-handcuffs"
+                      style="margin-right: 5px"
+                    ></i>
+                    <i
+                      *ngSwitchCase="'hazard'"
+                      class="fas fa-skull-crossbones"
+                      style="margin-right: 5px"
+                    ></i>
+                    <i
+                      *ngSwitchCase="'fire'"
+                      class="fas fa-fire"
+                      style="margin-right: 5px"
+                    ></i>
+                    <i
+                      *ngSwitchCase="'notice'"
+                      class="fas fa-bullhorn"
+                      style="margin-right: 5px"
+                    ></i>
+                    <i
+                      *ngSwitchCase="'lockdown'"
+                      class="fas fa-lock"
+                      style="margin-right: 5px"
+                    ></i>
+                    <i
+                      *ngSwitchDefault
+                      class="fas fa-bell"
+                      style="margin-right: 5px"
+                    ></i>
+                  </ng-container>
+                  <strong *ngIf="alert.sender">{{ alert.sender }}</strong>
+                  <ng-container *ngIf="alert.senderRole">
+                    ({{ alert.senderRole }})</ng-container
+                  >
+                  <ng-container *ngIf="alert.message">
+                    - {{ alert.message }}</ng-container
+                  >
+                  <ng-container *ngIf="alert.time">
+                    at
+                    <strong style="font-weight: normal">{{
+                      alert.time
+                    }}</strong></ng-container
+                  >
+                </ng-container>
+              </div>
+              <button
+                *ngIf="alert.read === false"
+                (click)="dashboardService.markAlertAsRead(alert)"
+                style="
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                  color: #888;
+                  font-size: 0.9em;
+                  padding: 0;
+                  margin-left: 10px;
+                  flex-shrink: 0;
+                "
+                title="Mark as read"
+              >
+                <i class="fa-solid fa-envelope-open"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

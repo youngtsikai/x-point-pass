@@ -37,7 +37,7 @@ export class VisitorPreregistratonComponent {
     visitDate: '',
     visitTime: '',
     visitorUid: '',
-    status: 'active', // Set default status to 'active'
+    status: 'pending', //default status is pending until acknowledged by host
   };
 
   showErrorPopup = false;
@@ -117,7 +117,7 @@ export class VisitorPreregistratonComponent {
       await setDoc(docRef, this.formData); // formData now includes status: 'active'
       this.showSuccessPopup = true;
       setTimeout(() => {
-        this.router.navigate(['/visits']);
+        this.router.navigate(['/visitor-visits']);
       }, 2000);
     } catch (error: any) {
       this.errorMessages.push('Error pre-registering visit: ' + error.message);

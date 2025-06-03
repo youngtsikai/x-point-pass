@@ -1,7 +1,6 @@
 <app-main-header></app-main-header>
-<h1 class="headerh1">Visitor Sign-Up</h1>
-<p class="headerp">Sign up and be one of us</p>
-<div class="main-container">
+<h1 class="headerh1">Create your account</h1>
+<div class="signup-main-container">
   <form (ngSubmit)="onSubmit()" ngForm>
     <label for="name">
       <input
@@ -60,17 +59,9 @@
     <button type="submit">Sign-Up</button>
   </form>
   <form class="visitor">
-    <h2><i class="fa-solid fa-image-portrait"></i></h2>
+    <h2><i class="fa-solid fa-id-card-clip"></i></h2>
     <h3>Already a member?</h3>
     <p>Sign in to continue</p>
     <button routerLink="/visitor-signin">Sign-In</button>
   </form>
-  <style>
-    /* Add some basic styling for the error message */
-    .error-message {
-      color: red;
-      font-size: 0.8em;
-      margin-top: 5px;
-    }
-  </style>
 </div>

@@ -1,0 +1,154 @@
+<div class="alert-type-section">
+  <h2 class="section-heading">
+    <i class="fa-solid fa-bolt"></i> Send General Alert
+  </h2>
+  <div class="alertbuttons">
+    <button
+      (click)="sendAlert('Medical')"
+      class="alert-type-button medical-button"
+    >
+      <h3><i class="fas fa-stethoscope"></i></h3>
+      Medical
+    </button>
+    <button
+      (click)="sendAlert('Security')"
+      class="alert-type-button security-button"
+    >
+      <h3><i class="fas fa-handcuffs"></i></h3>
+      Security
+    </button>
+    <button
+      (click)="sendAlert('Hazard')"
+      class="alert-type-button hazard-button"
+    >
+      <h3><i class="fas fa-skull-crossbones"></i></h3>
+      Hazard
+    </button>
+    <button (click)="sendAlert('Fire')" class="alert-type-button fire-button">
+      <h3><i class="fas fa-fire"></i></h3>
+      Fire
+    </button>
+    <button (click)="openNotice()" class="alert-type-button notice-button">
+      <h3><i class="fas fa-bullhorn"></i></h3>
+      Notice
+    </button>
+    <button
+      (click)="sendAlert('LockDown')"
+      class="alert-type-button lockdown-button"
+    >
+      <h3><i class="fas fa-lock"></i></h3>
+      LockDown
+    </button>
+  </div>
+</div>
+
+<div class="notice" id="notice-con" *ngIf="isVisibleNotice">
+  <div class="modal-header">
+    <h3 style="text-align: center; margin: 0px auto; color: white">
+      Public Notice
+    </h3>
+    <button class="closenotice close-modal-button" (click)="closeNotice()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <hr />
+  <input
+    class="notice-title"
+    type="text"
+    name="notice-header"
+    id="notice-header"
+    placeholder="Notice Title"
+    [(ngModel)]="noticeTitle"
+    required
+  />
+  <textarea
+    name="notice-msg"
+    id="notice-msg-area"
+    rows="10"
+    placeholder="Enter notice message here..."
+    [(ngModel)]="noticeMessage"
+    required
+  ></textarea>
+  <div class="modal-actions">
+    <button
+      (click)="issueNotice()"
+      class="send-alert-button"
+      style="align-self: flex-end; margin: 13px 0px; margin-bottom: 0px"
+      [disabled]="!noticeTitle || !noticeMessage"
+    >
+      Send Notice
+    </button>
+  </div>
+</div>
+
+<div class="targeted-alert">
+  <h3>Targeted Alert</h3>
+  <hr />
+
+  <div class="alert-content-fields">
+    <input
+      class="targeted-alert-subject"
+      type="text"
+      id="targeted-alert-subject"
+      placeholder="Alert Subject"
+      [(ngModel)]="targetedAlertSubject"
+      required
+    />
+    <textarea
+      class="target-msg"
+      id="targeted-alert-message"
+      rows="8"
+      placeholder="Enter targeted alert message here..."
+      [(ngModel)]="targetedAlertMessage"
+      required
+    ></textarea>
+  </div>
+  <hr />
+
+  <div class="recipients-section">
+    <h4>Recipients</h4>
+    <div class="delivery-options">
+      <p>Select specific users or roles to send this alert to.</p>
+    </div>
+
+    <div class="recipient-selection">
+      <div id="recipient-list" class="custom-recipient-list">
+        <div
+          class="recipient-list-item"
+          *ngFor="let user of allUsers"
+          [class.selected]="isSelectedRecipient(user.uid)"
+          (click)="toggleRecipientSelection(user.uid)"
+        >
+          {{ user.displayName || user.name }} ({{ user.role }})
+        </div>
+        <div *ngIf="allUsers.length === 0" class="no-recipients-message">
+          Loading recipients or no users found...
+        </div>
+      </div>
+
+      <div
+        *ngIf="selectedRecipientIds.length > 0"
+        class="selected-recipients-list"
+      >
+        Selected: {{ getSelectedRecipientNames() }}
+      </div>
+      <div
+        *ngIf="selectedRecipientIds.length === 0"
+        class="no-recipients-selected"
+      >
+        Select one or more recipients from the list above.
+      </div>
+    </div>
+  </div>
+  <hr />
+
+  <div class="modal-actions">
+    <button
+      (click)="sendTargetedAlert()"
+      class="send-alert-button"
+      [disabled]="isTargetedSendButtonDisabled()"
+    >
+      Send Targeted Alert
+    </button>
+  </div>
+</div>

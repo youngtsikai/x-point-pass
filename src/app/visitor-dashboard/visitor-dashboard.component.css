@@ -1,91 +1,320 @@
+/* Style for individual status boxes (using the classes you provided) */
 .status-flags,
 .status-alerts,
 .status-visits,
 .status-disack {
   flex-grow: 1;
+  flex-basis: 0;
   font-size: 16px;
   text-align: center;
-  border-radius: 20px;
+  border-radius: 10px; /* Consistent border-radius */
   color: #ffffff;
+  padding: 15px 10px; /* Added padding */
+  min-width: 100px; /* Adjusted min-width */
+  box-sizing: border-box;
+  display: flex; /* Use flex for internal alignment */
+  flex-direction: column; /* Stack content vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
 }
 
+/* Specific background colors for visitor status boxes (using the classes you provided) */
 .status-visits {
-  background-color: var(--success-color);
+  background-color: var(--success-color, #28a745); /* Green */
 }
 
 .status-disack {
-  background-color: var(--error-color);
+  background-color: var(--error-color, #dc3545); /* Red */
 }
 
 .status-flags {
-  background-color: var(--warning-color);
+  background-color: var(--warning-color, #ffc107); /* Orange/Yellow */
 }
 
 .status-alerts {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color, #007bff); /* Blue */
 }
 
-.quick-actions,
-.rec-act-ale {
-  flex-grow: 1;
-  border-radius: 20px;
-  flex-direction: column;
-  padding: 10px;
-  box-sizing: border-box;
+/* Style for h3 and h2 within status boxes */
+.status div h3 {
+  margin: 0;
+  font-size: 16px; /* Adjusted font size */
+  line-height: 1.2; /* Adjusted line height */
+}
+
+.status div h3 i {
+  display: block; /* Ensure icon is on its own line if using <br> */
+  margin-bottom: 5px; /* Space between icon and text */
+  font-size: 16px; /* Adjusted icon size */
+}
+
+.status div h2 {
+  margin: 0; /* Remove default margin */
+  font-size: 2em; /* Adjusted font size for count */
+}
+
+/* --- Bottom Section Styles --- */
+.bottom {
   display: flex;
-  max-width: 50%;
-  justify-content: space-between;
-  background-color: #ffffff;
+  flex-wrap: wrap; /* Allow sections to wrap on smaller screens */
+  gap: 20px; /* Space between bottom sections */
+}
+
+/* Styles for Quick Actions section container */
+.quick-actions {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 45%; /* Suggested initial width basis */
+  flex-grow: 1; /* Allow to grow */
+
+  background-color: #333333; /* Dark background */
+  padding: 15px; /* Adjusted padding */
+  box-sizing: border-box;
+  color: #ffffff; /* White text color */
+  border-radius: 10px; /* Consistent border-radius */
+  max-height: 400px; /* Example max height */
+  overflow-y: auto; /* Add scrolling if content exceeds max height */
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; /* Example shadow */
+
+  justify-content: flex-start; /* Align content to the top */ /* Removed space-between */
 }
 
-.visits,
-.flag,
-.flag-review,
-.profile,
-.alerts,
-.pre-registration {
-  border-radius: 20px;
-  flex-grow: 1;
-  display: flex;
-  padding: 0;
-  box-sizing: border-box;
-  border: none;
-}
-
-.quick-actions {
-  background-color: #333333;
-  color: #ffffff;
-}
-
+/* Styles for Recent Activities and Alerts section container */
 .rec-act-ale {
-  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 45%; /* Suggested initial width basis */
+  flex-grow: 1;
+  height: 370px;
+  background-color: var(--accent-color, #6610f2);
+  color: #ffffff; /* White text color */
+  padding: 15px; /* Adjusted padding */
+  box-sizing: border-box;
+  border-radius: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; /* Example shadow */
+
+  justify-content: flex-start; /* Align content to the top */
 }
 
-.check-in-dist {
-  background-color: var(--accent-color);
+/* Styles for Quick Actions and Rec Activities/Alerts headers */
+.quick-actions h4,
+.rec-act-ale h4 {
+  margin-top: 0;
+  margin-bottom: 10px; /* Add space below header */
+  padding-bottom: 10px; /* Padding below header text */
+  border-bottom: 1px solid #555; /* Separator line (adjust color for rec-act-ale if needed) */
+  font-size: 1.2em; /* Adjusted font size */
+}
+
+/* Adjust border for rec-act-ale header if its background is light */
+.rec-act-ale.light-background h4 {
+  /* Example if rec-act-ale has a light background */
+  border-bottom-color: #eee;
+}
+
+.quick-actions .buttons {
+  flex-direction: row;
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center; /* Center buttons within the container */
+}
+
+/* Style for the actual button elements within Quick Actions */
+.quick-actions .buttons button {
+  width: 152px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 152px;
+  padding: 10px 5px;
+  background-color: #555; /* Default button color */
+  color: #eee; /* Default text color */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* Style for h2 within quick action buttons (icon container) */
+.quick-actions .buttons button h2 {
+  margin: 0; /* Remove default margin */
+  font-size: 1.8em; /* Adjust icon size */
+}
+
+/* Style for h4 within quick action buttons (text) */
+.quick-actions .buttons button h4 {
+  margin: 0; /* Remove default margin */
+  font-size: 0.9em; /* Adjusted font size */
+  line-height: 1.2; /* Ensure text fits */
+  text-align: center; /* Center text */
+}
+
+/* Hover style for buttons within quick actions */
+.quick-actions .buttons button:hover {
+  background-color: var(--primary-color, #007bff); /* Primary color on hover */
   color: #ffffff;
 }
 
+/* --- Rec Activities and Alerts List Styles (Example, based on other dashboards) --- */
+/* If you add a list (ul/li) to .rec-act-ale, you'll need these styles */
+/*
+.rec-act-ale ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rec-act-ale li {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f8f9fa; // Light background for items
+  color: #333; // Dark text for items
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 5px solid var(--info-color, #17a2b8); // Example border
+}
+
+// Style for icons within list items
+.rec-act-ale li i {
+  margin-right: 8px;
+  font-size: 1.1em;
+  flex-shrink: 0;
+}
+
+// Style for the text content within list items
+.rec-act-ale li > div:first-child {
+  flex-grow: 1;
+  margin-right: 10px;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+// Style for timestamp if present
+.rec-act-ale li .item-time {
+  font-size: 0.9em;
+  color: #666;
+  margin-left: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+*/
+
+/* --- Responsive Adjustments --- */
 @media (max-width: 720px) {
-  .buttons button {
-    height: 52px;
+  /* Status boxes stack vertically */
+  .status {
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .buttons {
-    margin: 10px auto;
-    padding: 10px;
-    box-sizing: border-box;
+  /* Apply to all status boxes */
+  .status-flags,
+  .status-alerts,
+  .status-visits,
+  .status-disack {
+    flex-basis: auto;
+    min-width: auto;
+    width: 100%;
   }
 
-  .rec-act-ale,
-  .quick-actions {
-    width: 100% !important;
-    max-width: 100%;
-    display: flex;
-    height: fit-content;
-    max-height: 385px;
+  /* Bottom sections stack vertically */
+  .bottom {
+    flex-direction: column;
+    gap: 20px;
   }
+
+  /* Apply to quick actions and recent activity containers */
+  .quick-actions,
+  .rec-act-ale {
+    width: 100%; /* Take full width */
+    max-width: 100%; /* Override any max-width */
+    flex-basis: auto; /* Remove basis */
+    height: auto; /* Height adapts to content */
+    max-height: none; /* Remove max height constraint if they should fully expand */
+    overflow-y: visible; /* Remove scrolling */
+  }
+
+  /* If you still need scrolling on mobile for these sections, re-add max-height and overflow-y */
+  /*
+  .quick-actions,
+  .rec-act-ale {
+      max-height: 300px; // Example fixed height for scrolling on mobile
+      overflow-y: auto;
+  }
+  */
+
+  /* Quick Actions buttons container on mobile */
+  .quick-actions .buttons {
+    justify-content: space-around; /* Adjust alignment */
+    gap: 5px; /* Reduced gap */
+    padding: 0;
+  }
+
+  /* Individual Quick Action buttons on mobile */
+  .quick-actions .buttons button {
+    width: auto; /* Allow width to be determined by flex-basis */
+    min-width: 80px; /* Ensure buttons don't get too small */
+    flex-basis: auto; /* Allow basis to adapt */
+    padding: 10px 5px; /* Adjusted padding */
+  }
+
+  /* Adjust text and icon size in quick action buttons on mobile if needed */
+  .quick-actions .buttons button h2 {
+    font-size: 1.5em;
+  }
+
+  .quick-actions .buttons button h4 {
+    font-size: 0.8em;
+  }
+}
+
+/* --- Scrollbar styles (Keep or adjust as desired) --- */
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color, #6c757d) white; /* Adjust color if needed */
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color, #6c757d);
+  border-radius: 10px;
+  border: 3px solid white;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+  border-radius: 10px;
 }

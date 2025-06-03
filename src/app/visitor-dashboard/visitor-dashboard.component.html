@@ -5,84 +5,206 @@
     <div class="mini-header" *ngIf="authserv.user() as user">
       <h4><i class="fa-solid fa-user"></i> {{ user.displayName }}</h4>
     </div>
+
     <div class="status">
       <div class="status-flags">
-        <h3>
-          <i class="fa-solid fa-flag"></i><br />My<br />
-          Pending Flags
-        </h3>
-        <h2>{{ RaisedFlagsCount }}</h2>
+        <h3><i class="fa-solid fa-flag"></i> Pending Flags</h3>
+        <h2>{{ dashboardService.MyPendingFlagsCount$ | async }}</h2>
       </div>
       <div class="status-visits">
-        <h3>
-          <i class="fa-solid fa-user-plus"></i><br />
-          My Active <br />Pre-registered visits
-        </h3>
-        <h2>{{ ActiveVisitsCount }}</h2>
+        <h3><i class="fa-solid fa-user-plus"></i> Active visits</h3>
+        <h2>{{ dashboardService.AcknowledgedVisitsCount$ | async }}</h2>
       </div>
       <div class="status-disack">
-        <h3>
-          <i class="fa-solid fa-user-slash"></i> <br />My<br />
-          Disacknowledged visits
-        </h3>
-        <h2>{{ DisacknowledgedVACount }}</h2>
+        <h3><i class="fa-solid fa-user-slash"></i> Disacknowledged visits</h3>
+        <h2>{{ dashboardService.DisacknowledgedVisitCount$ | async }}</h2>
       </div>
       <div class="status-alerts">
-        <h3>
-          <i class="fa-solid fa-bell"></i><br />My<br />
-          Unread Alerts
-        </h3>
-        <h2>0</h2>
+        <h3><i class="fa-solid fa-bell"></i> Unread Alerts</h3>
+        <h2>{{ dashboardService.UnreadAlertsTodayCount$ | async }}</h2>
       </div>
     </div>
+
     <div class="bottom">
       <div class="quick-actions">
-        <h4><i class="fa-solid fa-bolt"></i> Quick Actions</h4>
+        <h4 class="section-header">
+          <i class="fa-solid fa-bolt"></i> Quick Actions
+        </h4>
         <div class="buttons">
-          <div class="pre-registration">
-            <button routerLink="/visitor-preregistration">
-              <h2><i class="fa-solid fa-calendar-plus"></i></h2>
-              <h4>Pre-Register</h4>
-            </button>
-          </div>
-          <div class="visits">
-            <button routerLink="/visits">
-              <h2><i class="fa-solid fa-list-ul"></i></h2>
-              <h4>Visits</h4>
-            </button>
-          </div>
-          <div class="flag">
-            <button routerLink="/visitor-flag">
-              <h2><i class="fa-solid fa-flag"></i></h2>
-              <h4>Raise Flag</h4>
-            </button>
-          </div>
-          <div class="flag-review">
-            <button routerLink="/visitor-flags">
-              <h2>
-                <i class="fa-solid fa-flag-checkered"></i>
-              </h2>
-              <h4>View Flags</h4>
-            </button>
-          </div>
-          <div class="profile">
-            <button routerLink="/visitor-profile">
-              <h2><i class="fa-solid fa-user"></i></h2>
-              <h4>Profile</h4>
-            </button>
-          </div>
-          <div class="alerts">
-            <button routerLink="/visitor-view-alerts">
-              <h2><i class="fa-solid fa-bell"></i></h2>
-              <h4>Alerts</h4>
-            </button>
-          </div>
+          <button routerLink="/visitor-preregistration">
+            <h2><i class="fa-solid fa-calendar-plus"></i></h2>
+            <h4>Pre-Register</h4>
+          </button>
+
+          <button routerLink="/visitor-visits">
+            <h2><i class="fa-solid fa-list-ul"></i></h2>
+            <h4>Visits</h4>
+          </button>
+
+          <button routerLink="/visitor-flag">
+            <h2><i class="fa-solid fa-flag"></i></h2>
+            <h4>Raise Flag</h4>
+          </button>
+
+          <button routerLink="/visitor-flags">
+            <h2><i class="fa-solid fa-flag-checkered"></i></h2>
+            <h4>View Flags</h4>
+          </button>
+
+          <button routerLink="/visitor-send">
+            <h2><i class="fa-solid fa-paper-plane"></i></h2>
+            <h4>Send Alert</h4>
+          </button>
+
+          <button routerLink="/visitor-view-alerts">
+            <h2><i class="fa-solid fa-bell"></i></h2>
+            <h4>Alerts</h4>
+          </button>
+
+          <button routerLink="/visitor-profile">
+            <h2><i class="fa-solid fa-user"></i></h2>
+            <h4>Profile</h4>
+          </button>
         </div>
       </div>
+
       <div class="rec-act-ale">
-        <h4>
+        <h4
+          style="
+            margin-bottom: 0%;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+          "
+        >
           <i class="fa-solid fa-list-alt"></i> Recent Activities and Alerts
         </h4>
+        <div
+          *ngIf="dashboardService.recentActivityAlerts$ | async as recentAlerts"
+        >
+          <div
+            *ngIf="recentAlerts.length === 0"
+            style="padding: 10px; text-align: center; color: #888"
+          >
+            No recent activity or alerts found today.
+          </div>
+          <ul
+            *ngIf="recentAlerts.length > 0"
+            style="list-style: none; padding: 0; margin: 0"
+          >
+            <li
+              *ngFor="let alert of recentAlerts"
+              class="recent-activity-item"
+              [class.activity-item]="
+                alert.type === 'checkin' || alert.type === 'checkout'
+              "
+              [class.sent-alert-item]="alert.type === 'sent-alert'"
+              [class.unread]="alert.read === false"
+              style="
+                padding: 8px 10px;
+                border: none;
+                display: flex;
+                font-size: 15px;
+                justify-content: space-between;
+                text-align: left;
+                background-color: #ffffff;
+                color: #333;
+                border-radius: 10px;
+                margin: 5px auto;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                align-items: center;
+              "
+            >
+              <div>
+                <ng-container
+                  *ngIf="alert.type === 'checkin' || alert.type === 'checkout'"
+                >
+                  <i class="fa-solid fa-clock" style="margin-right: 5px"></i>
+                  <strong *ngIf="alert.name">{{ alert.name }}</strong>
+                  <ng-container *ngIf="alert.role">
+                    ({{ alert.role }})</ng-container
+                  >
+                  <ng-container *ngIf="alert.type === 'checkin'">
+                    checked in at
+                  </ng-container>
+                  <ng-container *ngIf="alert.type === 'checkout'">
+                    checked out at
+                  </ng-container>
+                  <strong *ngIf="alert.time">{{ alert.time }}</strong>
+                </ng-container>
+
+                <ng-container *ngIf="alert.type === 'sent-alert'">
+                  <ng-container [ngSwitch]="alert.code">
+                    <i
+                      *ngSwitchCase="'medical'"
+                      class="fas fa-stethoscope"
+                      style="margin-right: 5px"
+                    ></i>
+                    <i
+                      *ngSwitchCase="'security'"
+                      class="fas fa-handcuffs"
+                      style="margin-right: 5px"
+                    ></i>
+                    <i
+                      *ngSwitchCase="'hazard'"
+                      class="fas fa-skull-crossbones"
+                      style="margin-right: 5px"
+                    ></i>
+                    <i
+                      *ngSwitchCase="'fire'"
+                      class="fas fa-fire"
+                      style="margin-right: 5px"
+                    ></i>
+                    <i
+                      *ngSwitchCase="'notice'"
+                      class="fas fa-bullhorn"
+                      style="margin-right: 5px"
+                    ></i>
+                    <i
+                      *ngSwitchCase="'lockdown'"
+                      class="fas fa-lock"
+                      style="margin-right: 5px"
+                    ></i>
+                    <i
+                      *ngSwitchDefault
+                      class="fas fa-bell"
+                      style="margin-right: 5px"
+                    ></i>
+                  </ng-container>
+                  <strong *ngIf="alert.sender">{{ alert.sender }}</strong>
+                  <ng-container *ngIf="alert.senderRole">
+                    ({{ alert.senderRole }})</ng-container
+                  >
+                  <ng-container *ngIf="alert.message">
+                    - {{ alert.message }}</ng-container
+                  >
+                  <ng-container *ngIf="alert.time">
+                    at
+                    <strong style="font-weight: normal">{{
+                      alert.time
+                    }}</strong></ng-container
+                  >
+                </ng-container>
+              </div>
+              <button
+                *ngIf="alert.read === false"
+                (click)="dashboardService.markAlertAsRead(alert)"
+                style="
+                  background: none;
+                  border: none;
+                  cursor: pointer;
+                  color: #888;
+                  font-size: 0.9em;
+                  padding: 0;
+                  margin-left: 10px;
+                  flex-shrink: 0;
+                "
+                title="Mark as read"
+              >
+                <i class="fa-solid fa-envelope-open"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

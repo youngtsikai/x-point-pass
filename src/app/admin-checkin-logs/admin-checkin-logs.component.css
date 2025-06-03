@@ -1,0 +1,60 @@
+td {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.controls {
+  margin-bottom: 0px;
+}
+
+input {
+  font-size: 16px;
+  width: 13%;
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: #1a5276 2px solid;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  color: #1a5276;
+}
+
+.controls button {
+  font-size: 16px;
+  width: 13%;
+  background-color: #ffffff;
+  border-radius: 20px;
+  border: #1a5276 2px solid;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  color: #1a5276;
+  margin: 13px 13px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #1a5276;
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  /* Adjust breakpoint as needed */
+
+  /* Hide the 'Today', 'Last Week', 'Last Month' buttons */
+  .controls .today-button,
+  .controls .week-button,
+  .controls .month-button {
+    display: none;
+  }
+
+  /* Make the remaining items (Print button and Date input) stack */
+  .controls .print-button,
+  .controls .date-input {
+    width: 42%; /* Make them take full width */
+    margin: 13px 13px; /* Ensure no residual margin interferes with width */
+  }
+
+  .controls {
+    justify-content: stretch; /* Ensure remaining items fill width */
+    padding: 0 5px; /* Reduce container padding */
+  }
+}

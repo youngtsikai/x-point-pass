@@ -1,0 +1,29 @@
+<app-admin-header></app-admin-header>
+<div class="page-container">
+  <app-admin-sidebar></app-admin-sidebar>
+  <div class="dash-main-container">
+    <h2>Update Password</h2>
+    <label for="password">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        name="password"
+        [(ngModel)]="password"
+        id="password"
+        placeholder="New Password"
+        required
+      />
+      <span>New Password</span>
+    </label>
+
+    <div class="checkbox-container">
+      <input
+        type="checkbox"
+        id="showPasswordCheckbox"
+        name="showPasswordCheckbox"
+        [(ngModel)]="showPassword"
+      />
+      <label for="showPasswordCheckbox">Show Password</label>
+    </div>
+    <button (click)="updatePassword()">Update Password</button>
+  </div>
+</div>

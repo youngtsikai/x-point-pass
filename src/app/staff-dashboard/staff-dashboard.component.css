@@ -1,113 +1,362 @@
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.status h2 {
+  margin: 5px auto;
+}
+
+.status h3 {
+  margin: 5px auto;
+}
+
+/* Styles for individual status boxes */
 .act-visits,
 .pen-visits,
 .pen-flags,
 .unr-alerts {
   flex-grow: 1;
-  font-size: 0.8em;
+  flex-basis: 0; /* Allow flex-grow to work effectively */
+  font-size: 16px;
   text-align: center;
-  border-radius: 20px;
+  border-radius: 10px;
   color: #ffffff;
+  padding: 10px;
+  min-width: 100px; /* Adjusted min-width to prevent excessive squishing */
+  box-sizing: border-box;
+  display: flex; /* Use flex for internal alignment */
+  flex-direction: column; /* Stack content vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  gap: 5px; /* Space between h3 and h2 */
 }
 
-.unr-alerts {
-  background-color: var(--primary-color);
+/* Specific background colors for staff status boxes */
+.act-visits {
+  background-color: var(--success-color, #28a745); /* Example: Green */
 }
 
 .pen-visits {
-  background-color: var(--warning-color);
+  background-color: var(--warning-color, #ffc107); /* Example: Orange/Yellow */
 }
 
 .pen-flags {
-  background-color: var(--error-color);
+  background-color: var(--error-color, #dc3545); /* Example: Red */
 }
 
-.act-visits {
-  background-color: var(--success-color);
+.unr-alerts {
+  background-color: var(
+    --primary-color,
+    #007bff
+  ); /* Using primary color or another suitable color */
+  /* background-color: var(--info-color, #17a2b8); */ /* Cyan/Info color is also a good option */
 }
 
-.quick-actions,
-.check-in-dist,
-.rec-act-ale {
-  flex-grow: 1;
-  border-radius: 20px;
-  padding: 10px;
-  height: 324px;
-  box-sizing: border-box;
+/* Styles for the bottom section containing quick actions, lists, etc. */
+.bottom {
   display: flex;
-  max-width: 34%;
-  background-color: #ffffff;
+  flex-wrap: wrap; /* Allow sections to wrap on smaller screens */
+  gap: 20px; /* Space between bottom sections */
+}
+
+/* Styles for Quick Actions section */
+.quick-actions {
+  display: flex;
   flex-direction: column;
+  flex-basis: 30%;
+  flex-grow: 1;
+  background-color: #333333;
+  padding: 10px;
+  box-sizing: border-box;
+  color: #ffffff;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.buttons {
+.quick-actions h4 {
+  margin-top: 0; /* Ensure no top margin on header */
+  margin-bottom: 10px; /* Space below header */
+  padding-bottom: 10px; /* Padding below header text */
+  border-bottom: 1px solid #555; /* Separator line */
+  color: #fff;
+}
+
+.quick-actions .buttons {
   flex-direction: row;
   display: flex;
-  gap: 15px;
+  gap: 10px;
   flex-wrap: wrap;
   padding: 5px;
-  margin: 8px auto;
   width: 100%;
   box-sizing: border-box;
+  justify-content: center;
 }
 
-.buttons button {
-  width: 126px;
+.quick-actions .buttons button {
   border-radius: 10px;
   cursor: pointer;
-  margin: 2px 2px;
   border: none;
-  font-size: 15px;
+  font-size: 14px;
   flex-grow: 1;
+  flex-basis: 0;
+  min-width: 100px;
+  padding: 10px 5px;
+  box-sizing: border-box;
+  background-color: #555;
+  color: #eee;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.buttons button h2 {
-  margin-bottom: 0%;
-}
-
-.buttons button h4 {
-  margin-top: 0%;
-}
-
-.quick-actions {
-  background-color: #333333;
-  color: #ffffff;
-}
-
-.rec-act-ale {
-  background-color: #ffffff;
-}
-
-.check-in-dist {
-  background-color: var(--accent-color);
-  color: #ffffff;
-}
-
-.buttons :hover {
+.quick-actions .buttons button:hover {
   background-color: var(--primary-color);
   color: #ffffff;
 }
 
-@media (max-width: 720px) {
-  .buttons button {
-    height: 52px;
+.quick-actions .buttons button h2 {
+  margin-bottom: 0%;
+  font-size: 20px;
+}
+
+.quick-actions .buttons button h4 {
+  margin-top: 5px;
+  font-size: 0.9em;
+  line-height: 1.2;
+}
+
+/* Styles for Check-In Distribution section container */
+.check-in-dist {
+  flex-grow: 1;
+  flex-basis: 25%;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-height: 326px;
+  font-size: 16px;
+  overflow-y: auto;
+  color: #333;
+}
+
+/* Consistent header style for sections in the bottom row */
+.section-header {
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 20px;
+  color: #333; /* Dark text color */
+}
+
+/* Style for the list container within Check-In Distribution */
+.check-in-dist ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* Style for individual items in Check-In Distribution */
+.check-in-dist li.activity-log-item {
+  padding: 8px 0;
+  border-bottom: 1px dashed #eee;
+  font-size: 16px;
+  box-sizing: border-box;
+  color: #555; /* Slightly lighter text */
+}
+
+.check-in-dist li.activity-log-item:last-child {
+  border-bottom: none; /* Remove border on the last item */
+}
+
+.rec-act-ale {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 35%;
+  flex-grow: 1;
+  background-color: var(--accent-color); /* Container background */
+  padding: 10px;
+  box-sizing: border-box;
+  color: #ffffff; /* Default text color for container */
+  border-radius: 10px;
+  max-height: 320px;
+  overflow-y: auto; /* Enable scrolling */
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.rec-act-ale h4 {
+  margin-top: 0; /* Ensure no top margin on header */
+}
+
+/* Styles for the list container within Recent Activities */
+.rec-act-ale ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Use flexbox for list items */
+  flex-direction: column; /* Stack list items vertically */
+  gap: 8px; /* Space between list items */
+}
+
+/* Base style for each list item in Recent Activities - applies to ALL items */
+.rec-act-ale li.recent-activity-item {
+  padding: 10px; /* Adjusted padding */
+  display: flex;
+  font-size: 15px;
+  justify-content: space-between;
+  text-align: left;
+  border-radius: 10px;
+  /* margin: 5px 0; Removed fixed margin if using gap on ul */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  background-color: #ffffff; /* Default background for all items (e.g., white) */
+  color: #333; /* Default text color for all items (e.g., dark grey) */
+  align-items: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
+  width: 100%; /* Item takes full width of its flex container */
+  box-sizing: border-box;
+}
+
+/* Style for Check-in/Check-out Activity Items (Overrides base style) */
+.rec-act-ale li.activity-item {
+  border-left: 5px solid var(--success-color); /* Example border color (Green) */
+  /* background-color: #e8f5e9; */ /* Optional: very light green background */
+}
+
+/* Style for Sent Alert Items (Overrides base style) */
+.rec-act-ale li.sent-alert-item {
+  border-left: 5px solid var(--warning-color); /* Example border color (Orange/Yellow) */
+  /* background-color: #fff3cd; */ /* Optional: light yellow background */
+}
+
+/* Style for the content div within list items */
+.rec-act-ale li .alert-content {
+  flex-grow: 1;
+  margin-right: 10px;
+  word-break: break-word;
+  display: flex; /* Use flex to align icon, text, and time */
+  align-items: center; /* Vertically align icon and text */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* Style for icons within alert content */
+.rec-act-ale li .alert-content i {
+  margin-right: 8px;
+  font-size: 1.1em;
+}
+
+/* Style for the timestamp within alert content */
+.rec-act-ale li .alert-content strong[style] {
+  font-weight: normal; /* Override inline style if needed */
+}
+
+/* Style for the mark as read button */
+.rec-act-ale li .mark-read-button {
+  background: none; /* No background */
+  border: none;
+  cursor: pointer;
+  color: #888; /* Grey color */
+  font-size: 0.9em;
+  padding: 0;
+  margin-left: 10px;
+  flex-shrink: 0;
+  width: 20px; /* Fixed size for consistency */
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.rec-act-ale li .mark-read-button:hover {
+  color: #555; /* Darker grey on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 762px) {
+  .status {
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .buttons {
-    margin: 10px auto;
-    padding: 10px;
-    box-sizing: border-box;
+  .act-visits,
+  .pen-visits,
+  .pen-flags,
+  .unr-alerts {
+    flex-basis: auto;
+    min-width: auto;
+    width: 100%;
   }
 
-  .rec-act-ale,
+  .bottom {
+    flex-direction: column;
+    gap: 20px;
+  }
+
   .quick-actions,
-  .check-in-dist {
-    width: 100% !important;
+  .rec-act-ale {
+    width: 100%;
     max-width: 100%;
-    display: flex;
-    height: fit-content;
-    max-height: 385px;
+    flex-basis: auto;
+    overflow-y: hidden;
   }
+
+  .quick-actions .buttons {
+    justify-content: space-around;
+    gap: 5px;
+    padding: 0;
+  }
+
+  .quick-actions .buttons button {
+    width: auto;
+    min-width: 80px;
+    flex-basis: auto;
+    padding: 10px 5px;
+  }
+
+  .check-in-dist li.activity-log-item {
+    padding: 8px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .check-in-dist {
+    width: 92%;
+    max-height: fit-content;
+    height: fit-content;
+    flex-basis: auto;
+    overflow: auto;
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-color, #6c757d) white;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color, #6c757d); /* Use a theme color */
+  border-radius: 10px;
+  border: 3px solid white;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+  border-radius: 10px;
 }

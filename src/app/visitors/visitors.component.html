@@ -1,0 +1,181 @@
+<app-admin-header></app-admin-header>
+<div class="page-container">
+  <app-admin-sidebar></app-admin-sidebar>
+  <div class="dash-main-container">
+    <h1 class="inheaderh1">Manage Visitors</h1>
+
+    <div *ngIf="isLoading" style="text-align: center; padding: 20px">
+      Loading visitors...
+    </div>
+
+    <div
+      *ngIf="!isLoading && visitors.length === 0"
+      style="text-align: center; padding: 20px"
+    >
+      No visitor records found.
+    </div>
+
+    <div *ngIf="!isLoading && visitors.length > 0" class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let visitor of visitors">
+            <td data-label="Name">
+              <ng-container
+                *ngIf="visitor.uid === editingVisitorUid && tempEditVisitor"
+              >
+                <input
+                  type="text"
+                  [(ngModel)]="tempEditVisitor.displayName"
+                  name="editDisplayName_{{ visitor.uid }}"
+                  required
+                />
+              </ng-container>
+              <ng-container *ngIf="visitor.uid !== editingVisitorUid">
+                {{ visitor.displayName || "N/A" }}
+              </ng-container>
+            </td>
+
+            <td data-label="Email">
+              <ng-container
+                *ngIf="visitor.uid === editingVisitorUid && tempEditVisitor"
+              >
+                <input
+                  type="email"
+                  [(ngModel)]="tempEditVisitor.email"
+                  name="editEmail_{{ visitor.uid }}"
+                  disabled
+                  title="Email cannot be changed directly here"
+                />
+              </ng-container>
+              <ng-container *ngIf="visitor.uid !== editingVisitorUid">
+                {{ visitor.email || "N/A" }}
+              </ng-container>
+            </td>
+
+            <td data-label="Phone">
+              <ng-container
+                *ngIf="visitor.uid === editingVisitorUid && tempEditVisitor"
+              >
+                <input
+                  type="text"
+                  [(ngModel)]="tempEditVisitor.phoneNumber"
+                  name="editPhoneNumber_{{ visitor.uid }}"
+                />
+              </ng-container>
+              <ng-container *ngIf="visitor.uid !== editingVisitorUid">
+                {{ visitor.phoneNumber || "N/A" }}
+              </ng-container>
+            </td>
+
+            <td data-label="Role">
+              <ng-container
+                *ngIf="visitor.uid === editingVisitorUid && tempEditVisitor"
+              >
+                <input
+                  type="text"
+                  [(ngModel)]="tempEditVisitor.role"
+                  name="editRole_{{ visitor.uid }}"
+                  disabled
+                  title="Role is fixed as visitor"
+                />
+              </ng-container>
+              <ng-container *ngIf="visitor.uid !== editingVisitorUid">
+                {{ visitor.role || "N/A" }}
+              </ng-container>
+            </td>
+
+            <td data-label="Status">
+              <p
+                [ngClass]="{
+                  'status-blacklisted': visitor.isBlacklisted,
+                  'status-active': !visitor.isBlacklisted
+                }"
+              >
+                <ng-container *ngIf="visitor.isBlacklisted"
+                  >Blacklisted</ng-container
+                >
+                <ng-container *ngIf="!visitor.isBlacklisted"
+                  >Active</ng-container
+                >
+              </p>
+            </td>
+
+            <td data-label="Actions" class="actions-cell">
+              <ng-container *ngIf="visitor.uid === editingVisitorUid">
+                <button
+                  (click)="updateVisitor()"
+                  title="Save Changes"
+                  class="action-button save-button"
+                  [disabled]="
+                    !tempEditVisitor?.displayName || !tempEditVisitor?.uid
+                  "
+                >
+                  <i class="fa-solid fa-save"></i> Save
+                </button>
+                <button
+                  (click)="cancelEditVisitor()"
+                  title="Cancel Edit"
+                  class="action-button cancel-button"
+                >
+                  <i class="fa-solid fa-times"></i> Cancel
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="visitor.uid !== editingVisitorUid">
+                <button
+                  (click)="viewDetails(visitor)"
+                  title="View Details"
+                  class="action-button view-button"
+                >
+                  <i class="fas fa-eye"></i>
+                </button>
+                <button
+                  (click)="editVisitor(visitor)"
+                  title="Edit Visitor"
+                  class="action-button edit-button"
+                >
+                  <i class="fas fa-edit"></i>
+                </button>
+
+                <button
+                  *ngIf="!visitor.isBlacklisted"
+                  (click)="blacklistVisitor(visitor)"
+                  title="Blacklist Visitor"
+                  class="blacklist-button"
+                >
+                  <i class="fas fa-ban"></i>
+                </button>
+                <button
+                  *ngIf="visitor.isBlacklisted"
+                  (click)="unblacklistVisitor(visitor)"
+                  title="Unblacklist Visitor"
+                  class="unblacklist-button"
+                >
+                  <i class="fas fa-user-check"></i>
+                </button>
+
+                <button
+                  (click)="deleteVisitor(visitor)"
+                  title="Delete Visitor"
+                  class="delete-button"
+                >
+                  <i class="fas fa-trash"></i>
+                </button>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

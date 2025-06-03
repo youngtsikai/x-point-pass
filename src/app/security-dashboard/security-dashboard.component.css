@@ -1,104 +1,372 @@
+.status {
+  display: flex;
+  flex-wrap: wrap; /* Allow boxes to wrap on smaller screens */
+  gap: 10px; /* Space between status boxes */
+  margin-bottom: 20px; /* Space below the status boxes */
+}
+
 .status-new-flags,
 .status-new-alerts,
 .status-visitors-in,
 .status-staff-in,
 .status-head-count {
   flex-grow: 1;
+  flex-basis: 0;
   font-size: 0.8em;
   text-align: center;
   border-radius: 20px;
   color: #ffffff;
+  padding: 15px 10px; /* Add some padding */
+  min-width: 120px; /* Minimum width before wrapping */
+  box-sizing: border-box; /* Include padding in width */
 }
 
+/* Specific background colors for status boxes */
 .status-head-count {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color); /* Example: Blue */
 }
 
 .status-visitors-in {
-  background-color: var(--success-color);
+  background-color: var(--success-color); /* Example: Green */
 }
 .status-staff-in {
-  background-color: var(--accent-color);
+  background-color: var(--accent-color); /* Example: Purple/Indigo */
 }
 .status-new-flags {
-  background-color: var(--error-color);
+  background-color: var(--error-color); /* Example: Red */
 }
 .status-new-alerts {
-  background-color: var(--warning-color);
+  background-color: var(--warning-color); /* Example: Orange/Yellow */
 }
 
+/* Styles for the bottom section containing Quick Actions, Recent Activity, and Trends */
+.bottom {
+  display: flex;
+  flex-wrap: wrap; /* Allow sections to wrap on smaller screens */
+  gap: 20px; /* Space between bottom sections */
+}
+
+/* Styles for Quick Actions section */
 .quick-actions {
   display: flex;
   flex-direction: column;
-  max-width: 46.5%;
+  flex-basis: 40%; /* Suggest initial width */
+  flex-grow: 1; /* Allow to grow */
+  /* max-width: 40%; Removed max-width here to let flex-basis control initial size better */
   background-color: #333333;
   padding: 10px;
   box-sizing: border-box;
   color: #ffffff;
   border-radius: 10px;
+  /* max-height: 426px; Remove fixed max height unless necessary, let content define */
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.rec-act-ale {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--accent-color);
-  padding: 10px;
-  box-sizing: border-box;
-  flex-grow: 1;
-  color: #ffffff;
-  border-radius: 10px;
+.quick-actions h4 {
+  margin-top: 0; /* Ensure no top margin on header */
+  margin-bottom: 10px; /* Space below header */
+  padding-bottom: 10px; /* Padding below header text */
+  border-bottom: 1px solid #555; /* Separator line */
 }
 
-.buttons {
+/* Styles for the buttons container within Quick Actions */
+.quick-actions .buttons {
+  /* Added .quick-actions prefix for specificity */
   flex-direction: row;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   padding: 5px;
-  margin: 8px auto;
+  /* margin: 8px auto; Removed auto margin */
   width: 100%;
   box-sizing: border-box;
+  justify-content: center; /* Center buttons */
 }
 
-.buttons button {
-  width: 126px;
+/* Styles for individual buttons within Quick Actions */
+.quick-actions .buttons button {
+  /* Added .quick-actions prefix for specificity */
+  width: 126px; /* Fixed width */
   border-radius: 10px;
   cursor: pointer;
-  margin: 2px 2px;
+  /* margin: 2px 2px; Removed fixed margin if using gap */
   border: none;
   font-size: 15px;
-  flex-grow: 1;
+  flex-grow: 1; /* Allow buttons to grow */
+  flex-basis: 0; /* Suggest minimum size 0 */
+  min-width: 100px; /* Minimum width before wrapping */
+  padding: 10px 5px; /* Adjust padding */
+  background-color: #555; /* Default button color */
+  color: #eee; /* Default text color */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
-.buttons button:hover {
+.quick-actions .buttons button:hover {
+  /* Added .quick-actions prefix for specificity */
   background-color: var(--primary-color);
   color: #ffffff;
 }
 
-.buttons button h2 {
+.quick-actions .buttons button h2 {
   margin-bottom: 0%;
+  font-size: 1.8em;
 }
 
-.buttons button h4 {
-  margin-top: 0%;
+.quick-actions .buttons button h4 {
+  /* Added .quick-actions prefix for specificity */
+  margin-top: 5px; /* Add space above text */
+  font-size: 0.9em; /* Adjust text size */
+  line-height: 1.2; /* Adjust line height */
 }
 
+/* Styles for Recent Activities and Alerts section */
+.rec-act-ale {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 35%;
+  flex-grow: 1;
+  background-color: var(--accent-color); /* Container background */
+  padding: 10px;
+  box-sizing: border-box;
+  color: #ffffff; /* Default text color for container */
+  border-radius: 10px;
+  max-height: 372px;
+  overflow-y: auto; /* Enable scrolling */
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.rec-act-ale h4 {
+  margin-top: 0; /* Ensure no top margin on header */
+}
+
+/* Styles for the list container within Recent Activities */
+.rec-act-ale ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Use flexbox for list items */
+  flex-direction: column; /* Stack list items vertically */
+  gap: 8px; /* Space between list items */
+}
+
+/* Base style for each list item in Recent Activities - applies to ALL items */
+.rec-act-ale li.recent-activity-item {
+  padding: 10px; /* Adjusted padding */
+  display: flex;
+  font-size: 15px;
+  justify-content: space-between;
+  text-align: left;
+  border-radius: 10px;
+  /* margin: 5px 0; Removed fixed margin if using gap on ul */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  background-color: #ffffff; /* Default background for all items (e.g., white) */
+  color: #333; /* Default text color for all items (e.g., dark grey) */
+  align-items: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transitions */
+  width: 100%; /* Item takes full width of its flex container */
+  box-sizing: border-box;
+}
+
+/* Style for Check-in/Check-out Activity Items (Overrides base style) */
+.rec-act-ale li.activity-item {
+  border-left: 5px solid var(--success-color); /* Example border color (Green) */
+  /* background-color: #e8f5e9; */ /* Optional: very light green background */
+}
+
+/* Style for Sent Alert Items (Overrides base style) */
+.rec-act-ale li.sent-alert-item {
+  border-left: 5px solid var(--warning-color); /* Example border color (Orange/Yellow) */
+  /* background-color: #fff3cd; */ /* Optional: light yellow background */
+}
+
+/* Style for the content div within list items */
+.rec-act-ale li .alert-content {
+  flex-grow: 1;
+  margin-right: 10px;
+  word-break: break-word;
+  display: flex; /* Use flex to align icon, text, and time */
+  align-items: center; /* Vertically align icon and text */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* Style for icons within alert content */
+.rec-act-ale li .alert-content i {
+  margin-right: 8px;
+  font-size: 1.1em;
+}
+
+/* Style for the timestamp within alert content */
+.rec-act-ale li .alert-content strong[style] {
+  font-weight: normal; /* Override inline style if needed */
+}
+
+/* Style for the mark as read button */
+.rec-act-ale li .mark-read-button {
+  background: none; /* No background */
+  border: none;
+  cursor: pointer;
+  color: #888; /* Grey color */
+  font-size: 0.9em;
+  padding: 0;
+  margin-left: 10px;
+  flex-shrink: 0;
+  width: 20px; /* Fixed size for consistency */
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.rec-act-ale li .mark-read-button:hover {
+  color: #555; /* Darker grey on hover */
+}
+
+/* Styles for Trends section */
 .trend-alerts {
-  width: 100%;
+  flex-grow: 1;
+  flex-basis: 20%; /* Suggest initial width */
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
   padding: 10px;
   box-sizing: border-box;
   border-radius: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 13px;
-  flex-direction: row;
-  background-color: #ffffff;
-}
-
-.trend-alerts div {
-  flex-grow: 1;
+  /* gap: 26px; Removed gap from here, style children instead */
+  max-height: 426px; /* Keep max height */
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .trend-alerts h4 {
-  margin: 0%;
+  margin-top: 0; /* Ensure no top margin on header */
+  margin-bottom: 10px; /* Space below header */
+  padding-bottom: 10px; /* Padding below header text */
+  border-bottom: 1px solid #eee; /* Separator line */
+  font-size: 20px;
+}
+
+/* Style for individual trend items within the trends section */
+.trend-alerts > div {
+  /* Target the direct children divs */
+  flex-grow: 1;
+  font-size: 18px;
+  text-align: center;
+  padding: 10px; /* Add padding */
+  box-sizing: border-box;
+  /* Add space between trend items */
+  margin-bottom: 10px;
+  /* Remove border-bottom from the last child if using margin-bottom */
+}
+
+/* Remove bottom margin from the last trend item */
+.trend-alerts > div:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 720px) {
+  /* Status boxes stack vertically */
+  .status {
+    flex-direction: column;
+  }
+
+  .status-new-flags,
+  .status-new-alerts,
+  .status-visitors-in,
+  .status-staff-in,
+  .status-head-count {
+    flex-basis: auto; /* Remove basis so they take full width */
+    min-width: auto; /* Remove min-width restriction */
+    width: 100%; /* Ensure they take full width */
+  }
+
+  .status h3 {
+    margin: 2px auto;
+  }
+
+  .status h2 {
+    margin: 2px auto;
+  }
+
+  /* Bottom sections stack vertically */
+  .bottom {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .quick-actions,
+  .rec-act-ale,
+  .trend-alerts {
+    width: 100%; /* Take full width */
+    max-width: 100%; /* Override any max-width */
+    flex-basis: auto; /* Remove basis */
+    height: auto; /* Height adapts to content */
+    max-height: none; /* Remove max height constraint for scrolling sections */
+    overflow-y: visible; /* Remove scrolling if height is auto */
+  }
+
+  /* Re-enable scrolling for recent activity if still needed */
+  .rec-act-ale {
+    max-height: 400px; /* Example fixed height for scrolling on mobile */
+    overflow-y: auto;
+  }
+
+  /* Quick Actions buttons container */
+  .quick-actions .buttons {
+    justify-content: space-around; /* Distribute buttons */
+    gap: 5px; /* Adjust gap */
+    padding: 0; /* Remove padding if container has padding */
+  }
+
+  /* Individual Quick Action buttons on mobile */
+  .quick-actions .buttons button {
+    width: auto; /* Auto width based on content/flex */
+    min-width: 80px; /* Smaller min width */
+    flex-basis: auto; /* Allow flexible sizing */
+    padding: 10px 5px;
+  }
+
+  /* Trend items stack vertically on mobile */
+  .trend-alerts {
+    gap: 5px; /* Space between trend items */
+  }
+
+  .trend-alerts > div {
+    margin-bottom: 5px; /* Smaller margin between trend items */
+    padding: 5px; /* Adjust padding */
+  }
+}
+
+/* Scrollbar styles (Keep or adjust as desired) */
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: white var(--accent-color);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--accent-color);
+  border-radius: 10px;
+  border: 3px solid white;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+  border-radius: 10px;
 }

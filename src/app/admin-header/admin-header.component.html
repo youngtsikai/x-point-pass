@@ -1,5 +1,5 @@
 <header>
-  <div logo>
+  <div logo routerLink="/admin-dashboard" style="cursor: pointer">
     <img src="logo-xpoint-pass.png" alt="logo" class="logo-img" />
   </div>
 
@@ -9,7 +9,9 @@
         <a routerLink="/admin-dashboard"><i class="fas fa-home"></i></a>
       </li>
       <li>
-        <a class="info-icon"><i class="fa-solid fa-circle-info"></i></a>
+        <a routerLink="/admin-emergency" class="info-icon"
+          ><i class="fa-solid fa-circle-info"></i
+        ></a>
       </li>
     </ul>
     <div class="user-menu">
@@ -17,11 +19,14 @@
         <i class="fa-solid fa-user"></i>
       </button>
       <div class="dropdown" [ngClass]="{ show: isUserMenuOpen }">
-        <a routerLink="/profile"
+        <a routerLink="/admin-profile"
           ><i class="fa-solid fa-user-gear"></i> Profile</a
         >
-        <a routerLink="/staff-dashboard"
-          ><i class="fa-solid fa-list-alt"></i> Activity</a
+        <a (click)="downloadCurrentUserQrCode()"
+          ><i class="fa-solid fa-qrcode"></i> Download</a
+        >
+        <a routerLink="/admin-update-password"
+          ><i class="fa-solid fa-key"></i> Password</a
         >
         <a (click)="signOut()"><i class="fa fa-sign-out"></i> Sign-Out</a>
       </div>

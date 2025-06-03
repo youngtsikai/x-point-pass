@@ -20,8 +20,12 @@
         Checked-In <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="dropdown" [ngClass]="{ show: isCheckedinOpen }">
-        <a href="#"><i class="fa-solid fa-id-card-clip"></i> Staff</a>
-        <a href="#"><i class="fa-solid fa-id-badge"></i> Visitors</a>
+        <a routerLink="/checkedin-staff"
+          ><i class="fa-solid fa-id-card-clip"></i> Staff</a
+        >
+        <a routerLink="/checkedin-visitors"
+          ><i class="fa-solid fa-id-badge"></i> Visitors</a
+        >
       </div>
     </div>
     <div class="flags-drop">
@@ -33,8 +37,9 @@
         Flags <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="dropdown" [ngClass]="{ show: isFlagsOpen }">
-        <a href="#"><i class="fa-solid fa-flag"></i> Raise Flag</a>
-        <a href="#"><i class="fa-solid fa-flag-checkered"></i> Raised Flags</a>
+        <a routerLink="/security-flags"
+          ><i class="fa-solid fa-flag-checkered"></i> Raised Flags</a
+        >
       </div>
     </div>
     <div class="alerts-drop">
@@ -46,15 +51,17 @@
         Alerts <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="dropdown" [ngClass]="{ show: isAlertsOpen }">
-        <a routerLink="#"><i class="fa-solid fa-paper-plane"></i> Send Alert</a>
-        <a routerLink="/staff-view-alerts"
+        <a routerLink="/security-send"
+          ><i class="fa-solid fa-paper-plane"></i> Send Alert</a
+        >
+        <a routerLink="/security-alerts"
           ><i class="fa-solid fa-eye"></i> View Alerts</a
         >
       </div>
     </div>
     <ul>
       <li>
-        <a routerLink="/staff-dashboard" class="info-icon"
+        <a routerLink="/security-emergency" class="info-icon"
           ><i
             class="fa-solid fa-circle-info"
             style="margin-right: 26px; font-size: 21.5px"

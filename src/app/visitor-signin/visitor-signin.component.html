@@ -1,7 +1,7 @@
 <app-main-header></app-main-header>
 <h1 class="headerh1">Visitor Sign-In</h1>
 <p class="headerp">Sign in to access your account</p>
-<div class="main-container">
+<div class="signin-main-container">
   <form (ngSubmit)="onSubmit()" ngForm>
     <label for="email">
       <input
@@ -26,7 +26,7 @@
       <span>Password</span>
     </label>
     <a routerLink="/reset-password" class="forgot-pass">Forgot Password</a>
-    <button class="login" type="submit">Sign-In</button>
+    <button class="login-btn" type="submit">Sign-In</button>
     <p style="font-size: 16px; text-align: center; margin-top: 13px">
       Or Sign-In with your Social Accounts
     </p>

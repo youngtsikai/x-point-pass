@@ -20,10 +20,12 @@
         Guests <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="dropdown" [ngClass]="{ show: isGuestsOpen }">
-        <a href="#"
+        <a routerLink="/admin-visits"
           ><i class="fa-solid fa-check-double"></i> Acknowledge Visits</a
         >
-        <a href="#"><i class="fa-solid fa-users"></i> Guest List</a>
+        <a routerLink="/admin-guest-list"
+          ><i class="fa-solid fa-users"></i> Guest List</a
+        >
       </div>
     </div>
     <div class="flags-drop">
@@ -52,15 +54,17 @@
         Alerts <i class="fa-solid fa-chevron-down"></i>
       </button>
       <div class="dropdown" [ngClass]="{ show: isAlertsOpen }">
-        <a routerLink="#"><i class="fa-solid fa-paper-plane"></i> Send Alert</a>
-        <a routerLink="/admin-view-alerts"
+        <a routerLink="/admin-sends"
+          ><i class="fa-solid fa-paper-plane"></i> Send Alert</a
+        >
+        <a routerLink="/admin-views"
           ><i class="fa-solid fa-eye"></i> View Alerts</a
         >
       </div>
     </div>
     <ul>
       <li>
-        <a routerLink="/staff-dashboard" class="info-icon"
+        <a routerLink="/admin-emergency" class="info-icon"
           ><i
             class="fa-solid fa-circle-info"
             style="margin-right: 26px; font-size: 21.5px"

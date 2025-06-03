@@ -1,0 +1,44 @@
+<app-security-header></app-security-header>
+<div class="page-container">
+  <app-security-sidebar></app-security-sidebar>
+  <div class="dash-main-container">
+    <h2>Currently Checked-In Visitors</h2>
+    <div class="table-container">
+      <div *ngIf="loading">Loading currently checked-in visitors...</div>
+      <div *ngIf="error" class="error-message">{{ error }}</div>
+
+      <div *ngIf="!loading">
+        <table *ngIf="checkedInVisitors.length > 0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Check-in Time</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let log of checkedInVisitors">
+              <td>{{ log.name }}</td>
+              <td>{{ log.role }}</td>
+              <td>{{ log.checkin_time | date : "medium" }}</td>
+              <td>Checked In</td>
+              <td>
+                <button (click)="checkoutUser(log.id)">Check Out</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="checkedInVisitors.length === 0 && !loading">
+          No Visitors currently checked in.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  h2 {
+    margin: 13px auto;
+  }
+</style>

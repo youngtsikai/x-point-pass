@@ -4,7 +4,7 @@ form {
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  margin: 20px auto;
+  margin: 0px auto;
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
@@ -18,8 +18,7 @@ label {
   box-sizing: border-box;
 }
 
-input,
-textarea {
+input {
   width: 100%;
   padding: 12px 0;
   margin-top: 20px;
@@ -28,36 +27,43 @@ textarea {
   background-color: var(--background-color);
   box-sizing: border-box;
 }
+
 select {
   width: 100%;
   padding: 0px;
   margin-top: 20px;
   border: none;
   outline: none;
-  background-color: var(--background-color);
+  background-color: var(
+    --background-color
+  ); /* Ensure this variable is defined or removed if not used */
   box-sizing: border-box;
   cursor: pointer;
+  /* Specific styles for select */
+  font-size: 16px;
+  border-radius: 3px;
+  color: #333333;
+  border-bottom: 1px #1a5276 solid;
 }
 
-input::placeholder,
-textarea::placeholder {
-  opacity: 0;
+input::placeholder {
+  opacity: 0; /* Makes placeholder invisible initially, relying on span for label effect */
 }
 
 span {
   position: absolute;
   top: 0;
   left: 0;
-  transform: translateY(30px);
+  transform: translateY(30px); /* Initial position of label */
   font-size: 0.825em;
   transition-duration: 300ms;
+  color: #555; /* Default label color */
 }
 
 label:focus-within > span,
-input:not(:placeholder-shown) + span,
-textarea:not(:placeholder-shown) + span {
+input:not(:placeholder-shown) + span {
   color: #1a5276;
-  transform: translateY(0px);
+  transform: translateY(0px); /* Label moves up when focused or filled */
 }
 
 button {
@@ -66,9 +72,9 @@ button {
   background: #1a5276;
   font-size: 16px;
   color: #ffffff;
+  border: none;
   cursor: pointer;
   border-radius: 10px;
-  border: none;
   width: 25%;
 }
 
@@ -79,14 +85,6 @@ button:hover {
     rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
     rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
     rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
-}
-
-select {
-  font-size: 16px;
-  border: none;
-  border-radius: 3px;
-  color: #333333;
-  border-bottom: 1px #1a5276 solid;
 }
 
 select:focus {
@@ -102,21 +100,22 @@ select option {
 
 textarea {
   width: 100%;
-  padding: 12px; /* Added padding to make space for the placeholder */
-  margin-top: 20px;
-  border: 1px solid #ccc; /* Added a subtle border */
+  padding: 12px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  border: 1px solid var(--primary-color);
   outline: none;
-  background-color: white; /* Set background to white */
+  background-color: white;
   box-sizing: border-box;
   resize: vertical;
 }
 
 textarea::placeholder {
-  color: #999;
-  opacity: 2;
+  color: var(--primary-color);
+  opacity: 1;
 }
 
-label:focus-within > textarea,
+textarea:focus,
 textarea:not(:placeholder-shown) {
   border-color: #1a5276;
 }
@@ -135,13 +134,15 @@ textarea:not(:placeholder-shown) {
     gap: 10px;
   }
 
-  .main-container,
   form {
-    width: 95%;
-    padding: 15px;
+    width: 100%;
   }
 
   button {
     width: 50%;
+  }
+
+  .maincontainer {
+    border-radius: 20px;
   }
 }

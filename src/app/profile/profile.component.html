@@ -1,3 +1,6 @@
+<h1 class="inheaderh1">Profile</h1>
+<p class="inheaderp">Edit + Update your Contact and Medical Information</p>
+
 <div class="buttons">
   <div class="contact-btn">
     <button
@@ -142,6 +145,7 @@
           name="emergencyContactName"
           id="emergencyContactName"
           placeholder="Emergency Contact Name"
+          [readonly]="!isMedicalEditMode"
         />
         <span>Emergency Contact Name</span>
       </label>
@@ -152,6 +156,7 @@
           name="emergencyContactPhone"
           id="emergencyContactPhone"
           placeholder="Emergency Contact Phone"
+          [readonly]="!isMedicalEditMode"
         />
         <span>Emergency Contact Phone</span>
       </label>
@@ -164,6 +169,7 @@
           name="allergies"
           id="allergies"
           placeholder="Allergies (if any)"
+          [readonly]="!isMedicalEditMode"
         />
         <span>Allergies</span>
       </label>
@@ -174,25 +180,44 @@
           name="preExistingConditions"
           id="preExistingConditions"
           placeholder="Pre-existing Conditions (if any)"
+          [readonly]="!isMedicalEditMode"
         />
         <span>Pre-existing Conditions</span>
       </label>
     </div>
-    <button
-      (click)="saveMedicalData()"
-      style="
-        background-color: rgb(99, 87, 24);
-        border: none;
-        border-radius: 10px;
-        padding: 10px;
-        cursor: pointer;
-        color: #ffffff;
-        font-size: 20px;
-        width: 26%;
-      "
-    >
-      <i class="fa-solid fa-heart-pulse"></i>
-      Save Medical Data
-    </button>
+    <div class="btns">
+      <button
+        *ngIf="!isMedicalEditMode"
+        (click)="toggleMedicalEdit()"
+        style="
+          background-color: #1a5267;
+          border: none;
+          border-radius: 10px;
+          padding: 10px;
+          cursor: pointer;
+          color: #ffffff;
+          font-size: 20px;
+        "
+      >
+        <i class="fas fa-edit"></i>
+        Edit Medical Data
+      </button>
+      <button
+        *ngIf="isMedicalEditMode"
+        (click)="saveMedicalData()"
+        style="
+          background-color: #1a5267; /* Changed to match contact section style for consistency */
+          border: none;
+          border-radius: 10px;
+          padding: 10px;
+          cursor: pointer;
+          color: #ffffff;
+          font-size: 20px;
+          width: fit-content;
+        "
+      >
+        <i class="fas fa-save" style="color: #ffffff"></i> Save Medical Data
+      </button>
+    </div>
   </form>
 </div>

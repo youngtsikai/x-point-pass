@@ -1,0 +1,224 @@
+.qrcheckin {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  max-height: 100vh;
+  height: 100vh;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.qrscanner-container {
+  border: none;
+  width: 50%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  padding: 8px 15px;
+  font-size: 16px;
+  background-color: #333;
+}
+
+.back-button:hover {
+  background-color: #555;
+  box-shadow: none;
+}
+
+.scanner-wrapper {
+  position: relative;
+  width: 520px;
+  height: 300px;
+  border: 1px dashed var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  margin: 10px 0;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+zxing-scanner {
+  display: block !important;
+  width: 100%;
+  height: 100%;
+}
+
+zxing-scanner video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.scanner-placeholder {
+  text-align: center;
+  color: #ffffff;
+}
+
+.placeholder-icon {
+  font-size: 152px;
+  margin: 10px auto;
+  color: #ffffff;
+}
+
+.placeholder-content ol {
+  list-style-position: inside;
+  padding: 0;
+  margin: 10px auto;
+  max-width: 100%;
+}
+
+.placeholder-content li {
+  text-align: left;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.no-camera-message {
+  text-align: center;
+  color: var(--error-color);
+  font-size: 1.1em;
+  margin-top: 20px;
+}
+
+.result {
+  width: 50%;
+  padding: 10px;
+  box-sizing: border-box;
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.qr-validation-container,
+.checkin-result-container {
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex-grow: 1;
+  max-height: fit-content;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 10px auto;
+  padding: 10px;
+  width: 100%;
+}
+
+.qr-validation-container h3,
+.checkin-result-container h3 {
+  margin-top: 5px;
+  font-size: 26px;
+  margin-bottom: 5px;
+}
+
+.qr-validation-container.is-valid-format,
+.checkin-result-container.is-success {
+  border-color: var(--success-color);
+  color: var(--success-color);
+}
+.qr-validation-container.is-invalid-format,
+.checkin-result-container.is-failure {
+  border-color: var(--error-color);
+  color: var(--error-color);
+}
+.qr-validation-container.is-info-format {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.visitor-checkin-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.visitor-checkin-info h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+
+.visitor-icon {
+  margin: 10px auto;
+  font-size: 260px;
+}
+
+p {
+  margin: 10px auto;
+  text-align: center;
+}
+
+button {
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 20px;
+  margin: 13px auto;
+  background-color: var(--primary-color);
+  border-radius: 20px;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #008080;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .qrcheckin {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    max-height: fit-content;
+    height: auto;
+    overflow: hidden;
+  }
+  .qrscanner-container,
+  .result {
+    width: 100%;
+    max-width: none;
+  }
+  .scanner-wrapper {
+    width: 100%;
+    height: auto;
+  }
+  .back-button {
+    position: static;
+    margin-bottom: 10px;
+  }
+
+  .checkin-result-container {
+    margin: 13px 0px;
+  }
+}

@@ -1,0 +1,121 @@
+h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+td.actions-cell button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-color);
+  font-size: 16px;
+  margin: 13px 5px;
+  padding: 0;
+  transition: color 0.2s ease-in-out;
+}
+
+td.actions-cell button:hover {
+  color: var(--accent-color);
+}
+
+td.actions-cell button.delete-button {
+  color: var(--error-color);
+}
+
+td.actions-cell button.delete-button:hover {
+  color: darken(var(--error-color), 10%);
+}
+
+td.actions-cell button.blacklist-button {
+  color: var(--warning-color);
+}
+
+td.actions-cell button.blacklist-button:hover {
+  color: darken(var(--warning-color), 10%);
+}
+
+td.actions-cell button.unblacklist-button {
+  color: var(--success-color);
+}
+
+td.actions-cell button.unblacklist-button:hover {
+  color: darken(var(--success-color), 10%);
+}
+
+td p {
+  font-weight: bold;
+}
+
+td p.status-blacklisted {
+  color: var(--error-color);
+}
+
+td p.status-active {
+  color: var(--success-color);
+}
+
+@media (max-width: 720px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tbody {
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  tr {
+    border: 1px solid #333;
+    margin: 5px auto;
+    overflow: hidden;
+  }
+
+  td {
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    box-sizing: border-box;
+    margin: 10px;
+    text-align: right;
+  }
+
+  td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    font-weight: bold;
+    color: #555;
+    content: attr(data-label);
+    text-align: left;
+  }
+
+  td.actions-cell {
+    text-align: right;
+    padding-left: 6px;
+    white-space: normal;
+    box-sizing: border-box;
+    border-bottom: none;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  td.actions-cell button {
+    margin: 0;
+  }
+}

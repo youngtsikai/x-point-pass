@@ -1,0 +1,55 @@
+<h1 class="inheaderh1">Blacklisted Visitors</h1>
+
+<div *ngIf="isLoading" class="loading-message">
+  <p>Loading blacklisted users...</p>
+</div>
+
+<div *ngIf="error" class="error-message">
+  <p>{{ error }}</p>
+</div>
+
+<ng-container *ngIf="blacklistedVisitors$ | async as visitors">
+  <div
+    *ngIf="!isLoading && !error && visitors.length === 0"
+    class="no-records-message"
+  >
+    <p>No blacklisted visitors found</p>
+  </div>
+
+  <div *ngIf="!isMobileView && visitors.length > 0" class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Blacklisted</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of visitors">
+          <td>{{ user.displayName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>{{ user.isBlacklisted ? "Yes" : "No" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="isMobileView && visitors.length > 0" class="list-container">
+    <ul class="user-list">
+      <li *ngFor="let user of visitors">
+        <div class="user-card">
+          <p><strong>Name:</strong> {{ user.displayName }}</p>
+          <p><strong>Email:</strong> {{ user.email }}</p>
+          <p><strong>Role:</strong> {{ user.role }}</p>
+          <p>
+            <strong>Blacklisted:</strong>
+            {{ user.isBlacklisted ? "Yes" : "No" }}
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</ng-container>

@@ -1,0 +1,97 @@
+<div class="page-container">
+  <div class="qrcheckin" style="padding: 0px">
+    <div class="qrscanner-container">
+      <button class="back-button" (click)="goBack()">Back</button>
+
+      <h2>Visitor QR Check-in</h2>
+      <p class="status-message">{{ statusMessage }}</p>
+
+      <div class="scanner-wrapper">
+        <zxing-scanner
+          *ngIf="scannerEnabled && !noCamerasFound"
+          [formats]="allowedFormats"
+          (camerasFound)="onCamerasFound($event)"
+          (scanSuccess)="onCodeResult($event)"
+          (scanError)="onScanError($event)"
+          [enable]="scannerEnabled"
+        ></zxing-scanner>
+
+        <div
+          *ngIf="!scannerEnabled && !noCamerasFound"
+          class="scanner-placeholder"
+        >
+          <div class="placeholder-content">
+            <i class="fas fa-qrcode placeholder-icon"></i>
+            <ol>
+              <li>Position a Visit QR code in front of the camera to scan.</li>
+              <li>Press "Start Scanning" below.</li>
+              <li>Make sure QR Code is visible within the frame.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div *ngIf="noCamerasFound" class="no-camera-message">
+          <p>{{ statusMessage }}</p>
+        </div>
+      </div>
+
+      <button
+        *ngIf="!scannerEnabled && !noCamerasFound"
+        (click)="startCamera()"
+      >
+        Start Scanning
+      </button>
+      <button *ngIf="scannerEnabled" (click)="stopCamera()">
+        Stop Scanning
+      </button>
+      <button *ngIf="!scannerEnabled && noCamerasFound" disabled>
+        No Camera Available
+      </button>
+    </div>
+
+    <div class="result" style="padding: 0px 10px; box-sizing: border-box">
+      <div
+        style="margin-top: 5px"
+        *ngIf="qrValidationMessage"
+        class="qr-validation-container"
+        [ngClass]="{
+          'is-valid-format': qrValidationStatus === 'valid',
+          'is-invalid-format': qrValidationStatus === 'invalid',
+          'is-info-format': qrValidationStatus === 'info'
+        }"
+      >
+        <h3>QR Format Validation</h3>
+        <p>{{ qrValidationMessage }}</p>
+      </div>
+
+      <div *ngIf="isVerifying" class="verification-status">
+        Verification in progress ...
+      </div>
+
+      <div
+        style="margin-bottom: 0%"
+        *ngIf="checkinResultMessage"
+        class="checkin-result-container"
+        [ngClass]="{
+          'is-success': checkinResultStatus === 'success',
+          'is-failure': checkinResultStatus === 'failure'
+        }"
+      >
+        <h3>Check-in Status</h3>
+        <p>{{ checkinResultMessage }}</p>
+
+        <div
+          *ngIf="checkinResultStatus === 'success' && checkedInVisitorName"
+          class="visitor-checkin-info"
+          style="display: flex; flex-direction: column"
+        >
+          <h3>Welcome, {{ checkedInVisitorName }}!</h3>
+          <p>
+            Visiting: {{ checkedInHostName }} | Purpose: {{ checkedInPurpose }}
+          </p>
+          <i class="fas fa-id-card-clip visitor-icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

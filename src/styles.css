@@ -11,6 +11,32 @@
   --error-color: #c62828;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) var(--background-color);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--background-color);
+  border-radius: 10px;
+  border: 3px solid white;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+  border-radius: 10px;
+}
+
 body,
 html {
   margin: 0%;
@@ -21,6 +47,11 @@ html {
   background-color: var(--background-color);
   box-sizing: border-box;
   text-align: center;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -41,8 +72,8 @@ header {
 }
 
 .inheaderh1 {
-  font-size: 2em;
-  margin-top: 13px;
+  font-size: 26px;
+  margin-top: 5px;
   margin-bottom: 0%;
 }
 
@@ -55,6 +86,7 @@ header {
 .page-container {
   display: flex;
   width: 100%;
+  flex: 1;
 }
 
 .mini-header {
@@ -86,6 +118,43 @@ header {
   width: 100%;
   box-sizing: border-box;
 }
+
+label {
+  margin-bottom: 15px;
+  position: relative;
+  border-bottom: 1px solid #1a5276;
+}
+
+input {
+  width: 100%;
+  padding: 10px 0px;
+  margin-top: 20px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background-color: var(--background-color);
+}
+
+input::placeholder {
+  opacity: 0;
+}
+
+span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(30px);
+  font-size: 0.825em;
+  transition-duration: 300ms;
+}
+
+label:focus-within > span,
+input:not(:placeholder-shown) + span {
+  color: #1a5276;
+  transform: translateY(0px);
+}
+
+/*---*/
 
 .buttons button {
   width: 126px;
@@ -146,6 +215,9 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  top: 62px;
+  bottom: 0;
+  left: 0%;
   gap: 26px;
   padding: 10px;
   box-sizing: border-box;
@@ -153,6 +225,7 @@ header {
   overflow-x: hidden;
   transition: width 0.3s ease-in-out;
   position: sticky;
+  z-index: 1000;
 }
 
 .sidebar:hover {
@@ -230,6 +303,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1002;
 }
 
 header .logo-img {
@@ -288,7 +362,7 @@ header .dropdown {
   cursor: pointer;
   right: 0;
   top: 100%;
-  margin: 10px auto;
+  margin: 13px auto;
   border-radius: 5px;
 }
 
@@ -332,11 +406,131 @@ header button:hover {
   background-color: #008080;
 }
 
+.signin-main-container {
+  padding: 20px;
+  box-sizing: border-box;
+  margin: 1.5% auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 60%;
+}
+
+.signin-form {
+  width: 100%;
+  max-width: 768px;
+  border: none;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.login-btn {
+  padding: 15px 0px;
+  margin-top: 20px;
+  background: #1a5276;
+  font-size: 90%;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-btn:hover {
+  background-color: #008080;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.forgot-pass {
+  font-size: 16px;
+  color: #1a5276;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  border: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+table {
+  margin: 0px auto;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+thead {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+th {
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+tbody {
+  background-color: #ffffff;
+  border: 1px solid var(--primary-color);
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+td {
+  font-size: 15px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+td input {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0%;
+  outline: #1a5276 1px solid;
+  border: none;
+  border-radius: 10px;
+}
+
+td button {
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 2px;
+}
+
 @media (max-width: 720px) {
   .status,
   .bottom {
     flex-direction: column;
     width: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
   }
 
   .mini-header {
@@ -345,11 +539,11 @@ header button:hover {
     flex-direction: row;
     width: 63%;
     border-bottom: #333333 2px solid;
-    border-bottom-left-radius: 0%;
-    border-bottom-right-radius: 0%;
+    border-top: #333333 2px solid;
+    border-right: none;
+    border-left: none;
     margin-bottom: 10px;
     padding: 5px;
-    border: 2px solid #1a5276;
     box-sizing: border-box;
   }
 
@@ -362,6 +556,115 @@ header button:hover {
   }
 
   .inheaderh1 {
-    margin-top: 45px;
+    margin-top: 8px;
   }
+
+  .signin-main-container {
+    width: 95%;
+    margin: 20% auto;
+    flex-direction: column;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+
+  .page-container {
+    flex: 1;
+  }
+
+  .signin-form {
+    width: 90%;
+  }
+
+  .table-container {
+    max-height: fit-content;
+    height: fit-content;
+    margin-bottom: 13px;
+    border-bottom: 2px solid #1a5276;
+  }
+}
+
+@media print {
+  /* --- HIDE UNWANTED ELEMENTS FIRST AND FOREMOST --- */
+  app-security-header,
+  app-security-sidebar,
+  app-admin-header,
+  app-admin-sidebar,
+  .print-button,
+  .filters-container,
+  button,
+  input,
+  label {
+    display: none !important; /* Force hide these elements */
+  }
+
+  /* --- TABLE AND CONTAINER STYLING FOR PRINT --- */
+  .table-container {
+    height: auto !important; /* Allow height to expand */
+    overflow: visible !important; /* Ensure content is not clipped */
+    margin: 13px; /* Keep consistent margin */
+  }
+
+  table {
+    width: 100% !important; /* Ensure table takes full print width */
+    border-collapse: collapse;
+    margin: 26px auto;
+    /* Removed any conflicting height properties */
+  }
+
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    color: black !important; /* Force black text color */
+    word-wrap: break-word; /* Allow long words to break */
+    page-break-inside: auto; /* Allow content within cells to break if necessary */
+  }
+
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold; /* Ensure headers stand out */
+    page-break-after: avoid; /* Try to keep header with the first row of data */
+  }
+
+  tr {
+    page-break-inside: avoid; /* Keep rows together if possible */
+    page-break-after: auto; /* Allow page breaks between rows */
+  }
+
+  thead {
+    display: table-header-group; /* Crucial: Make header repeat on each page */
+  }
+
+  tfoot {
+    display: table-footer-group; /* Make footer repeat on each page if applicable */
+  }
+
+  /* Specific adjustment for horizontal overflow if .log-table-container is a direct parent of table */
+  .log-table-container {
+    overflow-x: visible !important; /* Ensure horizontal scrolling content is visible */
+    /* If this container also has height/max-height, you might need to adjust it */
+    height: auto !important;
+    max-height: none !important;
+  }
+
+  /* Ensure the body or main content area allows full content to print */
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .dash-main-container {
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

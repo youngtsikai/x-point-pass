@@ -1,0 +1,104 @@
+td {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Status Indicator Styling */
+.desktop-view .acknowledged-visit-status {
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  display: inline-block;
+  text-align: center;
+  width: fit-content;
+  box-sizing: border-box;
+  background-color: var(--success-color, #4caf50);
+  color: white;
+
+  /* AGGRESSIVE RESETS FOR GLOBAL SPAN RULE */
+  position: static !important;
+  top: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  vertical-align: middle;
+  margin: 0;
+  line-height: normal;
+}
+
+/* Mobile View Specific Styling */
+@media (max-width: 768px) {
+  .desktop-view {
+    display: none;
+  }
+  .mobile-view {
+    display: block;
+  }
+
+  .visit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .visit-item {
+    border: 1px solid var(--primary-color);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+  }
+
+  .visit-details p {
+    margin: 5px 0;
+    word-wrap: break-word;
+  }
+
+  .mobile-status {
+    margin-top: 10px;
+  }
+
+  /* Mobile Status Indicator Styling */
+  .mobile-view .acknowledged-visit-status {
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    display: inline-block;
+    background-color: var(--success-color, #4caf50);
+    color: white;
+
+    /* AGGRESSIVE RESETS FOR GLOBAL SPAN RULE */
+    position: static !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+    vertical-align: middle;
+    margin: 0;
+    line-height: normal;
+  }
+}
+
+/* Generic messages styles */
+.loading-message,
+.no-visits-message {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: #666;
+}
+
+@media (min-width: 768px) {
+  .desktop-view {
+    display: block;
+  }
+
+  .mobile-view {
+    display: none;
+  }
+}

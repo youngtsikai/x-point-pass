@@ -1,0 +1,76 @@
+.loading-message,
+.error-message,
+.no-records-message {
+  text-align: center;
+  padding: 1opx;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+.loading-message {
+  color: #333;
+}
+
+td {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.error-message {
+  color: #c00000;
+}
+
+.error-message button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.no-records-message {
+  color: #d46b08;
+}
+
+/* --- List Styling (Mobile) --- */
+.list-container {
+  margin-top: 20px;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.user-card p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.user-card p strong {
+  color: #333;
+  min-width: 90px;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .list-container {
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: left;
+  }
+}

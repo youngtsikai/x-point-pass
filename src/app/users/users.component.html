@@ -2,165 +2,250 @@
 <div class="page-container">
   <app-admin-sidebar></app-admin-sidebar>
   <div class="dash-main-container">
-    <h1 class="inheaderh1">Users</h1>
-    <p class="inheaderp">View all and manage different types of users</p>
+    <h1 class="inheaderh1">Staff</h1>
+    <p class="inheaderp">View all and manage different types of staff</p>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Phone Number</th>
-          <th>Password</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users$ | async">
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
-          <td>{{ user.phoneNumber }}</td>
-          <td>
-            <span *ngIf="user.accountCreated">********</span>
-            <input
-              *ngIf="!user.accountCreated"
-              type="password"
-              value="********"
-              disabled
-            />
-          </td>
-          <td
-            style="
-              gap: 13px;
-              display: flex;
-              flex-direction: row;
-              justify-content: center;
-            "
-          >
-            <button
-              *ngIf="user?.id"
-              (click)="editUser(user)"
-              style="background-color: var(--accent-color)"
-            >
-              <i class="fa-solid fa-pencil"></i>
-            </button>
-            <button
-              *ngIf="user?.id"
-              (click)="deleteUser(user.id)"
-              style="background-color: var(--error-color)"
-            >
-              <i class="fa-solid fa-trash"></i>
-            </button>
-            <button *ngIf="!user?.id" disabled>Edit</button>
-            <button *ngIf="!user?.id" disabled>Delete</button>
-            <button *ngIf="user?.id" (click)="downloadUserQRCode(user)">
-              <i class="fa-solid fa-download" style="margin-right: 5px"></i>
-              <i class="fa-solid fa-qrcode"></i>
-            </button>
-            <button *ngIf="user?.id" (click)="printUserQRCode(user)">
-              <i class="fa-solid fa-print" style="margin-right: 5px"></i>
-              <i class="fa-solid fa-qrcode"></i>
-            </button>
-            <button *ngIf="!user?.id" disabled>Download QR</button>
-            <button *ngIf="!user?.id" disabled>Print QR</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="text" placeholder="Name" [(ngModel)]="newUser.name" />
-          </td>
-          <td>
-            <input
-              type="email"
-              placeholder="Email"
-              [(ngModel)]="newUser.email"
-            />
-          </td>
-          <td>
-            <input type="text" placeholder="Role" [(ngModel)]="newUser.role" />
-          </td>
-          <td>
-            <input
-              type="text"
-              placeholder="Phone Number"
-              [(ngModel)]="newUser.phoneNumber"
-            />
-          </td>
-          <td>
-            <input
-              type="password"
-              placeholder="Password"
-              [(ngModel)]="newUser.password"
-            />
-          </td>
-          <td>
-            <button
-              (click)="createUser()"
-              [disabled]="newUser.accountCreated"
-              style="background-color: var(--success-color); width: 100%"
-            >
-              Create Account
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Phone Number</th>
+            <th>Account Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users$ | async">
+            <td data-label="Name">
+              <ng-container *ngIf="user.id === editingUserId && tempEditUser">
+                <input
+                  type="text"
+                  [(ngModel)]="tempEditUser.name"
+                  name="editName_{{ user.id }}"
+                  required
+                />
+              </ng-container>
+              <ng-container *ngIf="user.id !== editingUserId">
+                {{ user.name || "N/A" }}
+              </ng-container>
+            </td>
+
+            <td data-label="Email">
+              <ng-container *ngIf="user.id === editingUserId && tempEditUser">
+                <input
+                  type="email"
+                  [(ngModel)]="tempEditUser.email"
+                  name="editEmail_{{ user.id }}"
+                  disabled
+                  title="Email cannot be changed directly for other users"
+                />
+              </ng-container>
+              <ng-container *ngIf="user.id !== editingUserId">
+                {{ user.email || "N/A" }}
+              </ng-container>
+            </td>
+
+            <td data-label="Role">
+              <ng-container *ngIf="user.id === editingUserId && tempEditUser">
+                <input
+                  type="text"
+                  [(ngModel)]="tempEditUser.role"
+                  name="editRole_{{ user.id }}"
+                  required
+                  placeholder="e.g., admin, staff, security"
+                />
+              </ng-container>
+              <ng-container *ngIf="user.id !== editingUserId">
+                {{ user.role || "N/A" }}
+              </ng-container>
+            </td>
+
+            <td data-label="Phone Number">
+              <ng-container *ngIf="user.id === editingUserId && tempEditUser">
+                <input
+                  type="text"
+                  [(ngModel)]="tempEditUser.phoneNumber"
+                  name="editPhoneNumber_{{ user.id }}"
+                />
+              </ng-container>
+              <ng-container *ngIf="user.id !== editingUserId">
+                {{ user.phoneNumber || "N/A" }}
+              </ng-container>
+            </td>
+
+            <td data-label="Account Status">
+              <p
+                [ngClass]="{
+                  'status-account-created': user.accountCreated,
+                  'status-pending-creation': !user.accountCreated
+                }"
+              >
+                <ng-container *ngIf="user.accountCreated"
+                  >Account Created</ng-container
+                >
+                <ng-container *ngIf="!user.accountCreated"
+                  >Pending Creation</ng-container
+                >
+              </p>
+            </td>
+
+            <td class="actions-cell">
+              <ng-container *ngIf="user.id === editingUserId">
+                <button
+                  (click)="updateUser()"
+                  title="Save Changes"
+                  class="action-button save-button"
+                  [disabled]="
+                    !tempEditUser?.name ||
+                    !tempEditUser?.role ||
+                    !tempEditUser?.id
+                  "
+                >
+                  <i class="fa-solid fa-save"></i> Save
+                </button>
+                <button
+                  (click)="cancelEdit()"
+                  title="Cancel Edit"
+                  class="action-button cancel-button"
+                >
+                  <i class="fa-solid fa-times"></i> Cancel
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="user.id !== editingUserId">
+                <button
+                  *ngIf="user?.id"
+                  (click)="viewUserDetails(user)"
+                  title="View Details"
+                  class="action-button view-button"
+                >
+                  <i class="fas fa-eye"></i>
+                </button>
+
+                <button
+                  *ngIf="user?.id"
+                  (click)="editUser(user)"
+                  title="Edit User"
+                  class="action-button edit-button"
+                >
+                  <i class="fa-solid fa-pencil"></i>
+                </button>
+                <button
+                  *ngIf="user?.id"
+                  (click)="deleteUser(user.id)"
+                  title="Delete User"
+                  class="action-button delete-button"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+
+                <ng-container *ngIf="!user?.id">
+                  <button disabled title="View Details (Unavailable)">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button disabled title="Edit User (Unavailable)">
+                    <i class="fa-solid fa-pencil"></i>
+                  </button>
+                  <button disabled title="Delete User (Unavailable)">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </ng-container>
+
+                <button
+                  *ngIf="user?.id"
+                  (click)="downloadUserQRCode(user)"
+                  title="Download QR Code"
+                  class="action-button qr-button download-qr-button"
+                >
+                  <i class="fa-solid fa-download"></i>
+                  <i class="fa-solid fa-qrcode"></i>
+                </button>
+                <button
+                  *ngIf="user?.id"
+                  (click)="printUserQRCode(user)"
+                  title="Print QR Code"
+                  class="action-button qr-button print-qr-button"
+                >
+                  <i class="fa-solid fa-print"></i>
+                  <i class="fa-solid fa-qrcode"></i>
+                </button>
+
+                <ng-container *ngIf="!user?.id">
+                  <button disabled title="Download QR (Unavailable)">
+                    <i class="fa-solid fa-download"></i>
+                    <i class="fa-solid fa-qrcode"></i>
+                  </button>
+                  <button disabled title="Print QR (Unavailable)">
+                    <i class="fa-solid fa-print"></i>
+                    <i class="fa-solid fa-qrcode"></i>
+                  </button>
+                </ng-container>
+              </ng-container>
+            </td>
+          </tr>
+          <tr>
+            <td data-label="New Name">
+              <input
+                type="text"
+                placeholder="Name"
+                [(ngModel)]="newUser.name"
+                required
+              />
+            </td>
+            <td data-label="New Email">
+              <input
+                type="email"
+                placeholder="Email"
+                [(ngModel)]="newUser.email"
+                required
+              />
+            </td>
+            <td data-label="New Role">
+              <input
+                type="text"
+                placeholder="Role"
+                [(ngModel)]="newUser.role"
+                required
+              />
+            </td>
+            <td data-label="New Phone">
+              <input
+                type="text"
+                placeholder="Phone Number"
+                [(ngModel)]="newUser.phoneNumber"
+                required
+              />
+            </td>
+            <td data-label="New Password">
+              <input
+                type="password"
+                placeholder="Password"
+                [(ngModel)]="newUser.password"
+                required
+              />
+            </td>
+            <td data-label="Create Action">
+              <button
+                (click)="createUser()"
+                [disabled]="
+                  !newUser.name ||
+                  !newUser.email ||
+                  !newUser.role ||
+                  !newUser.phoneNumber ||
+                  !newUser.password
+                "
+                class="action-button create-button"
+                title="Create User Account"
+              >
+                Create Account
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
-
-<style>
-  table {
-    margin: 13px auto;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  thead {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  th {
-    padding: 5px;
-    box-sizing: border-box;
-  }
-
-  tbody {
-    background-color: #ffffff;
-    border: 1px solid var(--primary-color);
-    padding: 5px;
-    box-sizing: border-box;
-  }
-
-  td {
-    font-size: 15px;
-    border: 1px solid var(--primary-color);
-    padding: 2px;
-    box-sizing: border-box;
-  }
-
-  td input {
-    width: 100%;
-    padding: 5px;
-    box-sizing: border-box;
-    height: 100%;
-    margin: 0%;
-  }
-
-  td button {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 2px;
-  }
-</style>

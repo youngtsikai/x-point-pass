@@ -1,97 +1,99 @@
 <h1 class="inheaderh1">Flag Suspicious Activity</h1>
 <p class="inheaderp">Report any suspicious activity or concerns.</p>
-<form id="flagForm" (ngSubmit)="onSubmit()">
-  <div class="group">
-    <select
-      id="reportas"
-      name="reportas"
-      [(ngModel)]="formData.reportas"
-      required
-    >
-      <option value="">Report As</option>
-      <option value="Name">Name</option>
-      <option value="Anonymous">Anonymous</option>
-    </select>
+<div class="maincontainer" #mainContainer>
+  <form id="flagForm" (ngSubmit)="onSubmit()">
+    <div class="group">
+      <select
+        id="reportas"
+        name="reportas"
+        [(ngModel)]="formData.reportas"
+        required
+      >
+        <option value="">Report As</option>
+        <option value="Name">Name</option>
+        <option value="Anonymous">Anonymous</option>
+      </select>
 
-    <select
-      id="threat"
-      [(ngModel)]="formData.threat"
-      name="threat"
-      #threat
-      required
-    >
-      <option value="">Threat Degree Level</option>
-      <option value="High">High</option>
-      <option value="Medium">Medium</option>
-      <option value="Low">Low</option>
-    </select>
-  </div>
-  <div class="group">
-    <label for="location">
-      <input
-        type="text"
-        id="location"
-        name="location"
-        [(ngModel)]="formData.location"
-        placeholder="Location"
+      <select
+        id="threat"
+        [(ngModel)]="formData.threat"
+        name="threat"
+        #threat
         required
-      />
-      <span>Location e.g Cafeteria / Parking lot</span>
-    </label>
-    <label for="involved">
-      <input
-        type="text"
-        id="involved"
-        name="involved"
-        [(ngModel)]="formData.involved"
-        placeholder="Individuals Involved"
+      >
+        <option value="">Threat Degree Level</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+    </div>
+    <div class="group">
+      <label for="location">
+        <input
+          type="text"
+          id="location"
+          name="location"
+          [(ngModel)]="formData.location"
+          placeholder="Location"
+          required
+        />
+        <span>Location e.g Cafeteria / Parking lot</span>
+      </label>
+      <label for="involved">
+        <input
+          type="text"
+          id="involved"
+          name="involved"
+          [(ngModel)]="formData.involved"
+          placeholder="Individuals Involved"
+          required
+        />
+        <span>Individuals Involved</span>
+      </label>
+    </div>
+    <div class="group">
+      <label for="badgecolour">
+        <input
+          type="text"
+          id="badgecolour"
+          name="badgecolour"
+          [(ngModel)]="formData.badgecolour"
+          placeholder="Badge Colour"
+          required
+        />
+        <span>Badge Colour</span>
+      </label>
+      <label for="attachment">
+        <input
+          type="file"
+          id="attachment"
+          name="attachment"
+          [(ngModel)]="formData.attachment"
+          placeholder="Attach File"
+          required
+        />
+        <span>Attach File or Image</span>
+      </label>
+    </div>
+    <div class="group">
+      <textarea
+        id="description"
+        name="description"
+        rows="5"
+        [(ngModel)]="formData.description"
+        placeholder="Description"
         required
-      />
-      <span>Individuals Involved</span>
-    </label>
-  </div>
-  <div class="group">
-    <label for="badgecolour">
-      <input
-        type="text"
-        id="badgecolour"
-        name="badgecolour"
-        [(ngModel)]="formData.badgecolour"
-        placeholder="Badge Colour"
-        required
-      />
-      <span>Badge Colour</span>
-    </label>
-    <label for="attachment">
-      <input
-        type="file"
-        id="attachment"
-        name="attachment"
-        [(ngModel)]="formData.attachment"
-        placeholder="Attach File"
-        required
-      />
-      <span>Attach File or Image</span>
-    </label>
-  </div>
-  <div class="group">
-    <textarea
-      type="text"
-      id="description"
-      name="description"
-      [(ngModel)]="formData.description"
-      placeholder="Description"
-      required
-    ></textarea>
-    <textarea
-      type="text"
-      id="additional"
-      name="additional"
-      [(ngModel)]="formData.additional"
-      placeholder="Additional Information"
-    ></textarea>
-  </div>
-  <div class="group">
-    <button type="submit" style="margin: auto auto">Submit</button>
-  </div>
-</form>
+      ></textarea>
+      <textarea
+        id="additional"
+        name="additional"
+        rows="5"
+        [(ngModel)]="formData.additional"
+        placeholder="Additional Information"
+      ></textarea>
+    </div>
+    <div class="group">
+      <button type="submit" style="margin: auto auto">Submit</button>
+    </div>
+  </form>
+</div>

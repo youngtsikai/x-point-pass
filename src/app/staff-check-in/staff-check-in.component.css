@@ -1,0 +1,119 @@
+.container {
+  display: flex;
+  width: 90%;
+  max-width: 900px;
+  margin: 20px auto;
+  text-align: center;
+  gap: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.container {
+  flex-direction: row;
+}
+
+.qr-scanning,
+.facial-scanning {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 2px solid var(--primary-color);
+  background-color: #ffffff;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.container i {
+  font-size: 172px;
+  padding: 15px;
+  margin: 15px auto;
+  box-sizing: border-box;
+  color: var(--primary-color);
+}
+
+/* --- Button Styling (Scoped) --- */
+.container button {
+  /* Target buttons specifically within the container */
+  border-radius: 20px;
+  font-size: 18px; /* Adjusted font size */
+  padding: 12px 20px; /* Adjusted padding */
+  box-sizing: border-box;
+  width: 100%; /* Make button take full width of its parent (.qr/facial-scanning) */
+  max-width: 250px; /* Set a max-width for the button */
+  margin: 10px auto; /* Center button horizontally */
+  cursor: pointer;
+  background-color: var(--primary-color);
+  border: none;
+  color: #ffffff;
+  transition: background-color 0.3s ease; /* Added transition for hover */
+}
+
+/* --- Button Hover Styling (Scoped) --- */
+.container button:hover {
+  /* Target buttons specifically within the container */
+  background-color: var(--accent-color);
+  color: #ffffff;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    display: flex; /* Stack items vertically on small screens */
+    width: 95%; /* Use more width on smaller screens */
+    margin-top: 10px; /* Reduce top margin slightly */
+    margin-bottom: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .qr-scanning,
+  .facial-scanning {
+    margin-bottom: 15px; /* Add space between stacked items */
+  }
+
+  .container > div:last-child {
+    margin-bottom: 0;
+  }
+
+  .container i {
+    font-size: 130px !important;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 10px auto;
+  }
+
+  .container button {
+    font-size: 17px; /* Slightly smaller font */
+    padding: 10px 15px;
+    max-width: 200px; /* Adjust max width for button on smaller screens */
+  }
+}
+
+/* Optional: Very small screen adjustments */
+@media (max-width: 480px) {
+  .container {
+    padding: 5px;
+    gap: 10px;
+    flex-direction: column;
+  }
+  .qr-scanning,
+  .facial-scanning {
+    padding: 15px;
+  }
+  .container i {
+    font-size: 60px; /* Even smaller icon */
+    padding: 8px;
+  }
+  .container button {
+    font-size: 16px;
+    padding: 8px 10px;
+    max-width: 180px;
+  }
+  .instructions {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,79 @@
+@use "@angular/material" as mat;
+
+html {
+  @include mat.theme(
+    (
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+.mat-mdc-snack-bar-container {
+  max-width: none !important;
+  width: fit-content;
+  min-width: 250px;
+  border-radius: 20px;
+  overflow: hidden; /* ADDED: Ensures content is clipped to the border-radius */
+}
+
+.mat-mdc-simple-snackbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: nowrap;
+  // border-radius: 20px; // REMOVED: Apply border-radius only to the container
+}
+
+// Apply background color directly to the container when the panelClass is present
+.mat-mdc-snack-bar-container.success-snackbar {
+  background-color: #4caf50 !important; /* Green background */
+}
+.success-snackbar {
+  /* This targets the inner text/content */
+  color: white !important;
+  font-size: 16px;
+}
+
+.mat-mdc-snack-bar-container.error-snackbar {
+  background-color: #f44336 !important; /* Red background */
+}
+.error-snackbar {
+  /* This targets the inner text/content */
+  color: white !important;
+  font-size: 16px;
+}
+
+.mat-mdc-snack-bar-container.warning-snackbar {
+  background-color: #ff9800 !important; /* Orange background */
+}
+.warning-snackbar {
+  /* This targets the inner text/content */
+  color: white !important;
+  font-size: 16px;
+}
+
+/* Hide the dismiss button completely, as per our previous discussion */
+.mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action {
+  color: white !important; /* Still set color for consistency if it ever shows */
+  margin: 0;
+  display: none !important; /* IMPORTANT: Hides the button */
+}
+
+/* The hover styles for the dismiss button are now effectively moot
+   because display: none !important will hide the button entirely.
+   You can remove this block if you confirm the button is hidden. */
+.mat-mdc-snack-bar-container.success-snackbar
+  .mat-mdc-button.mat-mdc-snack-bar-action
+  :hover,
+.mat-mdc-snack-bar-container.error-snackbar
+  .mat-mdc-button.mat-mdc-snack-bar-action
+  :hover,
+.mat-mdc-snack-bar-container.warning-snackbar
+  .mat-mdc-button.mat-mdc-snack-bar-action
+  :hover {
+  color: #333 !important;
+  background-color: #ffff;
+  margin: 0;
+}

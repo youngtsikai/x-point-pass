@@ -1,135 +1,118 @@
-<app-visitor-header></app-visitor-header>
-<div class="page-container">
-  <app-visitor-sidebar></app-visitor-sidebar>
-  <div class="dash-main-container">
-    <h1 class="inheaderh1">Pre-Registered Visits</h1>
-    <p class="inheaderp">All your visits in one place</p>
-    <div class="v-buttons">
-      <button class="active-visits" (click)="toggleActive()">Active</button>
-      <button class="inactive-visits" (click)="toggleInactive()">
-        In-Active
-      </button>
-    </div>
+<h1 class="inheaderh1">Visit Acknowledgement</h1>
+<p class="inheaderp">Acknowledge visits where you are set as host</p>
 
-    <div *ngIf="loading">
-      <p>Loading visits...</p>
-    </div>
+<div *ngIf="loading" class="loading-message">
+  <p>Loading visits...</p>
+</div>
 
-    <div class="active desktop-view" *ngIf="isVisibleActive && !loading">
-      <table>
-        <thead>
-          <tr>
-            <th>Full Name</th>
-            <th>Phone Number</th>
-            <th>National ID</th>
-            <th>License Plate</th>
-            <th>Purpose</th>
-            <th>Host's Name</th>
-            <th>Date & Time</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let visit of activeVisits">
-            <td>{{ visit.name }}</td>
-            <td>{{ visit.phone }}</td>
-            <td>{{ visit.idnum }}</td>
-            <td>{{ visit.licenseplate }}</td>
-            <td>{{ visit.purpose }}</td>
-            <td>{{ visit.host }}</td>
-            <td>
-              {{ visit.visitDate | date : "dd/MM/yyyy" }}, {{ visit.visitTime }}
-            </td>
-            <td>
-              <button class="cancel-button" (click)="cancelVisit(visit.id)">
-                Cancel
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="desktop-view" *ngIf="!loading">
+  <table *ngIf="allVisits.length > 0">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Phone Number</th>
+        <th>National ID</th>
+        <th>License Plate</th>
+        <th>Purpose</th>
+        <th>Host's Name</th>
+        <th>Date & Time</th>
+        <th>Status / Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let visit of allVisits" [ngClass]="getVisitRowClass(visit)">
+        <td>{{ visit.name }}</td>
+        <td>{{ visit.phone }}</td>
+        <td>{{ visit.idnum }}</td>
+        <td>{{ visit.licenseplate }}</td>
+        <td>{{ visit.purpose }}</td>
+        <td>{{ visit.host }}</td>
+        <td>
+          {{ visit.visitDate | date : "dd/MM/yyyy" }}, {{ visit.visitTime }}
+        </td>
+        <td class="action-buttons-cell">
+          <ng-container
+            *ngIf="visit.status === 'pending' && !isVisitPast(visit)"
+          >
+            <button
+              class="action-button acknowledge"
+              (click)="acknowledgeVisit(visit.id)"
+              title="Acknowledge Visit"
+            >
+              👍
+            </button>
+            <button
+              class="action-button disacknowledge"
+              (click)="disacknowledgeVisit(visit.id)"
+              title="Disacknowledge Visit"
+            >
+              👎
+            </button>
+          </ng-container>
+          <ng-container
+            *ngIf="visit.status !== 'pending' || isVisitPast(visit)"
+          >
+            <span class="status-indicator">
+              {{ getDisplayStatus(visit) }}
+            </span>
+          </ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="allVisits.length === 0" class="no-visits-message">
+    <p>No visits found where you are the host.</p>
+  </div>
+</div>
 
-    <div class="inactive desktop-view" *ngIf="isVisibleInactive && !loading">
-      <table>
-        <thead>
-          <tr>
-            <th>Full Name</th>
-            <th>Phone Number</th>
-            <th>National ID</th>
-            <th>License Plate</th>
-            <th>Purpose</th>
-            <th>Host's Name</th>
-            <th>Date & Time</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let visit of inactiveVisits">
-            <td>{{ visit.name }}</td>
-            <td>{{ visit.phone }}</td>
-            <td>{{ visit.idnum }}</td>
-            <td>{{ visit.licenseplate }}</td>
-            <td>{{ visit.purpose }}</td>
-            <td>{{ visit.host }}</td>
-            <td>
-              {{ visit.visitDate | date : "dd/MM/yyyy" }}, {{ visit.visitTime }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="active mobile-view" *ngIf="isVisibleActive && !loading">
-      <div
-        class="visit-list"
-        *ngIf="activeVisits.length > 0; else noActiveVisits"
-      >
-        <div class="visit-item" *ngFor="let visit of activeVisits">
-          <div class="visit-details">
-            <p><strong>Name:</strong> {{ visit.name }}</p>
-            <p><strong>Phone:</strong> {{ visit.phone }}</p>
-            <p><strong>ID:</strong> {{ visit.idnum }}</p>
-            <p><strong>License:</strong> {{ visit.licenseplate }}</p>
-            <p><strong>Purpose:</strong> {{ visit.purpose }}</p>
-            <p><strong>Host:</strong> {{ visit.host }}</p>
-            <p>
-              <strong>Date & Time:</strong>
-              {{ visit.visitDate | date : "dd/MM/yyyy" }}, {{ visit.visitTime }}
-            </p>
-          </div>
-          <button class="cancel-button" (click)="cancelVisit(visit.id)">
-            Cancel
+<div class="mobile-view" *ngIf="!loading">
+  <div class="visit-list" *ngIf="allVisits.length > 0">
+    <div
+      class="visit-item"
+      *ngFor="let visit of allVisits"
+      [ngClass]="getVisitRowClass(visit)"
+    >
+      <div class="visit-details">
+        <p><strong>Name:</strong> {{ visit.name }}</p>
+        <p><strong>Phone:</strong> {{ visit.phone }}</p>
+        <p><strong>ID:</strong> {{ visit.idnum }}</p>
+        <p><strong>License:</strong> {{ visit.licenseplate }}</p>
+        <p><strong>Purpose:</strong> {{ visit.purpose }}</p>
+        <p><strong>Host:</strong> {{ visit.host }}</p>
+        <p>
+          <strong>Date & Time:</strong>
+          {{ visit.visitDate | date : "dd/MM/yyyy" }}, {{ visit.visitTime }}
+        </p>
+        <p class="mobile-status">
+          <strong>Status:</strong>
+          <span class="status-indicator-mobile">
+            {{ getDisplayStatus(visit) }}
+          </span>
+        </p>
+      </div>
+      <div class="action-buttons-mobile">
+        <ng-container *ngIf="visit.status === 'pending' && !isVisitPast(visit)">
+          <button
+            class="action-button acknowledge"
+            (click)="acknowledgeVisit(visit.id)"
+            title="Acknowledge Visit"
+          >
+            👍
           </button>
-        </div>
+          <button
+            class="action-button disacknowledge"
+            (click)="disacknowledgeVisit(visit.id)"
+            title="Disacknowledge Visit"
+          >
+            👎
+          </button>
+        </ng-container>
+        <ng-container *ngIf="visit.status !== 'pending' || isVisitPast(visit)">
+        </ng-container>
       </div>
-      <ng-template #noActiveVisits>
-        <p>No active visits found.</p>
-      </ng-template>
     </div>
-
-    <div class="inactive mobile-view" *ngIf="isVisibleInactive && !loading">
-      <div
-        class="visit-list"
-        *ngIf="inactiveVisits.length > 0; else noInactiveVisits"
-      >
-        <div class="visit-item" *ngFor="let visit of inactiveVisits">
-          <div class="visit-details">
-            <p><strong>Name:</strong> {{ visit.name }}</p>
-            <p><strong>Phone:</strong> {{ visit.phone }}</p>
-            <p><strong>ID:</strong> {{ visit.idnum }}</p>
-            <p><strong>License:</strong> {{ visit.licenseplate }}</p>
-            <p><strong>Purpose:</strong> {{ visit.purpose }}</p>
-            <p><strong>Host:</strong> {{ visit.host }}</p>
-            <p>
-              <strong>Date & Time:</strong>
-              {{ visit.visitDate | date : "dd/MM/yyyy" }}, {{ visit.visitTime }}
-            </p>
-          </div>
-        </div>
-      </div>
-      <ng-template #noInactiveVisits>
-        <p>No inactive visits found.</p>
-      </ng-template>
-    </div>
+  </div>
+  <div *ngIf="allVisits.length === 0" class="no-visits-message">
+    <p>No visits found where you are the host.</p>
   </div>
 </div>

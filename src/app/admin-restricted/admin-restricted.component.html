@@ -1,0 +1,33 @@
+<app-admin-header></app-admin-header>
+<div class="page-container">
+  <app-admin-sidebar></app-admin-sidebar>
+  <div class="restricted">
+    <h1 style="color: var(--error-color)">Restricted</h1>
+    <h2>
+      <i
+        class="fas fa-ban"
+        style="font-size: 260px; color: var(--error-color)"
+      ></i>
+    </h2>
+    <br />
+    <h3>You dont have access rights to this page.</h3>
+  </div>
+</div>
+
+<style>
+  .restricted {
+    text-align: center;
+    padding: 10px;
+    color: var(--error-color);
+
+    box-sizing: border-box;
+
+    margin: 52px auto;
+    height: 100%;
+    width: 100%;
+  }
+
+  .restricted h3 {
+    margin-top: 0%;
+  }
+</style>

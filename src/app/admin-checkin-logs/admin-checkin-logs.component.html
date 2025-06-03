@@ -1,0 +1,70 @@
+<app-admin-header></app-admin-header>
+<div class="page-container">
+  <app-admin-sidebar></app-admin-sidebar>
+  <div class="dash-main-container">
+    <div class="controls">
+      <button (click)="printAllLogs()" class="control-button print-button">
+        Print All Records
+      </button>
+      <button
+        (click)="fetchCheckinLogsForToday()"
+        class="control-button today-button"
+      >
+        Today
+      </button>
+      <button (click)="showLastWeekLogs()" class="control-button week-button">
+        Last Week
+      </button>
+      <button (click)="showLastMonthLogs()" class="control-button month-button">
+        Last Month
+      </button>
+      <input
+        type="date"
+        id="filterDate"
+        class="control-input date-input"
+        [(ngModel)]="selectedDate"
+        (change)="filterLogsByDate()"
+      />
+    </div>
+    <div class="table-container">
+      <div *ngIf="loading">Loading check-in logs...</div>
+      <div *ngIf="error" class="error-message">{{ error }}</div>
+
+      <div *ngIf="!loading">
+        <table *ngIf="filteredCheckinLogs.length > 0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Check-in Time</th>
+              <th>Check-out Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let log of filteredCheckinLogs">
+              <td>{{ log.name }}</td>
+              <td>{{ log.role }}</td>
+              <td>
+                {{
+                  log.checkin_time
+                    ? (log.checkin_time.toDate() | date : "medium")
+                    : "N/A"
+                }}
+              </td>
+              <td>
+                {{
+                  log.checkout_time
+                    ? (log.checkout_time.toDate() | date : "medium")
+                    : "Not Checked Out"
+                }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p *ngIf="filteredCheckinLogs.length === 0 && !loading">
+          No check-in logs found for the selected criteria.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

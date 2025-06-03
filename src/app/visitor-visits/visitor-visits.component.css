@@ -1,0 +1,165 @@
+td {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.acknowledged-visit {
+  background-color: rgba(76, 175, 80, 0.2); /* Light green */
+}
+
+.cancelled-visit {
+  background-color: rgba(255, 0, 0, 0.2); /* Light red */
+}
+
+.desktop-view .status-indicator {
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
+  width: fit-content;
+  box-sizing: border-box;
+
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+
+  vertical-align: middle;
+  margin: 0;
+  line-height: normal;
+  color: #333;
+  background-color: #f0f0f0;
+}
+
+.desktop-view .acknowledged-visit .status-indicator {
+  background-color: var(--success-color, #4caf50);
+  color: white;
+}
+
+.desktop-view .cancelled-visit .status-indicator {
+  background-color: var(--error-color, #f44336);
+  color: white;
+}
+
+/* Styling for pending status in desktop view */
+.desktop-view .status-indicator {
+  background-color: #ffffff; /* White background for pending */
+  color: #333; /* Default text color */
+  border: 1px solid #ddd; /* Subtle border for pending */
+}
+
+/* Mobile View Specific Styling */
+@media (max-width: 768px) {
+  .desktop-view {
+    display: none;
+  }
+
+  .mobile-view {
+    display: block;
+  }
+
+  .mobile-view .status-indicator-mobile {
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    display: inline-block;
+
+    position: static !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+
+    vertical-align: middle;
+    margin: 0;
+    padding: 4px 8px;
+    line-height: normal;
+    color: #333;
+    background-color: #f0f0f0; /* Default background for pending/unknown */
+  }
+
+  /* Mobile specific status indicator colors */
+  .mobile-view .acknowledged-visit .status-indicator-mobile {
+    background-color: var(--success-color, #4caf50);
+    color: white;
+  }
+
+  .mobile-view .cancelled-visit .status-indicator-mobile {
+    background-color: var(--error-color, #f44336);
+    color: white;
+  }
+
+  /* Styling for pending status in mobile view */
+  .mobile-view .status-indicator-mobile {
+    background-color: #ffffff; /* White background for pending */
+    color: #333; /* Default text color */
+    border: 1px solid #ddd; /* Subtle border for pending */
+  }
+
+  .visit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .visit-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    background-color: #fff; /* Default white background for pending mobile items */
+  }
+
+  .mobile-view .acknowledged-visit {
+    background-color: rgba(
+      76,
+      175,
+      80,
+      0.2
+    ); /* Light green for mobile acknowledged item */
+  }
+
+  .mobile-view .cancelled-visit {
+    background-color: rgba(
+      255,
+      0,
+      0,
+      0.2
+    ); /* Light red for mobile cancelled item */
+  }
+
+  .visit-details {
+    margin-bottom: 10px;
+    border-radius: 20px;
+  }
+
+  .visit-details p {
+    margin: 5px 0;
+  }
+
+  .download-qr-button {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+}
+
+/* Desktop View (Table) */
+@media (min-width: 769px) {
+  .desktop-view {
+    display: block;
+  }
+
+  .mobile-view {
+    display: none;
+  }
+}

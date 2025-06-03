@@ -1,0 +1,72 @@
+<h1 class="inheaderh1">Visitors</h1>
+<p class="inheaderp">All your active visits</p>
+
+<div *ngIf="loading" class="loading-message">
+  <p>Loading visitors...</p>
+</div>
+
+<ng-container *ngIf="!loading">
+  <div *ngIf="activeVisits.length === 0" class="no-visits-message">
+    <p>You have no active visits today.</p>
+  </div>
+
+  <div class="desktop-view" *ngIf="activeVisits.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Phone Number</th>
+          <th>National ID</th>
+          <th>License Plate</th>
+          <th>Purpose</th>
+          <th>Host's Name</th>
+          <th>Date & Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let visit of activeVisits">
+          <td>{{ visit.name }}</td>
+          <td>{{ visit.phone }}</td>
+          <td>{{ visit.idnum }}</td>
+          <td>{{ visit.licenseplate }}</td>
+          <td>{{ visit.purpose }}</td>
+          <td>{{ visit.host }}</td>
+          <td>
+            {{ visit.visitDate | date : "dd/MM/yyyy" }}, {{ visit.visitTime }}
+          </td>
+          <td>
+            <span class="status-indicator acknowledged-visit-status">
+              {{ getDisplayStatus(visit) }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mobile-view" *ngIf="activeVisits.length > 0">
+    <div class="visit-list">
+      <div class="visit-item" *ngFor="let visit of activeVisits">
+        <div class="visit-details">
+          <p><strong>Name:</strong> {{ visit.name }}</p>
+          <p><strong>Phone:</strong> {{ visit.phone }}</p>
+          <p><strong>ID:</strong> {{ visit.idnum }}</p>
+          <p><strong>License:</strong> {{ visit.licenseplate }}</p>
+          <p><strong>Purpose:</strong> {{ visit.purpose }}</p>
+          <p><strong>Host:</strong> {{ visit.host }}</p>
+          <p>
+            <strong>Date & Time:</strong>
+            {{ visit.visitDate | date : "dd/MM/yyyy" }}, {{ visit.visitTime }}
+          </p>
+          <p class="mobile-status">
+            <strong>Status:</strong>
+            <span class="status-indicator-mobile acknowledged-visit-status">
+              {{ getDisplayStatus(visit) }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

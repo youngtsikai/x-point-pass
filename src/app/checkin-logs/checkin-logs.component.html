@@ -1,126 +1,75 @@
-<div class="main-container">
-  <h2>Check-in Logs</h2>
+<app-security-header></app-security-header>
+<div class="page-container">
+  <app-security-sidebar></app-security-sidebar>
+  <div class="dash-main-container">
+    <div class="controls">
+      <button (click)="printAllLogs()" class="control-button print-button">
+        Print All Records
+      </button>
+      <button
+        (click)="fetchCheckinLogsForToday()"
+        class="control-button today-button"
+      >
+        Today
+      </button>
+      <button (click)="showLastWeekLogs()" class="control-button week-button">
+        Last Week
+      </button>
+      <button (click)="showLastMonthLogs()" class="control-button month-button">
+        Last Month
+      </button>
+      <input
+        type="date"
+        id="filterDate"
+        class="control-input date-input"
+        [(ngModel)]="selectedDate"
+        (change)="filterLogsByDate()"
+      />
+    </div>
+    <div class="table-container">
+      <div *ngIf="loading">Loading check-in logs...</div>
+      <div *ngIf="error" class="error-message">{{ error }}</div>
 
-  <div class="controls">
-    <button (click)="printAllLogs()">Print All Records</button>
-
-    <label for="filterDate">Filter by Date:</label>
-    <input
-      type="date"
-      id="filterDate"
-      [(ngModel)]="selectedDate"
-      (change)="filterLogsByDate()"
-    />
-
-    <button (click)="fetchCheckinLogsForToday()">Today</button>
-    <button (click)="showLastWeekLogs()">Last Week</button>
-    <button (click)="showLastMonthLogs()">Last Month</button>
-  </div>
-
-  <div *ngIf="loading">Loading check-in logs...</div>
-  <div *ngIf="error" class="error-message">{{ error }}</div>
-
-  <div *ngIf="!loading">
-    <table *ngIf="filteredCheckinLogs.length > 0">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Role</th>
-          <th>Check-in Time</th>
-          <th>Check-out Time</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let log of filteredCheckinLogs">
-          <td>{{ log.name }}</td>
-          <td>{{ log.role }}</td>
-          <td>{{ log.checkin_time | date : "medium" }}</td>
-          <td>
-            {{
-              log.checkout_time
-                ? (log.checkout_time | date : "medium")
-                : "Not Checked Out"
-            }}
-          </td>
-          <td>
-            <button
-              *ngIf="!log.checkout_time"
-              (click)="checkoutUser(log.id!)"
-              class="checkout-button"
-            >
-              Check Out
-            </button>
-            <span *ngIf="log.checkout_time">Checked Out</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <p *ngIf="filteredCheckinLogs.length === 0 && !loading">
-      No check-in logs found for the selected criteria.
-    </p>
+      <div *ngIf="!loading">
+        <table *ngIf="filteredCheckinLogs.length > 0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Check-in Time</th>
+              <th>Check-out Time</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let log of filteredCheckinLogs">
+              <td>{{ log.name }}</td>
+              <td>{{ log.role }}</td>
+              <td>{{ log.checkin_time | date : "medium" }}</td>
+              <td>
+                {{
+                  log.checkout_time
+                    ? (log.checkout_time | date : "medium")
+                    : "Not Checked Out"
+                }}
+              </td>
+              <td>
+                <button
+                  *ngIf="!log.checkout_time"
+                  (click)="checkoutUser(log.id!)"
+                  class="checkout-button"
+                >
+                  Check Out
+                </button>
+                <p *ngIf="log.checkout_time">Checked Out</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p *ngIf="filteredCheckinLogs.length === 0 && !loading">
+          No check-in logs found for the selected criteria.
+        </p>
+      </div>
+    </div>
   </div>
 </div>
-<style>
-  .main-container {
-    border: 2px solid;
-    padding: 10px;
-    box-sizing: border-box;
-    height: 100vh;
-  }
-
-  table {
-    margin: 13px auto;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  thead {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    padding: 10px;
-    box-sizing: border-box;
-  }
-
-  th {
-    padding: 5px;
-    box-sizing: border-box;
-  }
-
-  tbody {
-    background-color: #ffffff;
-    border: 1px solid var(--primary-color);
-    padding: 5px;
-    box-sizing: border-box;
-  }
-
-  td {
-    font-size: 15px;
-    border: 1px solid var(--primary-color);
-    padding: 2px;
-    box-sizing: border-box;
-  }
-
-  td button {
-    background-color: var(--primary-color);
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    padding: 5px;
-    box-sizing: border-box;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 2px;
-  }
-
-  .controls {
-    margin-bottom: 1rem;
-  }
-
-  .controls button,
-  .controls label,
-  .controls input {
-    margin-right: 0.5rem;
-  }
-</style>
